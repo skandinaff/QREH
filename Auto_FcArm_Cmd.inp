@@ -1,0 +1,4 @@
+USER\usart.c,
+USER\motor_driver.c,
+USER\motor_driver.h 
+TO Q1kony.axf NOPRINT
