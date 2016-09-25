@@ -14,3 +14,4 @@
 .\objects\mcu_config.o: .\Libraries\STM32F10x_StdPeriph_Driver\inc\stm32f10x_tim.h
 .\objects\mcu_config.o: .\Libraries\STM32F10x_StdPeriph_Driver\inc\stm32f10x_usart.h
 .\objects\mcu_config.o: .\Libraries\STM32F10x_StdPeriph_Driver\inc\misc.h
+.\objects\mcu_config.o: .\USER\MyDrv\delay.h

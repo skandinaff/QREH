@@ -6,6 +6,7 @@
 
 /* ----------------------------------- Typedef -----------------------------------------------------------*/
 
+uint8_t _task_counter = 0; // Here we'll have only 2 states. 0 - Waiting to start quest. 1 - quest, and when it's finished - back to 0
 
 /*******************************************************************************
 * Function Name  : ChipInit
@@ -105,7 +106,7 @@ void ChipInit ( void )
 	NVIC_SetPriority (USART1_IRQn, 12);
 	NVIC_EnableIRQ(USART1_IRQn);																										// Включаем общие прерывания от USART
 	USART_ITConfig(USART1, USART_IT_RXNE, ENABLE);																	// Включаем прерывания по приёму
-//	USART_Cmd(USART1, ENABLE);																											// Включаем USART
+	USART_Cmd(USART1, ENABLE);																											// Включаем USART
 
 //------------- ADC --------------------------------------------------------------------------------------------------------
 
@@ -135,3 +136,44 @@ void ChipInit ( void )
 	TIM_OC4Init(TIM3, &TIM_OCConfig);
 }
 
+void BlinkOnboardLED(uint8_t L){
+	
+
+	switch(L) {
+		case 1:
+			GPIO_SetBits(LED_PORT, LED1);
+			delay_ms(150);
+			GPIO_ResetBits(LED_PORT, LED1);
+			break;
+		case 2:
+			GPIO_SetBits(LED_PORT, LED2);
+			delay_ms(50);
+			GPIO_ResetBits(LED_PORT, LED2);
+			break;
+		case 3:
+			GPIO_SetBits(LED_PORT, LED3);
+			delay_ms(150);
+			GPIO_ResetBits(LED_PORT, LED3);
+			break;
+		case 4:
+			GPIO_SetBits(LED_PORT, LED4);
+			delay_ms(150);
+			GPIO_ResetBits(LED_PORT, LED4);
+			break;
+	}
+
+}
+
+void reset_task_counter(void) {
+    _task_counter = 0;
+}
+
+
+int get_task_counter(void) {
+    return _task_counter;
+}
+
+void set_task_counter(int counter) {
+		if(counter > _task_counter) BlinkOnboardLED(4); // To indicate change of task
+    _task_counter = counter;
+}

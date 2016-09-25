@@ -7,10 +7,11 @@
 
 #include "stm32f10x.h"
 #include "stm32f10x_conf.h"
-
+#include "delay.h"
 
 //------------ Основные параметры ---------------------------------------------------------------
 //#define QUEST_ID					0x0B
+#define TASK_COUNT 1
 
 #define DATA_PACKET_LEN		7												// размер пакета USART
 #define MASTER_START_BYTE	0xC1
@@ -106,6 +107,10 @@ extern AppStateTypeDef AppState;
 
 /* --------- FUNCTIONS -------------------------------------------------------*/
 void ChipInit ( void );
+void BlinkOnboardLED(uint8_t L);
+void reset_task_counter(void);
+int get_task_counter(void);
+void set_task_counter(int counter);
 
 #endif
 

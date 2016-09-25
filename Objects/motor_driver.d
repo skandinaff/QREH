@@ -16,4 +16,5 @@
 .\objects\motor_driver.o: .\Libraries\STM32F10x_StdPeriph_Driver\inc\misc.h
 .\objects\motor_driver.o: USER\mcu_config.h
 .\objects\motor_driver.o: .\USER\MyDrv\delay.h
+.\objects\motor_driver.o: .\USER\MyDrv\LPH8731-3C.h
 .\objects\motor_driver.o: H:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h

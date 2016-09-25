@@ -23,8 +23,8 @@
 .\objects\main.o: .\USER\FreeRTOSV6.1.0\include\task.h
 .\objects\main.o: .\USER\FreeRTOSV6.1.0\include\list.h
 .\objects\main.o: USER\mcu_config.h
-.\objects\main.o: .\USER\FreeRTOSV6.1.0\include\queue.h
 .\objects\main.o: .\USER\MyDrv\delay.h
+.\objects\main.o: .\USER\FreeRTOSV6.1.0\include\queue.h
 .\objects\main.o: USER\terminal.h
 .\objects\main.o: USER\ErrorProcessing.h
 .\objects\main.o: USER\quest_routines.h

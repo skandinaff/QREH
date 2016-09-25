@@ -16,6 +16,7 @@
 .\objects\stm32f10x_it.o: .\Libraries\STM32F10x_StdPeriph_Driver\inc\misc.h
 .\objects\stm32f10x_it.o: USER\ErrorProcessing.h
 .\objects\stm32f10x_it.o: USER\mcu_config.h
+.\objects\stm32f10x_it.o: .\USER\MyDrv\delay.h
 .\objects\stm32f10x_it.o: .\USER\FreeRTOSV6.1.0\include\FreeRTOS.h
 .\objects\stm32f10x_it.o: H:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
 .\objects\stm32f10x_it.o: .\USER\FreeRTOSV6.1.0\include\projdefs.h
