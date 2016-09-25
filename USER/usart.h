@@ -21,6 +21,8 @@
 #include <stdint.h>
 #include "stm32f10x.h"
 #include "stm32f10x_conf.h"
+#include <stdlib.h>
+#include <mcu_config.h>
 
 #define USART_BAUD_RATE 					19200
 
@@ -99,5 +101,9 @@ void usart_convert_outgoing_packet (unsigned char* packet, outgoing_packet_t out
 uint8_t usart_crc8(uint8_t init, uint8_t *packet);
 bool usart_validate_crc8(incoming_packet_t incoming_packet);
 bool usart_break_required(void);
+uint8_t SendInstruction(unsigned char instruction);
+void check_usart_while_playing(void);
+void set_break_flag(bool bf);
+bool get_break_flag(void);
 
 #endif

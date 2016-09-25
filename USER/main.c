@@ -28,11 +28,8 @@
 
 /* Function prototypes -----------------------------------------------*/
 
-uint8_t SendInstruction(unsigned char instruction);
-void check_usart_while_playing(void);
 void PerformQuest(void);
 
-bool break_flag = false;
 
 /*******************************************************************************
 * Function Name  : main
@@ -45,8 +42,7 @@ int main(void)
 	incoming_packet_t incoming_packet;
 	
   ChipInit();
-	
-	//init_usart();
+	ADC_Configuration();
 	
 	GPIO_SetBits(LED_PORT, LED1);
 	
@@ -59,6 +55,12 @@ int main(void)
 	
   while(1){
 	
+		int adcval = readADC1(2);
+		char adcval_str[8];
+		sprintf(adcval_str, "%4d", adcval);
+		LCD_Puts(adcval_str, 1, 20, DARK_BLUE, WHITE,1,1);
+		if(adcval>10)  BlinkOnboardLED(3);
+		
 		if (usart_has_data()) {
 			
 			
@@ -78,9 +80,9 @@ int main(void)
 						while (get_task_counter() <= TASK_COUNT) {
 							//GPIO_SetBits(LED_GPIO, STATE_LED);
 							PerformQuest();
-							if(break_flag){
+							if(get_break_flag()){
 								set_task_counter(0);
-								break_flag = false;
+								set_break_flag(false);
 								break;
 							}
 						}
@@ -105,78 +107,9 @@ int main(void)
 	}
 }
 
-/*******************************************************************************
-* Function Name  : SendInstruction
-* Description    : Sends assembled packet via 485
-*******************************************************************************/
 
-uint8_t SendInstruction(unsigned char instruction){
-	unsigned char* packet = malloc((OUTGOING_PACKET_LENGTH + 1) * sizeof(char));
-	outgoing_packet_t outgoing_packet = usart_assemble_response(instruction);	
-	GPIO_SetBits(USART_PORT, RS485DIR_PIN);
-	usart_convert_outgoing_packet(packet, outgoing_packet);
-	put_str(packet);
-	delay_ms(100);
-	free(packet);
-	GPIO_ResetBits(USART_PORT, RS485DIR_PIN);
-	return 1;
-}
 
-/******************************************************************************
-* Function Name  : check_usart_while_playing
-* Description    : Listens for incoming commands via 485 while quest is in process
-*******************************************************************************/
-void check_usart_while_playing(){
-		incoming_packet_t incoming_packet;
-	
-		unsigned char* packet = malloc((OUTGOING_PACKET_LENGTH + 1) * sizeof(char));
-	
-		if (usart_has_data()) {
-			
-			usart_get_data_packet(packet);
-			incoming_packet = usart_packet_parser(packet);
-			if (usart_validate_crc8(incoming_packet) && usart_packet_is_addressed_to_me(incoming_packet)){
-			BlinkOnboardLED(2);
-				switch (incoming_packet.instruction) {
-					case INSTR_MASTER_TEST:
-						SendInstruction(INSTR_SLAVE_NOT_READY); 
-						break;
-					case INSTR_MASTER_WORK_START:
-						
-						break;
-					case INSTR_MASTER_STATUS_REQ:				
-						if (get_task_counter() == TASK_COUNT) {
-							SendInstruction(INSTR_SLAVE_COMPLETED);
-						} else {
-							SendInstruction(INSTR_SLAVE_NOT_COMLETED);
 
-						}
-						break;
-					case INSTR_MASTER_SET_IDLE:
-						//GPIO_ResetBits(LED_GPIO, STATE_LED);
-						break_flag = true;
-						return;
-					case CINSTR_GOTO_END:
-						set_task_counter(get_task_counter() + 1); // Skips a task
-						PerformQuest();
-						break;
-					case CINSTR_RESTART_TASK:
-						set_task_counter(get_task_counter());
-						PerformQuest();
-						break;
-					case TASK_REQUEST:
-					  SendInstruction(get_task_counter()+1);
-						break;
-					case SYS_RESET:
-						NVIC_SystemReset();
-						break;
-				}	
-			}
-		}
-		
-		free(packet);
-
-}
 
 void PerformQuest(void){
 	
@@ -186,7 +119,7 @@ void PerformQuest(void){
 	check_usart_while_playing();
 
 	
-	
+	// Initializations
 	switch (task_counter) {
 		case 0:	// Horses
 			MotorInit();
@@ -196,12 +129,12 @@ void PerformQuest(void){
 	while (task_counter == get_task_counter()) {
 		switch (task_counter) {
 			case 0:	// Horses
-			  // Move horses here
+			  HorseRace();
 				break;
 		}
 
 		check_usart_while_playing();
-		if (break_flag) return;
+		if (get_break_flag()) return;
 	}
 
 

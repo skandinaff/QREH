@@ -26,6 +26,7 @@ volatile uint16_t tx_counter=0;
 
 char data_for_crc8[3];
 char incoming_crc8;
+bool break_flag = false;
 
 void init_usart(void){
 	
@@ -291,4 +292,66 @@ void usart_convert_outgoing_packet (unsigned char* packet, outgoing_packet_t out
     packet[4] = '\0';
 	//}
 	
+}
+
+void check_usart_while_playing(void){
+		incoming_packet_t incoming_packet;
+	
+		unsigned char* packet = malloc((OUTGOING_PACKET_LENGTH + 1) * sizeof(char));
+	
+		if (usart_has_data()) {
+			
+			usart_get_data_packet(packet);
+			incoming_packet = usart_packet_parser(packet);
+			if (usart_validate_crc8(incoming_packet) && usart_packet_is_addressed_to_me(incoming_packet)){
+			BlinkOnboardLED(2);
+				switch (incoming_packet.instruction) {
+					case INSTR_MASTER_TEST:
+						SendInstruction(INSTR_SLAVE_NOT_READY); 
+						break;
+					case INSTR_MASTER_WORK_START:
+						
+						break;
+					case INSTR_MASTER_STATUS_REQ:				
+						if (get_task_counter() == TASK_COUNT) {
+							SendInstruction(INSTR_SLAVE_COMPLETED);
+						} else {
+							SendInstruction(INSTR_SLAVE_NOT_COMLETED);
+
+						}
+						break;
+					case INSTR_MASTER_SET_IDLE:
+						//GPIO_ResetBits(LED_GPIO, STATE_LED);
+						set_break_flag(true); //break_flag = true;
+						return;
+					case SYS_RESET:
+						NVIC_SystemReset();
+						break;
+				}	
+			}
+		}
+		
+		free(packet);
+
+}
+
+uint8_t SendInstruction(unsigned char instruction){
+	unsigned char* packet = malloc((OUTGOING_PACKET_LENGTH + 1) * sizeof(char));
+	outgoing_packet_t outgoing_packet = usart_assemble_response(instruction);	
+	GPIO_SetBits(USART_PORT, RS485DIR_PIN);
+	usart_convert_outgoing_packet(packet, outgoing_packet);
+	put_str(packet);
+	delay_ms(100);
+	free(packet);
+	GPIO_ResetBits(USART_PORT, RS485DIR_PIN);
+	return 1;
+}
+
+void set_break_flag(bool bf) {
+    break_flag = bf;
+}
+
+
+bool get_break_flag(void) {
+    return break_flag;
 }

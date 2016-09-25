@@ -17,4 +17,8 @@
 .\objects\motor_driver.o: USER\mcu_config.h
 .\objects\motor_driver.o: .\USER\MyDrv\delay.h
 .\objects\motor_driver.o: .\USER\MyDrv\LPH8731-3C.h
+.\objects\motor_driver.o: .\USER\usart.h
 .\objects\motor_driver.o: H:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+.\objects\motor_driver.o: H:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+.\objects\motor_driver.o: H:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
+.\objects\motor_driver.o: H:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h

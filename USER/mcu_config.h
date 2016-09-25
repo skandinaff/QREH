@@ -9,6 +9,10 @@
 #include "stm32f10x_conf.h"
 #include "delay.h"
 
+#include "stm32f10x_rcc.h"
+#include "stm32f10x_gpio.h"
+#include "stm32f10x_adc.h"
+
 //------------ Основные параметры ---------------------------------------------------------------
 //#define QUEST_ID					0x0B
 #define TASK_COUNT 1
@@ -111,6 +115,8 @@ void BlinkOnboardLED(uint8_t L);
 void reset_task_counter(void);
 int get_task_counter(void);
 void set_task_counter(int counter);
+void ADC_Configuration(void);
+uint16_t readADC1(uint8_t channel);
 
 #endif
 

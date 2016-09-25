@@ -9,6 +9,7 @@
 ".\objects\stm32f10x_rcc.o"
 ".\objects\stm32f10x_tim.o"
 ".\objects\stm32f10x_usart.o"
+".\objects\stm32f10x_adc.o"
 ".\objects\croutine.o"
 ".\objects\list.o"
 ".\objects\queue.o"

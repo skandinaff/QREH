@@ -5,6 +5,7 @@
 #include "stm32f10x_conf.h"
 #include "mcu_config.h"
 #include "LPH8731-3C.h"
+#include <usart.h>
 
 /* That is something that has been added after PCB was made.. */
 /* RESET pin of the driver */
@@ -19,5 +20,5 @@
 #define STEP2_EN_1()				(GPIO_SetBits(STEP_PORT3, STEP2_EN))
 
 void MotorInit (void);
-
+unsigned char HorseRace (void);
 #endif

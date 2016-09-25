@@ -3,6 +3,7 @@
 #include "delay.h"
 #include "stdio.h"
 
+
 /* Private define ------------------------------------------------------------*/
 
 /* Setting the microstep precision */
@@ -48,12 +49,13 @@ void MotorInit (void)
 		TIM2->ARR = 200;
 		TIM_Cmd(TIM2, ENABLE);
 		do {
-			// TODO: Rewrite this cycle such that when we reach start ponit, we just exit the function. Otherwise it stuck here
 			//vTaskDelay(1);
+			delay_ms(1);
 		} while (READ_MASTER_START_POINT() != 0);
 		STEP2_RES_0();
 		STEP2_EN_1();
 		TIM_Cmd(TIM2, DISABLE);
+		LCD_Puts("Computer Motor \n Found Start", 1, 1, DARK_BLUE, WHITE,1,1);
 	}
 	if (READ_USER_START_POINT() != 0){
 		DIR1_REVERSE();
@@ -63,18 +65,77 @@ void MotorInit (void)
 		TIM_Cmd(TIM3, ENABLE);
 		do {
 			//vTaskDelay(1);
-				//LCD_FillScreen(WHITE);
-				LCD_Puts("User Motor Stopped", 1, 1, DARK_BLUE, WHITE,1,1);
+			delay_ms(1);
 		} while (READ_USER_START_POINT() != 0);
 		STEP1_RES_0();
 		STEP1_EN_1();
 		TIM_Cmd(TIM3, DISABLE);
+		LCD_Puts("User Motor \n Found Start", 1, 1, DARK_BLUE, WHITE,1,1);
 	}
 
 	QUARTER_STEP();
 	DIR1_FORWARD();
 	DIR2_FORWARD();
 	
-	TIM2->ARR = 1200;						// ?????? ?????????? ???????? ????????
-	TIM3->ARR = 1400;						// ?????? ??????? ???????? ?????? ???????
+	TIM2->ARR = 1200;						// Setting computer's speed 
+	TIM3->ARR = 1400;						// Setting user's base speed
+}
+
+unsigned char HorseRace (void) 
+{
+	unsigned int bonus_speed_time = 0;
+	
+	QUARTER_STEP();
+	DIR1_FORWARD();
+	DIR2_FORWARD();
+	STEP1_RES_1();
+	STEP2_RES_1();
+	STEP1_EN_0();
+	STEP2_EN_0();
+	//vTaskDelay(50);
+	delay_ms(50);
+	TIM2->ARR = AUTOMAT_SPEED;
+	TIM3->ARR = USER_BASE_SPEED;
+	TIM_Cmd(TIM2, ENABLE);
+	TIM_Cmd(TIM3, ENABLE);
+	
+  while(1)
+  {
+		check_usart_while_playing();
+		
+		if (READ_MASTER_END_POINT() == 0) {													
+			STEP1_RES_0();
+			STEP2_RES_0();
+			STEP1_EN_1();
+			STEP2_EN_1();
+			set_task_counter(get_task_counter() + 1); // Added by me
+			return 0;									
+		}
+		if (READ_USER_END_POINT() == 0) {														
+			STEP1_RES_0();
+			STEP2_RES_0();
+			STEP1_EN_1();
+			STEP2_EN_1();
+			set_task_counter(get_task_counter() + 1); // Added by me
+			return 1;
+		}
+		if (bonus_speed_time > 0) {
+			bonus_speed_time--;
+			if (bonus_speed_time == 0) TIM3->ARR = USER_BASE_SPEED;
+		}
+		if (READ_BONUS_SENS_LOW() == 0) {
+			bonus_speed_time = 500;
+			TIM3->ARR = USER_BONUS_LOW_SPEED;
+		}
+		if (READ_BONUS_SENS_LOW() == 0) {
+			bonus_speed_time = 500;
+			TIM3->ARR = USER_BONUS_MED_SPEED;
+		}
+		if (READ_BONUS_SENS_LOW() == 0) {
+			bonus_speed_time = 500;
+			TIM3->ARR = USER_BONUS_HIGH_SPEED;
+		}
+		//vTaskDelay(10);
+		delay_ms(10);
+  }
 }
