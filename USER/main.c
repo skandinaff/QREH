@@ -78,7 +78,7 @@ int main(void)
 						break;
 					case INSTR_MASTER_WORK_START:
 						while (get_task_counter() <= TASK_COUNT) {
-							//GPIO_SetBits(LED_GPIO, STATE_LED);
+							GPIO_SetBits(STATE_LED_PORT, STATE_LED);
 							PerformQuest();
 							if(get_break_flag()){
 								set_task_counter(0);

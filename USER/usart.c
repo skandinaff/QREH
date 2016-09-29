@@ -217,7 +217,7 @@ incoming_packet_t usart_packet_parser(unsigned char* packet) {
 outgoing_packet_t usart_assemble_response(unsigned char instruction) {
 
 		outgoing_packet_t outgoing_packet;  
-		//data_for_crc8 = {QUEST_ID, instruction, '\0'};
+		//data_for_crc8 = {QUEST_ID, instruction, '\0'};  // Weirdly enough you cannot use such constriction for f103 chip
 	
 		data_for_crc8[0] = QUEST_ID;
 		data_for_crc8[1] = instruction;
@@ -321,7 +321,7 @@ void check_usart_while_playing(void){
 						}
 						break;
 					case INSTR_MASTER_SET_IDLE:
-						//GPIO_ResetBits(LED_GPIO, STATE_LED);
+						GPIO_ResetBits(STATE_LED_PORT, STATE_LED);
 						set_break_flag(true); //break_flag = true;
 						return;
 					case SYS_RESET:

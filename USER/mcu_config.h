@@ -52,6 +52,10 @@ extern AppStateTypeDef AppState;
 #define LED3							GPIO_Pin_14							// 
 #define LED4							GPIO_Pin_15							// Global error
 
+#define STATE_LED_PORT 			GPIOE
+#define STATE_LED_PORT_RCC	RCC_APB2Periph_GPIOE
+#define STATE_LED 					GPIO_Pin_8	
+
 // RS - 485
 #define USART_PORT				GPIOA
 #define USART_PORT_RCC		RCC_APB2Periph_GPIOA

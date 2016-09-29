@@ -22,6 +22,7 @@ void ChipInit ( void )
 	
 //--------------- Clock ----------------------------------------------------------------------------------------------------
 	RCC_APB2PeriphClockCmd(LED_PORT_RCC , ENABLE);
+	RCC_APB2PeriphClockCmd(STATE_LED_PORT_RCC , ENABLE);
 	
 	RCC_APB2PeriphClockCmd(USART_PORT_RCC, ENABLE);
 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO, ENABLE);
@@ -43,6 +44,11 @@ void ChipInit ( void )
 	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_2MHz;
 	GPIO_Init(LED_PORT, &GPIO_InitStructure);
+	
+	GPIO_InitStructure.GPIO_Pin = STATE_LED;											// STATE LED
+	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
+	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_2MHz;
+	GPIO_Init(STATE_LED_PORT, &GPIO_InitStructure);	
 	
 	GPIO_InitStructure.GPIO_Pin = USART_TX_PIN;										// RS - 485
 	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP;
@@ -229,3 +235,4 @@ void set_task_counter(int counter) {
 		if(counter > _task_counter) BlinkOnboardLED(4); // To indicate change of task
     _task_counter = counter;
 }
+
