@@ -55,7 +55,7 @@ void MotorInit (void)
 		STEP2_RES_0();
 		STEP2_EN_1();
 		TIM_Cmd(TIM2, DISABLE);
-		LCD_Puts("Computer Motor \n Found Start", 1, 1, DARK_BLUE, WHITE,1,1);
+		
 	}
 	if (READ_USER_START_POINT() != 0){
 		DIR1_REVERSE();
@@ -70,7 +70,7 @@ void MotorInit (void)
 		STEP1_RES_0();
 		STEP1_EN_1();
 		TIM_Cmd(TIM3, DISABLE);
-		LCD_Puts("User Motor \n Found Start", 1, 1, DARK_BLUE, WHITE,1,1);
+	
 	}
 
 	QUARTER_STEP();
@@ -121,17 +121,26 @@ unsigned char HorseRace (void)
 		}
 		if (bonus_speed_time > 0) {
 			bonus_speed_time--;
-			if (bonus_speed_time == 0) TIM3->ARR = USER_BASE_SPEED;
+			if (bonus_speed_time == 0) {
+				LCD_Puts("             ", 1, 1, DARK_BLUE, WHITE,1,1);
+				LCD_Puts("             ", 1, 10, DARK_BLUE, WHITE,1,1);
+				LCD_Puts("             ", 1, 20, DARK_BLUE, WHITE,1,1);
+				TIM3->ARR = USER_BASE_SPEED;
+			}
 		}
+		
 		if (READ_BONUS_SENS_LOW() == 0) {
+			LCD_Puts("LOW BONUS!", 1, 1, DARK_BLUE, WHITE,1,1);
 			bonus_speed_time = 500;
 			TIM3->ARR = USER_BONUS_LOW_SPEED;
 		}
-		if (READ_BONUS_SENS_LOW() == 0) {
+		if (READ_BONUS_SENS_MED() == 0) {
+			LCD_Puts("MEDIUM BONUS!", 1, 10, DARK_BLUE, WHITE,1,1);
 			bonus_speed_time = 500;
 			TIM3->ARR = USER_BONUS_MED_SPEED;
 		}
-		if (READ_BONUS_SENS_LOW() == 0) {
+		if (READ_BONUS_SENS_HIGH() == 0) {
+			LCD_Puts("HIGH BONUS!", 1, 20, DARK_BLUE, WHITE,1,1);
 			bonus_speed_time = 500;
 			TIM3->ARR = USER_BONUS_HIGH_SPEED;
 		}
@@ -215,5 +224,41 @@ void MotorTest(char sel_dir, int speed){
 	}
 			
 }
+
+void MotorTestVarSpeed (int speed){
+
+	
+	STEP1_RES_0();
+	STEP2_RES_0();
+	
+	STEP1_EN_1();
+	STEP2_EN_1();
+	
+	FULL_STEP();
+		
+
+	
+	STEP1_RES_1();
+	STEP1_EN_0();
+	DIR1_FORWARD();
+
+	TIM3->ARR = speed;
+	TIM_Cmd(TIM3, ENABLE);
+
+
+	do {
+		//vTaskDelay(1);
+		check_usart_while_playing();
+		speed += 10;
+		TIM3->ARR = speed;
+		delay_ms(500);
+	} while (READ_MASTER_END_POINT() != 0);
+	STEP1_RES_0();
+	STEP1_EN_1();
+	TIM_Cmd(TIM3, DISABLE);
+
+	
+}
+
 	
 

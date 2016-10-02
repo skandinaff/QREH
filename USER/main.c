@@ -103,7 +103,10 @@ int main(void)
 						NVIC_SystemReset();
 						break;
 					case TEST_MOTOR:
-						MotorTest(incoming_packet.motor_sel_dir, 108+10*incoming_packet.motor_speed);
+						MotorTest(incoming_packet.motor_sel_dir, 108+10*incoming_packet.motor_speed); // 108 is minimal speed possible
+						break;
+					case TEST_MOROR_VAR_SPEED:
+						MotorTestVarSpeed(108);
 						break;
 				}
 			}

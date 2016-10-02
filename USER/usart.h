@@ -10,14 +10,14 @@
 * -- Custom commands, not listed in original protocol
 
 * 0xC1 0x0B 0x79 0xFF 0xC0 Perform system reset
-
+* 0xC1 0x0B 0x77 0xD5 0xC0 Test variable speeds on motor
+*
 * 0xC1 0x0B 0x78 <speed> 0x01 0xE1 0xC0				Motor 1 forward at <speed>
 * 0xC1 0x0B 0x78 <speed> 0x02 0xE8 0xC0				Motor 1 reverse at <speed>
 * 0xC1 0x0B 0x78 <speed> 0x03 0xEF 0xC0 			Motor 2 forward at <speed>
 * 0xC1 0x0B 0x78 <speed> 0x04 0xFA 0xC0 			Motor 2 reverse at <speed>
 *
-* 108  < speed > 1100
-* 0x6C < speed > 44C
+*	108 < speed > 2550 // real speed mapped by formula real_speed = 108+10*speed_from_usart
 *
 * Speed selection formula: 108+10*incoming_packet.motor_speed
 *
@@ -46,6 +46,7 @@
 #define RESTRICTED_BYTE           0x7B
 #define SYS_RESET									0x79
 #define TEST_MOTOR								0x78
+#define TEST_MOROR_VAR_SPEED			0x77
 
 #define M1F 											0x01
 #define M1R 											0x02
