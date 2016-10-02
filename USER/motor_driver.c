@@ -139,3 +139,49 @@ unsigned char HorseRace (void)
 		delay_ms(10);
   }
 }
+
+void MotorTest(bool dir, int speed){
+
+	STEP1_RES_0();
+//	STEP2_RES_0();
+	STEP1_EN_1();
+//	STEP2_EN_1();
+	FULL_STEP();
+	
+
+		
+		
+		
+	if(dir == true) DIR2_FORWARD();
+	if(dir == false) DIR2_REVERSE();
+		
+	
+		STEP2_RES_1();
+		STEP2_EN_0();
+		TIM2->ARR = speed;
+		TIM_Cmd(TIM2, ENABLE);
+		
+		if(dir == true){
+			do {
+				//vTaskDelay(1);
+				check_usart_while_playing();
+				delay_ms(1);
+			} while (READ_MASTER_END_POINT() != 0);
+			STEP2_RES_0();
+			STEP2_EN_1();
+			TIM_Cmd(TIM2, DISABLE);
+		}
+		if(dir == false){
+			do {
+				//vTaskDelay(1);
+				delay_ms(1);
+				check_usart_while_playing();
+			} while (READ_MASTER_START_POINT() != 0);
+			STEP2_RES_0();
+			STEP2_EN_1();
+			TIM_Cmd(TIM2, DISABLE);
+		}
+	
+	
+}
+	

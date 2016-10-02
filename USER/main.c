@@ -42,7 +42,7 @@ int main(void)
 	incoming_packet_t incoming_packet;
 	
   ChipInit();
-	ADC_Configuration();
+//ADC_Configuration();
 	
 	GPIO_SetBits(LED_PORT, LED1);
 	
@@ -54,13 +54,13 @@ int main(void)
 	LCD_Puts("Status: Idle", 1, 30, DARK_BLUE, WHITE,1,1);
 	
   while(1){
-	
+	/*
 		int adcval = readADC1(2);
 		char adcval_str[8];
 		sprintf(adcval_str, "%4d", adcval);
 		LCD_Puts(adcval_str, 1, 20, DARK_BLUE, WHITE,1,1);
 		if(adcval>10)  BlinkOnboardLED(3);
-		
+		*/
 		if (usart_has_data()) {
 			
 			
@@ -99,6 +99,12 @@ int main(void)
 						break;
 					case SYS_RESET:
 						NVIC_SystemReset();
+						break;
+					case TEST_MOTOR_FORWARD:
+						MotorTest(true, 200);
+						break;
+					case TEST_MOTOR_REVERSE:
+						MotorTest(false, 200);
 						break;
 				}
 			}

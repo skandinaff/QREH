@@ -1,8 +1,8 @@
 .\objects\queue.o: USER\FreeRTOSV6.1.0\queue.c
-.\objects\queue.o: H:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
-.\objects\queue.o: H:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+.\objects\queue.o: D:\Keil_v5.2\ARM\ARMCC\Bin\..\include\stdlib.h
+.\objects\queue.o: D:\Keil_v5.2\ARM\ARMCC\Bin\..\include\string.h
 .\objects\queue.o: .\USER\FreeRTOSV6.1.0\include\FreeRTOS.h
-.\objects\queue.o: H:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+.\objects\queue.o: D:\Keil_v5.2\ARM\ARMCC\Bin\..\include\stddef.h
 .\objects\queue.o: .\USER\FreeRTOSV6.1.0\include\projdefs.h
 .\objects\queue.o: .\USER\FreeRTOSConfig.h
 .\objects\queue.o: .\USER\FreeRTOSV6.1.0\include\portable.h

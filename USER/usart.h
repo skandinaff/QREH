@@ -9,6 +9,9 @@
 * -- Custom commands, not listed in original protocol
 
 * 0xC1 0x0B 0x79 0xFF 0xC0 Perform system reset
+
+* 0xC1 0x0B 0x78 0xF8 0xC0 Forward
+* 0xC1 0x0B 0x77 0xD5 0xC0 Reverse
 *
 * ---------------------------------------------------------- */
 
@@ -33,10 +36,9 @@
 #define SLAVE_START_BYTE	        0xC2
 #define STOP_BYTE									0xC0
 #define RESTRICTED_BYTE           0x7B
-#define TEST_DISP									0x7D
-#define TASK_REQUEST							0x7C
-#define SIL_THR_REQUEST						0x7A
 #define SYS_RESET									0x79
+#define TEST_MOTOR_FORWARD				0x78
+#define TEST_MOTOR_REVERSE				0x77
 
 //------------- Instructions from main device
 #define INSTR_MASTER_TEST					0x01

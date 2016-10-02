@@ -51,7 +51,7 @@
           <OutputName>Q1kony</OutputName>
           <CreateExecutable>1</CreateExecutable>
           <CreateLib>0</CreateLib>
-          <CreateHexFile>0</CreateHexFile>
+          <CreateHexFile>1</CreateHexFile>
           <DebugInformation>1</DebugInformation>
           <BrowseInformation>1</BrowseInformation>
           <ListingPath>.\Listings\</ListingPath>
@@ -536,6 +536,31 @@
               <FileName>usart.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\USER\usart.h</FilePath>
+            </File>
+            <File>
+              <FileName>ErrorProcessing.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\USER\ErrorProcessing.h</FilePath>
+            </File>
+            <File>
+              <FileName>quest_routines.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\USER\quest_routines.h</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f10x_conf.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\USER\stm32f10x_conf.h</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f10x_it.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\USER\stm32f10x_it.h</FilePath>
+            </File>
+            <File>
+              <FileName>terminal.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\USER\terminal.h</FilePath>
             </File>
           </Files>
         </Group>
