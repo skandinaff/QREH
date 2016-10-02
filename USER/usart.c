@@ -24,7 +24,7 @@ volatile uint8_t tx_buffer[TX_BUFFER_SIZE];
 volatile uint16_t tx_wr_index=0,tx_rd_index=0;
 volatile uint16_t tx_counter=0;
 
-char data_for_crc8[3];
+char data_for_crc8[5];
 char incoming_crc8;
 bool break_flag = false;
 
@@ -195,6 +195,7 @@ bool usart_packet_is_addressed_to_me(incoming_packet_t incoming_packet) {
 
 
 incoming_packet_t usart_packet_parser(unsigned char* packet) {
+	// This function has been modified for QREH, so it can receive more bytes in packet, for motor testing
     incoming_packet_t incoming_packet;
     incoming_packet.packet_length = strlen(packet);
 
@@ -203,8 +204,8 @@ incoming_packet_t usart_packet_parser(unsigned char* packet) {
     incoming_packet.instruction = packet[2];
 
     if (incoming_packet.packet_length == 7) {
-        incoming_packet.player_count = packet[3];
-        incoming_packet.hint_count = packet[4];
+        incoming_packet.motor_speed = packet[3];
+        incoming_packet.motor_sel_dir = packet[4];
     }
 
     incoming_packet.stop_byte = packet[incoming_packet.packet_length == 7 ? 6 : 4];
@@ -244,11 +245,13 @@ outgoing_packet_t usart_assemble_response(unsigned char instruction) {
 
 bool usart_validate_crc8(incoming_packet_t incoming_packet){
 
-	//data_for_crc8 = {incoming_packet.slave_address, incoming_packet.instruction, '\0'};
 	data_for_crc8[0] = incoming_packet.slave_address;
 	data_for_crc8[1] = incoming_packet.instruction;
 	data_for_crc8[2] = '\0'; 
-	
+	if (incoming_packet.packet_length == 7){
+		data_for_crc8[2] = incoming_packet.motor_sel_dir;
+		data_for_crc8[3] = '\0';
+	}
 	
 	incoming_crc8 = usart_crc8(CRC_INIT_VAL, data_for_crc8);
 	

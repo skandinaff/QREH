@@ -140,48 +140,80 @@ unsigned char HorseRace (void)
   }
 }
 
-void MotorTest(bool dir, int speed){
+void MotorTest(char sel_dir, int speed){
 
 	STEP1_RES_0();
-//	STEP2_RES_0();
+	STEP2_RES_0();
+	
 	STEP1_EN_1();
-//	STEP2_EN_1();
+	STEP2_EN_1();
+	
 	FULL_STEP();
+		
+	if(sel_dir == M1F || sel_dir == M1R){
+		STEP1_RES_1();
+		STEP1_EN_0();
+		if(sel_dir == M1F) DIR1_FORWARD();
+		if(sel_dir == M1R) DIR1_REVERSE();
+		TIM3->ARR = speed;
+		TIM_Cmd(TIM3, ENABLE);
+	}
 	
-
-		
-		
-		
-	if(dir == true) DIR2_FORWARD();
-	if(dir == false) DIR2_REVERSE();
-		
-	
+	if(sel_dir == M2F || sel_dir == M2R){
 		STEP2_RES_1();
 		STEP2_EN_0();
+		if(sel_dir == M2F) DIR2_FORWARD();
+		if(sel_dir == M2R) DIR2_REVERSE();
 		TIM2->ARR = speed;
 		TIM_Cmd(TIM2, ENABLE);
-		
-		if(dir == true){
-			do {
-				//vTaskDelay(1);
-				check_usart_while_playing();
-				delay_ms(1);
-			} while (READ_MASTER_END_POINT() != 0);
-			STEP2_RES_0();
-			STEP2_EN_1();
-			TIM_Cmd(TIM2, DISABLE);
-		}
-		if(dir == false){
-			do {
-				//vTaskDelay(1);
-				delay_ms(1);
-				check_usart_while_playing();
-			} while (READ_MASTER_START_POINT() != 0);
-			STEP2_RES_0();
-			STEP2_EN_1();
-			TIM_Cmd(TIM2, DISABLE);
-		}
+	}	
 	
+	/* Once motor is initializet, spin it!*/
 	
+	if(sel_dir == M1F){
+	do {
+		//vTaskDelay(1);
+		check_usart_while_playing();
+		delay_ms(1);
+	} while (READ_MASTER_END_POINT() != 0);
+	STEP1_RES_0();
+	STEP1_EN_1();
+	TIM_Cmd(TIM3, DISABLE);
+	}
+	
+	if(sel_dir == M1R){
+	do {
+		//vTaskDelay(1);
+		check_usart_while_playing();
+		delay_ms(1);
+	} while (READ_MASTER_START_POINT() != 0);
+	STEP1_RES_0();
+	STEP1_EN_1();
+	TIM_Cmd(TIM3, DISABLE);
+	}
+
+	if(sel_dir == M2F){
+	do {
+		//vTaskDelay(1);
+		delay_ms(1);
+		check_usart_while_playing();
+	} while (READ_USER_END_POINT() != 0);
+	STEP2_RES_0();
+	STEP2_EN_1();
+	TIM_Cmd(TIM2, DISABLE);
+	}
+	
+	if(sel_dir == M2R){
+	do {
+		//vTaskDelay(1);
+		delay_ms(1);
+		check_usart_while_playing();
+	} while (READ_USER_START_POINT() != 0);
+	STEP2_RES_0();
+	STEP2_EN_1();
+	TIM_Cmd(TIM2, DISABLE);
+	}
+			
 }
 	
+

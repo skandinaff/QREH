@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\Objects\Q1kony.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Objects\Q1kony.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060183: Last Updated: Sun Oct 02 14:22:55 2016
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060183: Last Updated: Mon Oct 03 02:09:58 2016
 <BR><P>
 <H3>Maximum Stack Usage =        320 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -1549,8 +1549,8 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[b4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PerformQuest
 </UL>
 
-<P><STRONG><a name="[c3]"></a>MotorTest</STRONG> (Thumb, 208 bytes, Stack size 32 bytes, motor_driver.o(.text))
-<BR><BR>[Stack]<UL><LI>Max Depth = 136<LI>Call Chain = MotorTest &rArr; check_usart_while_playing &rArr; SendInstruction &rArr; malloc &rArr; __Heap_Full &rArr; __Heap_ProvideMemory &rArr; free
+<P><STRONG><a name="[c3]"></a>MotorTest</STRONG> (Thumb, 506 bytes, Stack size 40 bytes, motor_driver.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 144<LI>Call Chain = MotorTest &rArr; check_usart_while_playing &rArr; SendInstruction &rArr; malloc &rArr; __Heap_Full &rArr; __Heap_ProvideMemory &rArr; free
 </UL>
 <BR>[Calls]<UL><LI><a href="#[b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;check_usart_while_playing
 <LI><a href="#[93]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_ms
@@ -1654,7 +1654,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[c2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SendInstruction
 </UL>
 
-<P><STRONG><a name="[be]"></a>usart_validate_crc8</STRONG> (Thumb, 48 bytes, Stack size 8 bytes, usart.o(.text))
+<P><STRONG><a name="[be]"></a>usart_validate_crc8</STRONG> (Thumb, 58 bytes, Stack size 8 bytes, usart.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = usart_validate_crc8 &rArr; usart_crc8 &rArr; strlen
 </UL>
 <BR>[Calls]<UL><LI><a href="#[d9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;usart_crc8
@@ -1687,7 +1687,7 @@ Global Symbols
 <LI><a href="#[4c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[b6]"></a>check_usart_while_playing</STRONG> (Thumb, 188 bytes, Stack size 32 bytes, usart.o(.text))
+<P><STRONG><a name="[b6]"></a>check_usart_while_playing</STRONG> (Thumb, 186 bytes, Stack size 32 bytes, usart.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 104<LI>Call Chain = check_usart_while_playing &rArr; SendInstruction &rArr; malloc &rArr; __Heap_Full &rArr; __Heap_ProvideMemory &rArr; free
 </UL>
 <BR>[Calls]<UL><LI><a href="#[cc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;BlinkOnboardLED

@@ -61,6 +61,8 @@ int main(void)
 		LCD_Puts(adcval_str, 1, 20, DARK_BLUE, WHITE,1,1);
 		if(adcval>10)  BlinkOnboardLED(3);
 		*/
+		
+		
 		if (usart_has_data()) {
 			
 			
@@ -100,11 +102,8 @@ int main(void)
 					case SYS_RESET:
 						NVIC_SystemReset();
 						break;
-					case TEST_MOTOR_FORWARD:
-						MotorTest(true, 200);
-						break;
-					case TEST_MOTOR_REVERSE:
-						MotorTest(false, 200);
+					case TEST_MOTOR:
+						MotorTest(incoming_packet.motor_sel_dir, 108+10*incoming_packet.motor_speed);
 						break;
 				}
 			}
