@@ -19,12 +19,8 @@
 * 108  < speed > 1100
 * 0x6C < speed > 44C
 *
-* Motor and driection selection byte
+* Speed selection formula: 108+10*incoming_packet.motor_speed
 *
-* Motor 1 Forward: 0x01
-* Motor 1 Reverse: 0x02
-* Motor 2 Forward: 0x03
-* Motor 2 Reverse: 0x04
 * ---------------------------------------------------------- */
 
 #ifndef USART_H
