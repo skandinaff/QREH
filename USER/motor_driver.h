@@ -23,4 +23,5 @@ void MotorInit (void);
 unsigned char HorseRace (void);
 void MotorTest(char dir, int speed);
 void MotorTestVarSpeed(int speed);
+
 #endif
