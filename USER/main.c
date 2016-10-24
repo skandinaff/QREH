@@ -139,6 +139,9 @@ void PerformQuest(void){
 			case 0:	// Horses
 			  HorseRace();
 				break;
+			case 1:
+				GPIO_ResetBits(STATE_LED_PORT, STATE_LED);
+				break;
 		}
 
 		check_usart_while_playing();
