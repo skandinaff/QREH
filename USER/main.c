@@ -76,7 +76,8 @@ int main(void)
 				GPIO_ResetBits(LED_PORT, LED2);
 				switch (incoming_packet.instruction) {
 					case INSTR_MASTER_TEST:
-						SendInstruction(INSTR_SLAVE_NOT_READY);				
+						if(!Check_if_both_at_start()) MotorInit(); 
+						SendInstruction(INSTR_SLAVE_READY);
 						break;
 					case INSTR_MASTER_WORK_START:
 						while (get_task_counter() <= TASK_COUNT) {
@@ -90,15 +91,17 @@ int main(void)
 						}
 						break;
 					case INSTR_MASTER_STATUS_REQ:				
+						/*
 						if (get_task_counter() == TASK_COUNT) {
 							SendInstruction(INSTR_SLAVE_COMPLETED);
 						} else {
 							SendInstruction(INSTR_SLAVE_NOT_COMLETED);
-						}
+						}*/
 						break;
 					case INSTR_MASTER_SET_IDLE:
 						set_task_counter(0);
-						MotorInit();
+						set_break_flag(true);
+						if(!Check_if_both_at_start()) MotorInit();
 						break;
 					case SYS_RESET:
 						NVIC_SystemReset();
@@ -129,7 +132,7 @@ void PerformQuest(void){
 	// Initializations
 	switch (task_counter) {
 		case 0:	// Horses
-			if(!Check_if_both_arrived()) MotorInit();
+			if(!Check_if_both_at_start()) MotorInit();
 			break;
 	}
 
@@ -140,6 +143,7 @@ void PerformQuest(void){
 				break;
 			case 1:
 				GPIO_ResetBits(STATE_LED_PORT, STATE_LED);
+				if(HorseRace() == 1) 
 				break;
 		}
 

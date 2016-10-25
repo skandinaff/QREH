@@ -22,3 +22,4 @@
 .\objects\motor_driver.o: H:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
 .\objects\motor_driver.o: H:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
 .\objects\motor_driver.o: H:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\objects\motor_driver.o: .\USER\motor_driver.h

@@ -20,3 +20,6 @@
 .\objects\usart.o: H:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
 .\objects\usart.o: .\USER\mcu_config.h
 .\objects\usart.o: .\USER\MyDrv\delay.h
+.\objects\usart.o: USER\motor_driver.h
+.\objects\usart.o: .\USER\MyDrv\LPH8731-3C.h
+.\objects\usart.o: .\USER\usart.h

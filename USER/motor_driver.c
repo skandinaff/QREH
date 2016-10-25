@@ -110,7 +110,7 @@ void MotorInit (void)
 	TIM_Cmd(TIM2, ENABLE);
 	TIM_Cmd(TIM3, ENABLE);
 	
-  while( !Check_if_both_arrived() )
+  while( !Check_if_both_arrived(false) )
   {
 		check_usart_while_playing();
 		
@@ -130,13 +130,14 @@ void MotorInit (void)
 		delay_ms(1);
 	}
 
-
+/*
 	QUARTER_STEP();
 	DIR1_FORWARD();
 	DIR2_FORWARD();
 	//TODO: find out if it works or gets overrwritten in HorseRace
 	TIM2->ARR = 1200;						// Setting computer's speed 
 	TIM3->ARR = 1400;						// Setting user's base speed
+*/
 }
 
 unsigned char HorseRace (void) 
@@ -159,6 +160,7 @@ unsigned char HorseRace (void)
 	
   while(1)
   {
+		if (get_break_flag()) return 0;
 		check_usart_while_playing();
 		
 		if (READ_MASTER_END_POINT() == 0) {													
@@ -283,14 +285,31 @@ void MotorTest(char sel_dir, int speed){
 			
 }
 
-bool Check_if_both_arrived(void){
-
+bool Check_if_both_arrived(bool reset){
+	
+	if(reset){
+		user_start=false;
+		master_start=false;
+		return false;
+	}
+	
 	if( user_start == true && master_start == true ) return true;
 	else return false;
 }
 
-	
+bool Check_if_both_at_start(void){
+	if(READ_MASTER_START_POINT() == 0 || READ_USER_START_POINT() == 0) return true;
+	else return false;
+}
 
+void Emergency_Stop(void){
+		STEP1_RES_1();
+		STEP2_RES_1();
+		STEP1_EN_0();
+		STEP2_EN_0();
+		TIM_Cmd(TIM2, DISABLE);
+		TIM_Cmd(TIM3, DISABLE);
+}
 
 	
 

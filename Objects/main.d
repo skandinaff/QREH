@@ -35,3 +35,4 @@
 .\objects\main.o: H:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
 .\objects\main.o: USER\usart.h
 .\objects\main.o: USER\motor_driver.h
+.\objects\main.o: .\USER\usart.h

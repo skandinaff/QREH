@@ -34,6 +34,8 @@
 #include "stm32f10x_conf.h"
 #include <stdlib.h>
 #include <mcu_config.h>
+#include "motor_driver.h"
+
 
 #define USART_BAUD_RATE 					19200
 

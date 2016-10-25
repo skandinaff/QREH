@@ -305,7 +305,7 @@ void check_usart_while_playing(void){
 			BlinkOnboardLED(2);
 				switch (incoming_packet.instruction) {
 					case INSTR_MASTER_TEST:
-						SendInstruction(INSTR_SLAVE_NOT_READY); 
+						
 						break;
 					case INSTR_MASTER_WORK_START:
 						
@@ -320,8 +320,12 @@ void check_usart_while_playing(void){
 						break;
 					case INSTR_MASTER_SET_IDLE:
 						GPIO_ResetBits(STATE_LED_PORT, STATE_LED);
-						set_break_flag(true); //break_flag = true;
-						return;
+						Check_if_both_arrived(true);
+						set_task_counter(0);
+						Emergency_Stop();
+						if(!Check_if_both_at_start()) MotorInit();
+						set_break_flag(true);
+						break;
 					case SYS_RESET:
 						NVIC_SystemReset();
 						break;
