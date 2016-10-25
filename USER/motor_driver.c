@@ -41,7 +41,7 @@ void MotorInit (void)
 	STEP2_EN_1();
 	FULL_STEP();
 	
-	if (READ_MASTER_START_POINT() != 0){
+	if (READ_USER_START_POINT() != 0){
 		
 		DIR2_REVERSE();
 		STEP2_RES_1();
@@ -50,14 +50,15 @@ void MotorInit (void)
 		TIM_Cmd(TIM2, ENABLE);
 		do {
 			//vTaskDelay(1);
+			check_usart_while_playing();
 			delay_ms(1);
-		} while (READ_MASTER_START_POINT() != 0);
+		} while (READ_USER_START_POINT() != 0);
 		STEP2_RES_0();
 		STEP2_EN_1();
 		TIM_Cmd(TIM2, DISABLE);
 		
 	}
-	if (READ_USER_START_POINT() != 0){
+	if (READ_MASTER_START_POINT() != 0){
 		DIR1_REVERSE();
 		STEP1_RES_1();
 		STEP1_EN_0();
@@ -65,8 +66,9 @@ void MotorInit (void)
 		TIM_Cmd(TIM3, ENABLE);
 		do {
 			//vTaskDelay(1);
+			check_usart_while_playing();
 			delay_ms(1);
-		} while (READ_USER_START_POINT() != 0);
+		} while (READ_MASTER_START_POINT() != 0);
 		STEP1_RES_0();
 		STEP1_EN_1();
 		TIM_Cmd(TIM3, DISABLE);

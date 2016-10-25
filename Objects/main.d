@@ -1,7 +1,7 @@
 .\objects\main.o: USER\main.c
 .\objects\main.o: .\Libraries\CMSIS\CM3\DeviceSupport\ST\STM32F10x\stm32f10x.h
 .\objects\main.o: .\Libraries\CMSIS\CM3\CoreSupport\core_cm3.h
-.\objects\main.o: H:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\main.o: D:\Keil_v5.2\ARM\ARMCC\Bin\..\include\stdint.h
 .\objects\main.o: .\Libraries\CMSIS\CM3\DeviceSupport\ST\STM32F10x\system_stm32f10x.h
 .\objects\main.o: .\USER\stm32f10x_conf.h
 .\objects\main.o: .\Libraries\STM32F10x_StdPeriph_Driver\inc\stm32f10x_adc.h
@@ -14,7 +14,7 @@
 .\objects\main.o: .\Libraries\STM32F10x_StdPeriph_Driver\inc\stm32f10x_usart.h
 .\objects\main.o: .\Libraries\STM32F10x_StdPeriph_Driver\inc\misc.h
 .\objects\main.o: .\USER\FreeRTOSV6.1.0\include\FreeRTOS.h
-.\objects\main.o: H:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+.\objects\main.o: D:\Keil_v5.2\ARM\ARMCC\Bin\..\include\stddef.h
 .\objects\main.o: .\USER\FreeRTOSV6.1.0\include\projdefs.h
 .\objects\main.o: .\USER\FreeRTOSConfig.h
 .\objects\main.o: .\USER\FreeRTOSV6.1.0\include\portable.h
@@ -29,9 +29,9 @@
 .\objects\main.o: USER\ErrorProcessing.h
 .\objects\main.o: USER\quest_routines.h
 .\objects\main.o: .\USER\MyDrv\LPH8731-3C.h
-.\objects\main.o: H:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
-.\objects\main.o: H:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
-.\objects\main.o: H:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
-.\objects\main.o: H:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\objects\main.o: D:\Keil_v5.2\ARM\ARMCC\Bin\..\include\stdio.h
+.\objects\main.o: D:\Keil_v5.2\ARM\ARMCC\Bin\..\include\string.h
+.\objects\main.o: D:\Keil_v5.2\ARM\ARMCC\Bin\..\include\stdbool.h
+.\objects\main.o: D:\Keil_v5.2\ARM\ARMCC\Bin\..\include\stdlib.h
 .\objects\main.o: USER\usart.h
 .\objects\main.o: USER\motor_driver.h

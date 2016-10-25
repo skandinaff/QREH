@@ -286,14 +286,9 @@ void usart_convert_outgoing_packet (unsigned char* packet, outgoing_packet_t out
     packet[0] = outgoing_packet.slave_start_byte;
     packet[1] = outgoing_packet.slave_address;
     packet[2] = outgoing_packet.instruction;
-	//if (crc8){
     packet[3] = outgoing_packet.crc8;
     packet[4] = outgoing_packet.stop_byte;
     packet[5] = '\0';
-	//} else {
-		packet[3] = outgoing_packet.stop_byte;
-    packet[4] = '\0';
-	//}
 	
 }
 

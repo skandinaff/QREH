@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\Objects\Q1kony.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Objects\Q1kony.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060183: Last Updated: Mon Oct 24 14:45:25 2016
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060183: Last Updated: Mon Oct 24 19:19:07 2016
 <BR><P>
 <H3>Maximum Stack Usage =        320 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -1527,10 +1527,11 @@ Global Symbols
 <P><STRONG><a name="[f]"></a>DebugMon_Handler</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, stm32f10x_it.o(.text))
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f10x_md.o(RESET)
 </UL>
-<P><STRONG><a name="[b7]"></a>MotorInit</STRONG> (Thumb, 316 bytes, Stack size 40 bytes, motor_driver.o(.text))
-<BR><BR>[Stack]<UL><LI>Max Depth = 84<LI>Call Chain = MotorInit &rArr; delay_ms &rArr; RCC_GetClocksFreq
+<P><STRONG><a name="[b7]"></a>MotorInit</STRONG> (Thumb, 326 bytes, Stack size 40 bytes, motor_driver.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 144<LI>Call Chain = MotorInit &rArr; check_usart_while_playing &rArr; SendInstruction &rArr; malloc &rArr; __Heap_Full &rArr; __Heap_ProvideMemory &rArr; free
 </UL>
-<BR>[Calls]<UL><LI><a href="#[93]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_ms
+<BR>[Calls]<UL><LI><a href="#[b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;check_usart_while_playing
+<LI><a href="#[93]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_ms
 <LI><a href="#[cf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_Cmd
 <LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_ResetBits
 <LI><a href="#[96]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_SetBits
@@ -1682,7 +1683,7 @@ Global Symbols
 <LI><a href="#[4c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[dd]"></a>usart_convert_outgoing_packet</STRONG> (Thumb, 20 bytes, Stack size 0 bytes, usart.o(.text))
+<P><STRONG><a name="[dd]"></a>usart_convert_outgoing_packet</STRONG> (Thumb, 22 bytes, Stack size 0 bytes, usart.o(.text))
 <BR><BR>[Called By]<UL><LI><a href="#[c2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SendInstruction
 </UL>
 
@@ -1706,7 +1707,7 @@ Global Symbols
 <LI><a href="#[4c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[b6]"></a>check_usart_while_playing</STRONG> (Thumb, 186 bytes, Stack size 32 bytes, usart.o(.text))
+<P><STRONG><a name="[b6]"></a>check_usart_while_playing</STRONG> (Thumb, 188 bytes, Stack size 32 bytes, usart.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 104<LI>Call Chain = check_usart_while_playing &rArr; SendInstruction &rArr; malloc &rArr; __Heap_Full &rArr; __Heap_ProvideMemory &rArr; free
 </UL>
 <BR>[Calls]<UL><LI><a href="#[cd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;BlinkOnboardLED
@@ -1723,6 +1724,7 @@ Global Symbols
 </UL>
 <BR>[Called By]<UL><LI><a href="#[c4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MotorTestVarSpeed
 <LI><a href="#[c3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MotorTest
+<LI><a href="#[b7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MotorInit
 <LI><a href="#[b8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HorseRace
 <LI><a href="#[b4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PerformQuest
 </UL>
