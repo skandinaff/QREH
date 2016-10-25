@@ -22,6 +22,6 @@
 void MotorInit (void);
 unsigned char HorseRace (void);
 void MotorTest(char dir, int speed);
-void MotorTestVarSpeed(int speed);
+bool Check_if_both_arrived(void);
 
 #endif

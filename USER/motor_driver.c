@@ -32,7 +32,10 @@
 #define USER_BONUS_MED_SPEED				800
 #define USER_BONUS_HIGH_SPEED				650
 
+volatile bool master_start = false;
+volatile bool user_start = false;
 
+/* Original init function
 void MotorInit (void)
 {
 	STEP1_RES_0();
@@ -79,6 +82,59 @@ void MotorInit (void)
 	DIR1_FORWARD();
 	DIR2_FORWARD();
 	
+	TIM2->ARR = 1200;						// Setting computer's speed 
+	TIM3->ARR = 1400;						// Setting user's base speed
+}
+*/
+
+void MotorInit (void)
+{
+	STEP1_RES_0();
+	STEP2_RES_0();
+	STEP1_EN_1();
+	STEP2_EN_1();
+	FULL_STEP();
+	
+	DIR1_REVERSE();
+	DIR2_REVERSE();
+	
+	STEP1_RES_1();	
+	STEP2_RES_1();
+	STEP1_EN_0();
+	STEP2_EN_0();
+	
+		
+	TIM2->ARR = 200;
+	TIM3->ARR = 200;
+		
+	TIM_Cmd(TIM2, ENABLE);
+	TIM_Cmd(TIM3, ENABLE);
+	
+  while( !Check_if_both_arrived() )
+  {
+		check_usart_while_playing();
+		
+		if (READ_MASTER_START_POINT() == 0) {													
+			STEP1_RES_0();
+			STEP1_EN_1();
+			TIM_Cmd(TIM3, DISABLE);
+			user_start = true;
+		
+		}
+		if (READ_USER_START_POINT() == 0) {														
+			STEP2_RES_0();
+			STEP2_EN_1();
+			TIM_Cmd(TIM2, DISABLE);
+			master_start = true;
+		}
+		delay_ms(1);
+	}
+
+
+	QUARTER_STEP();
+	DIR1_FORWARD();
+	DIR2_FORWARD();
+	//TODO: find out if it works or gets overrwritten in HorseRace
 	TIM2->ARR = 1200;						// Setting computer's speed 
 	TIM3->ARR = 1400;						// Setting user's base speed
 }
@@ -227,40 +283,14 @@ void MotorTest(char sel_dir, int speed){
 			
 }
 
-void MotorTestVarSpeed (int speed){
+bool Check_if_both_arrived(void){
 
-	
-	STEP1_RES_0();
-	STEP2_RES_0();
-	
-	STEP1_EN_1();
-	STEP2_EN_1();
-	
-	FULL_STEP();
-		
-
-	
-	STEP1_RES_1();
-	STEP1_EN_0();
-	DIR1_FORWARD();
-
-	TIM3->ARR = speed;
-	TIM_Cmd(TIM3, ENABLE);
-
-
-	do {
-		//vTaskDelay(1);
-		check_usart_while_playing();
-		speed += 10;
-		TIM3->ARR = speed;
-		delay_ms(500);
-	} while (READ_MASTER_END_POINT() != 0);
-	STEP1_RES_0();
-	STEP1_EN_1();
-	TIM_Cmd(TIM3, DISABLE);
-
-	
+	if( user_start == true && master_start == true ) return true;
+	else return false;
 }
+
+	
+
 
 	
 

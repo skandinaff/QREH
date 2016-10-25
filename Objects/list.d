@@ -1,7 +1,7 @@
 .\objects\list.o: USER\FreeRTOSV6.1.0\list.c
-.\objects\list.o: D:\Keil_v5.2\ARM\ARMCC\Bin\..\include\stdlib.h
+.\objects\list.o: H:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
 .\objects\list.o: .\USER\FreeRTOSV6.1.0\include\FreeRTOS.h
-.\objects\list.o: D:\Keil_v5.2\ARM\ARMCC\Bin\..\include\stddef.h
+.\objects\list.o: H:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
 .\objects\list.o: .\USER\FreeRTOSV6.1.0\include\projdefs.h
 .\objects\list.o: .\USER\FreeRTOSConfig.h
 .\objects\list.o: .\USER\FreeRTOSV6.1.0\include\portable.h

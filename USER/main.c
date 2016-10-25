@@ -98,6 +98,7 @@ int main(void)
 						break;
 					case INSTR_MASTER_SET_IDLE:
 						set_task_counter(0);
+						MotorInit();
 						break;
 					case SYS_RESET:
 						NVIC_SystemReset();
@@ -105,9 +106,7 @@ int main(void)
 					case TEST_MOTOR:
 						MotorTest(incoming_packet.motor_sel_dir, 108+10*incoming_packet.motor_speed); // 108 is minimal speed possible
 						break;
-					case TEST_MOROR_VAR_SPEED:
-						MotorTestVarSpeed(108);
-						break;
+
 				}
 			}
 		}
@@ -130,7 +129,7 @@ void PerformQuest(void){
 	// Initializations
 	switch (task_counter) {
 		case 0:	// Horses
-			MotorInit();
+			if(!Check_if_both_arrived()) MotorInit();
 			break;
 	}
 

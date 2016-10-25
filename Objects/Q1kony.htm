@@ -3,9 +3,9 @@
 <title>Static Call Graph - [.\Objects\Q1kony.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Objects\Q1kony.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060183: Last Updated: Mon Oct 24 19:19:07 2016
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060183: Last Updated: Tue Oct 25 15:35:24 2016
 <BR><P>
-<H3>Maximum Stack Usage =        320 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
+<H3>Maximum Stack Usage =        328 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
 __rt_entry_main &rArr; main &rArr; PerformQuest &rArr; HorseRace &rArr; LCD_Puts &rArr; LCD_Putchar &rArr; Send_Symbol &rArr; Put_Pixel &rArr; SetArea &rArr; Send_to_lcd &rArr; Send_spi &rArr; ClkPulse
 <P>
@@ -206,7 +206,7 @@ Global Symbols
 <P><STRONG><a name="[110]"></a>__rt_entry_postsh_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, __rtentry2.o(.ARM.Collect$$rtentry$$00000009))
 
 <P><STRONG><a name="[4b]"></a>__rt_entry_main</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, __rtentry2.o(.ARM.Collect$$rtentry$$0000000D))
-<BR><BR>[Stack]<UL><LI>Max Depth = 320 + Unknown Stack Size
+<BR><BR>[Stack]<UL><LI>Max Depth = 328 + Unknown Stack Size
 <LI>Call Chain = __rt_entry_main &rArr; main &rArr; PerformQuest &rArr; HorseRace &rArr; LCD_Puts &rArr; LCD_Putchar &rArr; Send_Symbol &rArr; Put_Pixel &rArr; SetArea &rArr; Send_to_lcd &rArr; Send_spi &rArr; ClkPulse
 </UL>
 <BR>[Calls]<UL><LI><a href="#[4c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
@@ -412,7 +412,7 @@ Global Symbols
 <P><STRONG><a name="[117]"></a>NVIC_SystemLPConfig</STRONG> (Thumb, 20 bytes, Stack size 0 bytes, misc.o(.text), UNUSED)
 
 <P><STRONG><a name="[c5]"></a>SysTick_CLKSourceConfig</STRONG> (Thumb, 24 bytes, Stack size 0 bytes, misc.o(.text))
-<BR><BR>[Called By]<UL><LI><a href="#[ba]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ChipInit
+<BR><BR>[Called By]<UL><LI><a href="#[bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ChipInit
 </UL>
 
 <P><STRONG><a name="[54]"></a>GPIO_DeInit</STRONG> (Thumb, 152 bytes, Stack size 8 bytes, stm32f10x_gpio.o(.text), UNUSED)
@@ -426,18 +426,17 @@ Global Symbols
 <P><STRONG><a name="[9c]"></a>GPIO_Init</STRONG> (Thumb, 156 bytes, Stack size 20 bytes, stm32f10x_gpio.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 20<LI>Call Chain = GPIO_Init
 </UL>
-<BR>[Called By]<UL><LI><a href="#[ba]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ChipInit
+<BR>[Called By]<UL><LI><a href="#[bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ChipInit
 <LI><a href="#[9a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_init
 <LI><a href="#[d0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;init_usart
 </UL>
 
 <P><STRONG><a name="[118]"></a>GPIO_StructInit</STRONG> (Thumb, 16 bytes, Stack size 0 bytes, stm32f10x_gpio.o(.text), UNUSED)
 
-<P><STRONG><a name="[ce]"></a>GPIO_ReadInputDataBit</STRONG> (Thumb, 14 bytes, Stack size 0 bytes, stm32f10x_gpio.o(.text))
-<BR><BR>[Called By]<UL><LI><a href="#[c4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MotorTestVarSpeed
-<LI><a href="#[c3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MotorTest
-<LI><a href="#[b7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MotorInit
-<LI><a href="#[b8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HorseRace
+<P><STRONG><a name="[cf]"></a>GPIO_ReadInputDataBit</STRONG> (Thumb, 14 bytes, Stack size 0 bytes, stm32f10x_gpio.o(.text))
+<BR><BR>[Called By]<UL><LI><a href="#[c4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MotorTest
+<LI><a href="#[b8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MotorInit
+<LI><a href="#[b9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HorseRace
 </UL>
 
 <P><STRONG><a name="[119]"></a>GPIO_ReadInputData</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, stm32f10x_gpio.o(.text), UNUSED)
@@ -448,11 +447,10 @@ Global Symbols
 
 <P><STRONG><a name="[96]"></a>GPIO_SetBits</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, stm32f10x_gpio.o(.text))
 <BR><BR>[Called By]<UL><LI><a href="#[cd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;BlinkOnboardLED
-<LI><a href="#[c2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SendInstruction
-<LI><a href="#[c4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MotorTestVarSpeed
-<LI><a href="#[c3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MotorTest
-<LI><a href="#[b7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MotorInit
-<LI><a href="#[b8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HorseRace
+<LI><a href="#[c3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SendInstruction
+<LI><a href="#[c4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MotorTest
+<LI><a href="#[b8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MotorInit
+<LI><a href="#[b9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HorseRace
 <LI><a href="#[4c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 <LI><a href="#[9a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_init
 <LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Send_to_lcd
@@ -463,12 +461,12 @@ Global Symbols
 <P><STRONG><a name="[97]"></a>GPIO_ResetBits</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, stm32f10x_gpio.o(.text))
 <BR><BR>[Called By]<UL><LI><a href="#[cd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;BlinkOnboardLED
 <LI><a href="#[b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;check_usart_while_playing
-<LI><a href="#[c2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SendInstruction
-<LI><a href="#[c4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MotorTestVarSpeed
-<LI><a href="#[c3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MotorTest
-<LI><a href="#[b7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MotorInit
-<LI><a href="#[b8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HorseRace
+<LI><a href="#[c3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SendInstruction
+<LI><a href="#[c4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MotorTest
+<LI><a href="#[b8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MotorInit
+<LI><a href="#[b9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HorseRace
 <LI><a href="#[4c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+<LI><a href="#[b4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PerformQuest
 <LI><a href="#[9a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_init
 <LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Send_to_lcd
 <LI><a href="#[98]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Send_spi
@@ -546,13 +544,13 @@ Global Symbols
 <P><STRONG><a name="[136]"></a>RCC_AHBPeriphClockCmd</STRONG> (Thumb, 18 bytes, Stack size 0 bytes, stm32f10x_rcc.o(.text), UNUSED)
 
 <P><STRONG><a name="[9b]"></a>RCC_APB2PeriphClockCmd</STRONG> (Thumb, 18 bytes, Stack size 0 bytes, stm32f10x_rcc.o(.text))
-<BR><BR>[Called By]<UL><LI><a href="#[ba]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ChipInit
+<BR><BR>[Called By]<UL><LI><a href="#[bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ChipInit
 <LI><a href="#[9a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_init
 <LI><a href="#[d0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;init_usart
 </UL>
 
 <P><STRONG><a name="[c6]"></a>RCC_APB1PeriphClockCmd</STRONG> (Thumb, 18 bytes, Stack size 0 bytes, stm32f10x_rcc.o(.text))
-<BR><BR>[Called By]<UL><LI><a href="#[ba]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ChipInit
+<BR><BR>[Called By]<UL><LI><a href="#[bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ChipInit
 </UL>
 
 <P><STRONG><a name="[55]"></a>RCC_APB2PeriphResetCmd</STRONG> (Thumb, 18 bytes, Stack size 0 bytes, stm32f10x_rcc.o(.text), UNUSED)
@@ -587,7 +585,7 @@ Global Symbols
 <P><STRONG><a name="[c9]"></a>TIM_TimeBaseInit</STRONG> (Thumb, 114 bytes, Stack size 12 bytes, stm32f10x_tim.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 12<LI>Call Chain = TIM_TimeBaseInit
 </UL>
-<BR>[Called By]<UL><LI><a href="#[ba]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ChipInit
+<BR>[Called By]<UL><LI><a href="#[bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ChipInit
 </UL>
 
 <P><STRONG><a name="[13d]"></a>TIM_OC1Init</STRONG> (Thumb, 106 bytes, Stack size 12 bytes, stm32f10x_tim.o(.text), UNUSED)
@@ -597,13 +595,13 @@ Global Symbols
 <P><STRONG><a name="[cb]"></a>TIM_OC3Init</STRONG> (Thumb, 116 bytes, Stack size 16 bytes, stm32f10x_tim.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = TIM_OC3Init
 </UL>
-<BR>[Called By]<UL><LI><a href="#[ba]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ChipInit
+<BR>[Called By]<UL><LI><a href="#[bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ChipInit
 </UL>
 
 <P><STRONG><a name="[cc]"></a>TIM_OC4Init</STRONG> (Thumb, 90 bytes, Stack size 16 bytes, stm32f10x_tim.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = TIM_OC4Init
 </UL>
-<BR>[Called By]<UL><LI><a href="#[ba]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ChipInit
+<BR>[Called By]<UL><LI><a href="#[bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ChipInit
 </UL>
 
 <P><STRONG><a name="[61]"></a>TIM_SetIC4Prescaler</STRONG> (Thumb, 24 bytes, Stack size 0 bytes, stm32f10x_tim.o(.text), UNUSED)
@@ -645,18 +643,17 @@ Global Symbols
 <P><STRONG><a name="[140]"></a>TIM_TimeBaseStructInit</STRONG> (Thumb, 18 bytes, Stack size 0 bytes, stm32f10x_tim.o(.text), UNUSED)
 
 <P><STRONG><a name="[ca]"></a>TIM_OCStructInit</STRONG> (Thumb, 20 bytes, Stack size 0 bytes, stm32f10x_tim.o(.text))
-<BR><BR>[Called By]<UL><LI><a href="#[ba]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ChipInit
+<BR><BR>[Called By]<UL><LI><a href="#[bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ChipInit
 </UL>
 
 <P><STRONG><a name="[141]"></a>TIM_ICStructInit</STRONG> (Thumb, 16 bytes, Stack size 0 bytes, stm32f10x_tim.o(.text), UNUSED)
 
 <P><STRONG><a name="[142]"></a>TIM_BDTRStructInit</STRONG> (Thumb, 18 bytes, Stack size 0 bytes, stm32f10x_tim.o(.text), UNUSED)
 
-<P><STRONG><a name="[cf]"></a>TIM_Cmd</STRONG> (Thumb, 20 bytes, Stack size 0 bytes, stm32f10x_tim.o(.text))
-<BR><BR>[Called By]<UL><LI><a href="#[c4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MotorTestVarSpeed
-<LI><a href="#[c3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MotorTest
-<LI><a href="#[b7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MotorInit
-<LI><a href="#[b8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HorseRace
+<P><STRONG><a name="[ce]"></a>TIM_Cmd</STRONG> (Thumb, 20 bytes, Stack size 0 bytes, stm32f10x_tim.o(.text))
+<BR><BR>[Called By]<UL><LI><a href="#[c4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MotorTest
+<LI><a href="#[b8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MotorInit
+<LI><a href="#[b9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HorseRace
 </UL>
 
 <P><STRONG><a name="[143]"></a>TIM_CtrlPWMOutputs</STRONG> (Thumb, 22 bytes, Stack size 0 bytes, stm32f10x_tim.o(.text), UNUSED)
@@ -823,7 +820,7 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[6b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCC_GetClocksFreq
 </UL>
-<BR>[Called By]<UL><LI><a href="#[ba]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ChipInit
+<BR>[Called By]<UL><LI><a href="#[bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ChipInit
 <LI><a href="#[d0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;init_usart
 </UL>
 
@@ -834,14 +831,14 @@ Global Symbols
 <P><STRONG><a name="[184]"></a>USART_ClockStructInit</STRONG> (Thumb, 12 bytes, Stack size 0 bytes, stm32f10x_usart.o(.text), UNUSED)
 
 <P><STRONG><a name="[c8]"></a>USART_Cmd</STRONG> (Thumb, 20 bytes, Stack size 0 bytes, stm32f10x_usart.o(.text))
-<BR><BR>[Called By]<UL><LI><a href="#[ba]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ChipInit
+<BR><BR>[Called By]<UL><LI><a href="#[bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ChipInit
 <LI><a href="#[d0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;init_usart
 </UL>
 
 <P><STRONG><a name="[c7]"></a>USART_ITConfig</STRONG> (Thumb, 48 bytes, Stack size 8 bytes, stm32f10x_usart.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = USART_ITConfig
 </UL>
-<BR>[Called By]<UL><LI><a href="#[ba]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ChipInit
+<BR>[Called By]<UL><LI><a href="#[bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ChipInit
 <LI><a href="#[d6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;put_char
 <LI><a href="#[d5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;get_char
 <LI><a href="#[37]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USART1_IRQHandler
@@ -1204,11 +1201,10 @@ Global Symbols
 <BR>[Calls]<UL><LI><a href="#[6b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCC_GetClocksFreq
 </UL>
 <BR>[Called By]<UL><LI><a href="#[cd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;BlinkOnboardLED
-<LI><a href="#[c2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SendInstruction
-<LI><a href="#[c4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MotorTestVarSpeed
-<LI><a href="#[c3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MotorTest
-<LI><a href="#[b7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MotorInit
-<LI><a href="#[b8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HorseRace
+<LI><a href="#[c3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SendInstruction
+<LI><a href="#[c4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MotorTest
+<LI><a href="#[b8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MotorInit
+<LI><a href="#[b9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HorseRace
 <LI><a href="#[4c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
@@ -1321,7 +1317,7 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[a3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_Putchar
 </UL>
-<BR>[Called By]<UL><LI><a href="#[b8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HorseRace
+<BR>[Called By]<UL><LI><a href="#[b9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HorseRace
 <LI><a href="#[4c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
@@ -1407,34 +1403,36 @@ Global Symbols
 <BR><BR>[Calls]<UL><LI><a href="#[b2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_FillTriangleA
 </UL>
 
-<P><STRONG><a name="[b4]"></a>PerformQuest</STRONG> (Thumb, 48 bytes, Stack size 8 bytes, main.o(.text))
-<BR><BR>[Stack]<UL><LI>Max Depth = 296<LI>Call Chain = PerformQuest &rArr; HorseRace &rArr; LCD_Puts &rArr; LCD_Putchar &rArr; Send_Symbol &rArr; Put_Pixel &rArr; SetArea &rArr; Send_to_lcd &rArr; Send_spi &rArr; ClkPulse
+<P><STRONG><a name="[b4]"></a>PerformQuest</STRONG> (Thumb, 74 bytes, Stack size 16 bytes, main.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 304<LI>Call Chain = PerformQuest &rArr; HorseRace &rArr; LCD_Puts &rArr; LCD_Putchar &rArr; Send_Symbol &rArr; Put_Pixel &rArr; SetArea &rArr; Send_to_lcd &rArr; Send_spi &rArr; ClkPulse
 </UL>
 <BR>[Calls]<UL><LI><a href="#[b5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;get_task_counter
-<LI><a href="#[b9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;get_break_flag
+<LI><a href="#[ba]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;get_break_flag
 <LI><a href="#[b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;check_usart_while_playing
-<LI><a href="#[b7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MotorInit
-<LI><a href="#[b8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HorseRace
+<LI><a href="#[b8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MotorInit
+<LI><a href="#[b9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HorseRace
+<LI><a href="#[b7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Check_if_both_arrived
+<LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_ResetBits
 </UL>
 <BR>[Called By]<UL><LI><a href="#[4c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[4c]"></a>main</STRONG> (Thumb, 318 bytes, Stack size 24 bytes, main.o(.text))
-<BR><BR>[Stack]<UL><LI>Max Depth = 320<LI>Call Chain = main &rArr; PerformQuest &rArr; HorseRace &rArr; LCD_Puts &rArr; LCD_Putchar &rArr; Send_Symbol &rArr; Put_Pixel &rArr; SetArea &rArr; Send_to_lcd &rArr; Send_spi &rArr; ClkPulse
+<P><STRONG><a name="[4c]"></a>main</STRONG> (Thumb, 308 bytes, Stack size 24 bytes, main.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 328<LI>Call Chain = main &rArr; PerformQuest &rArr; HorseRace &rArr; LCD_Puts &rArr; LCD_Putchar &rArr; Send_Symbol &rArr; Put_Pixel &rArr; SetArea &rArr; Send_to_lcd &rArr; Send_spi &rArr; ClkPulse
 </UL>
-<BR>[Calls]<UL><LI><a href="#[be]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;usart_validate_crc8
-<LI><a href="#[bd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;usart_packet_parser
-<LI><a href="#[bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;usart_packet_is_addressed_to_me
-<LI><a href="#[bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;usart_has_data
-<LI><a href="#[bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;usart_get_data_packet
-<LI><a href="#[c0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;set_task_counter
-<LI><a href="#[c1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;set_break_flag
+<BR>[Calls]<UL><LI><a href="#[bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;usart_validate_crc8
+<LI><a href="#[be]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;usart_packet_parser
+<LI><a href="#[c0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;usart_packet_is_addressed_to_me
+<LI><a href="#[bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;usart_has_data
+<LI><a href="#[bd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;usart_get_data_packet
+<LI><a href="#[c1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;set_task_counter
+<LI><a href="#[c2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;set_break_flag
 <LI><a href="#[b5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;get_task_counter
-<LI><a href="#[b9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;get_break_flag
-<LI><a href="#[c2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SendInstruction
-<LI><a href="#[c4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MotorTestVarSpeed
-<LI><a href="#[c3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MotorTest
-<LI><a href="#[ba]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ChipInit
+<LI><a href="#[ba]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;get_break_flag
+<LI><a href="#[c3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SendInstruction
+<LI><a href="#[c4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MotorTest
+<LI><a href="#[b8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MotorInit
+<LI><a href="#[bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ChipInit
 <LI><a href="#[b4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PerformQuest
 <LI><a href="#[a8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_FillScreen
 <LI><a href="#[a4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_Puts
@@ -1446,7 +1444,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[4b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_entry_main
 </UL>
 
-<P><STRONG><a name="[ba]"></a>ChipInit</STRONG> (Thumb, 598 bytes, Stack size 88 bytes, mcu_config.o(.text))
+<P><STRONG><a name="[bb]"></a>ChipInit</STRONG> (Thumb, 598 bytes, Stack size 88 bytes, mcu_config.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 132<LI>Call Chain = ChipInit &rArr; USART_Init &rArr; RCC_GetClocksFreq
 </UL>
 <BR>[Calls]<UL><LI><a href="#[c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USART_ITConfig
@@ -1471,7 +1469,7 @@ Global Symbols
 <LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_ResetBits
 <LI><a href="#[96]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_SetBits
 </UL>
-<BR>[Called By]<UL><LI><a href="#[c0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;set_task_counter
+<BR>[Called By]<UL><LI><a href="#[c1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;set_task_counter
 <LI><a href="#[b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;check_usart_while_playing
 </UL>
 
@@ -1479,17 +1477,17 @@ Global Symbols
 
 <P><STRONG><a name="[b5]"></a>get_task_counter</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, mcu_config.o(.text))
 <BR><BR>[Called By]<UL><LI><a href="#[b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;check_usart_while_playing
-<LI><a href="#[b8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HorseRace
+<LI><a href="#[b9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HorseRace
 <LI><a href="#[4c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 <LI><a href="#[b4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PerformQuest
 </UL>
 
-<P><STRONG><a name="[c0]"></a>set_task_counter</STRONG> (Thumb, 22 bytes, Stack size 16 bytes, mcu_config.o(.text))
+<P><STRONG><a name="[c1]"></a>set_task_counter</STRONG> (Thumb, 22 bytes, Stack size 16 bytes, mcu_config.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 76<LI>Call Chain = set_task_counter &rArr; BlinkOnboardLED &rArr; delay_ms &rArr; RCC_GetClocksFreq
 </UL>
 <BR>[Calls]<UL><LI><a href="#[cd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;BlinkOnboardLED
 </UL>
-<BR>[Called By]<UL><LI><a href="#[b8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HorseRace
+<BR>[Called By]<UL><LI><a href="#[b9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HorseRace
 <LI><a href="#[4c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
@@ -1527,57 +1525,51 @@ Global Symbols
 <P><STRONG><a name="[f]"></a>DebugMon_Handler</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, stm32f10x_it.o(.text))
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f10x_md.o(RESET)
 </UL>
-<P><STRONG><a name="[b7]"></a>MotorInit</STRONG> (Thumb, 326 bytes, Stack size 40 bytes, motor_driver.o(.text))
+<P><STRONG><a name="[b7]"></a>Check_if_both_arrived</STRONG> (Thumb, 18 bytes, Stack size 0 bytes, motor_driver.o(.text))
+<BR><BR>[Called By]<UL><LI><a href="#[b8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MotorInit
+<LI><a href="#[b4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PerformQuest
+</UL>
+
+<P><STRONG><a name="[b8]"></a>MotorInit</STRONG> (Thumb, 306 bytes, Stack size 40 bytes, motor_driver.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 144<LI>Call Chain = MotorInit &rArr; check_usart_while_playing &rArr; SendInstruction &rArr; malloc &rArr; __Heap_Full &rArr; __Heap_ProvideMemory &rArr; free
 </UL>
 <BR>[Calls]<UL><LI><a href="#[b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;check_usart_while_playing
+<LI><a href="#[b7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Check_if_both_arrived
 <LI><a href="#[93]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_ms
-<LI><a href="#[cf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_Cmd
+<LI><a href="#[ce]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_Cmd
 <LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_ResetBits
 <LI><a href="#[96]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_SetBits
-<LI><a href="#[ce]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_ReadInputDataBit
+<LI><a href="#[cf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_ReadInputDataBit
 </UL>
-<BR>[Called By]<UL><LI><a href="#[b4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PerformQuest
+<BR>[Called By]<UL><LI><a href="#[4c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+<LI><a href="#[b4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PerformQuest
 </UL>
 
-<P><STRONG><a name="[b8]"></a>HorseRace</STRONG> (Thumb, 448 bytes, Stack size 48 bytes, motor_driver.o(.text))
+<P><STRONG><a name="[b9]"></a>HorseRace</STRONG> (Thumb, 448 bytes, Stack size 48 bytes, motor_driver.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 288<LI>Call Chain = HorseRace &rArr; LCD_Puts &rArr; LCD_Putchar &rArr; Send_Symbol &rArr; Put_Pixel &rArr; SetArea &rArr; Send_to_lcd &rArr; Send_spi &rArr; ClkPulse
 </UL>
-<BR>[Calls]<UL><LI><a href="#[c0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;set_task_counter
+<BR>[Calls]<UL><LI><a href="#[c1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;set_task_counter
 <LI><a href="#[b5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;get_task_counter
 <LI><a href="#[b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;check_usart_while_playing
 <LI><a href="#[a4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_Puts
 <LI><a href="#[93]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_ms
-<LI><a href="#[cf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_Cmd
+<LI><a href="#[ce]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_Cmd
 <LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_ResetBits
 <LI><a href="#[96]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_SetBits
-<LI><a href="#[ce]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_ReadInputDataBit
+<LI><a href="#[cf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_ReadInputDataBit
 </UL>
 <BR>[Called By]<UL><LI><a href="#[b4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PerformQuest
 </UL>
 
-<P><STRONG><a name="[c3]"></a>MotorTest</STRONG> (Thumb, 502 bytes, Stack size 40 bytes, motor_driver.o(.text))
+<P><STRONG><a name="[c4]"></a>MotorTest</STRONG> (Thumb, 508 bytes, Stack size 40 bytes, motor_driver.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 144<LI>Call Chain = MotorTest &rArr; check_usart_while_playing &rArr; SendInstruction &rArr; malloc &rArr; __Heap_Full &rArr; __Heap_ProvideMemory &rArr; free
 </UL>
 <BR>[Calls]<UL><LI><a href="#[b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;check_usart_while_playing
 <LI><a href="#[93]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_ms
-<LI><a href="#[cf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_Cmd
+<LI><a href="#[ce]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_Cmd
 <LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_ResetBits
 <LI><a href="#[96]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_SetBits
-<LI><a href="#[ce]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_ReadInputDataBit
-</UL>
-<BR>[Called By]<UL><LI><a href="#[4c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
-</UL>
-
-<P><STRONG><a name="[c4]"></a>MotorTestVarSpeed</STRONG> (Thumb, 170 bytes, Stack size 32 bytes, motor_driver.o(.text))
-<BR><BR>[Stack]<UL><LI>Max Depth = 136<LI>Call Chain = MotorTestVarSpeed &rArr; check_usart_while_playing &rArr; SendInstruction &rArr; malloc &rArr; __Heap_Full &rArr; __Heap_ProvideMemory &rArr; free
-</UL>
-<BR>[Calls]<UL><LI><a href="#[b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;check_usart_while_playing
-<LI><a href="#[93]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_ms
-<LI><a href="#[cf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_Cmd
-<LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_ResetBits
-<LI><a href="#[96]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_SetBits
-<LI><a href="#[ce]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_ReadInputDataBit
+<LI><a href="#[cf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_ReadInputDataBit
 </UL>
 <BR>[Called By]<UL><LI><a href="#[4c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
@@ -1606,19 +1598,19 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USART_ITConfig
 </UL>
-<BR>[Called By]<UL><LI><a href="#[bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;usart_get_data_packet
+<BR>[Called By]<UL><LI><a href="#[bd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;usart_get_data_packet
 </UL>
 
-<P><STRONG><a name="[bb]"></a>usart_has_data</STRONG> (Thumb, 12 bytes, Stack size 0 bytes, usart.o(.text))
-<BR><BR>[Called By]<UL><LI><a href="#[bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;usart_get_data_packet
+<P><STRONG><a name="[bc]"></a>usart_has_data</STRONG> (Thumb, 12 bytes, Stack size 0 bytes, usart.o(.text))
+<BR><BR>[Called By]<UL><LI><a href="#[bd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;usart_get_data_packet
 <LI><a href="#[b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;check_usart_while_playing
 <LI><a href="#[4c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[bc]"></a>usart_get_data_packet</STRONG> (Thumb, 36 bytes, Stack size 16 bytes, usart.o(.text))
+<P><STRONG><a name="[bd]"></a>usart_get_data_packet</STRONG> (Thumb, 36 bytes, Stack size 16 bytes, usart.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 48<LI>Call Chain = usart_get_data_packet &rArr; get_char &rArr; USART_ITConfig
 </UL>
-<BR>[Calls]<UL><LI><a href="#[bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;usart_has_data
+<BR>[Calls]<UL><LI><a href="#[bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;usart_has_data
 <LI><a href="#[d5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;get_char
 </UL>
 <BR>[Called By]<UL><LI><a href="#[b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;check_usart_while_playing
@@ -1640,15 +1632,15 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[d6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;put_char
 </UL>
-<BR>[Called By]<UL><LI><a href="#[c2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SendInstruction
+<BR>[Called By]<UL><LI><a href="#[c3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SendInstruction
 </UL>
 
-<P><STRONG><a name="[bf]"></a>usart_packet_is_addressed_to_me</STRONG> (Thumb, 16 bytes, Stack size 0 bytes, usart.o(.text))
+<P><STRONG><a name="[c0]"></a>usart_packet_is_addressed_to_me</STRONG> (Thumb, 16 bytes, Stack size 0 bytes, usart.o(.text))
 <BR><BR>[Called By]<UL><LI><a href="#[b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;check_usart_while_playing
 <LI><a href="#[4c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[bd]"></a>usart_packet_parser</STRONG> (Thumb, 88 bytes, Stack size 24 bytes, usart.o(.text))
+<P><STRONG><a name="[be]"></a>usart_packet_parser</STRONG> (Thumb, 88 bytes, Stack size 24 bytes, usart.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = usart_packet_parser &rArr; strlen
 </UL>
 <BR>[Calls]<UL><LI><a href="#[d9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;strlen
@@ -1662,7 +1654,7 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[d9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;strlen
 </UL>
-<BR>[Called By]<UL><LI><a href="#[be]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;usart_validate_crc8
+<BR>[Called By]<UL><LI><a href="#[bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;usart_validate_crc8
 <LI><a href="#[db]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;usart_assemble_response
 </UL>
 
@@ -1671,10 +1663,10 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[da]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;usart_crc8
 </UL>
-<BR>[Called By]<UL><LI><a href="#[c2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SendInstruction
+<BR>[Called By]<UL><LI><a href="#[c3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SendInstruction
 </UL>
 
-<P><STRONG><a name="[be]"></a>usart_validate_crc8</STRONG> (Thumb, 58 bytes, Stack size 8 bytes, usart.o(.text))
+<P><STRONG><a name="[bf]"></a>usart_validate_crc8</STRONG> (Thumb, 58 bytes, Stack size 8 bytes, usart.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = usart_validate_crc8 &rArr; usart_crc8 &rArr; strlen
 </UL>
 <BR>[Calls]<UL><LI><a href="#[da]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;usart_crc8
@@ -1684,14 +1676,14 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[dd]"></a>usart_convert_outgoing_packet</STRONG> (Thumb, 22 bytes, Stack size 0 bytes, usart.o(.text))
-<BR><BR>[Called By]<UL><LI><a href="#[c2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SendInstruction
+<BR><BR>[Called By]<UL><LI><a href="#[c3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SendInstruction
 </UL>
 
-<P><STRONG><a name="[c1]"></a>set_break_flag</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, usart.o(.text))
+<P><STRONG><a name="[c2]"></a>set_break_flag</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, usart.o(.text))
 <BR><BR>[Called By]<UL><LI><a href="#[4c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[c2]"></a>SendInstruction</STRONG> (Thumb, 74 bytes, Stack size 24 bytes, usart.o(.text))
+<P><STRONG><a name="[c3]"></a>SendInstruction</STRONG> (Thumb, 74 bytes, Stack size 24 bytes, usart.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 72<LI>Call Chain = SendInstruction &rArr; malloc &rArr; __Heap_Full &rArr; __Heap_ProvideMemory &rArr; free
 </UL>
 <BR>[Calls]<UL><LI><a href="#[93]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_ms
@@ -1711,25 +1703,24 @@ Global Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 104<LI>Call Chain = check_usart_while_playing &rArr; SendInstruction &rArr; malloc &rArr; __Heap_Full &rArr; __Heap_ProvideMemory &rArr; free
 </UL>
 <BR>[Calls]<UL><LI><a href="#[cd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;BlinkOnboardLED
-<LI><a href="#[be]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;usart_validate_crc8
-<LI><a href="#[bd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;usart_packet_parser
-<LI><a href="#[bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;usart_packet_is_addressed_to_me
-<LI><a href="#[bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;usart_has_data
-<LI><a href="#[bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;usart_get_data_packet
+<LI><a href="#[bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;usart_validate_crc8
+<LI><a href="#[be]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;usart_packet_parser
+<LI><a href="#[c0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;usart_packet_is_addressed_to_me
+<LI><a href="#[bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;usart_has_data
+<LI><a href="#[bd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;usart_get_data_packet
 <LI><a href="#[b5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;get_task_counter
-<LI><a href="#[c2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SendInstruction
+<LI><a href="#[c3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SendInstruction
 <LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_ResetBits
 <LI><a href="#[de]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;free
 <LI><a href="#[dc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;malloc
 </UL>
-<BR>[Called By]<UL><LI><a href="#[c4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MotorTestVarSpeed
-<LI><a href="#[c3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MotorTest
-<LI><a href="#[b7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MotorInit
-<LI><a href="#[b8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HorseRace
+<BR>[Called By]<UL><LI><a href="#[c4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MotorTest
+<LI><a href="#[b8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MotorInit
+<LI><a href="#[b9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HorseRace
 <LI><a href="#[b4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PerformQuest
 </UL>
 
-<P><STRONG><a name="[b9]"></a>get_break_flag</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, usart.o(.text))
+<P><STRONG><a name="[ba]"></a>get_break_flag</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, usart.o(.text))
 <BR><BR>[Called By]<UL><LI><a href="#[4c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 <LI><a href="#[b4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PerformQuest
 </UL>
@@ -1741,7 +1732,7 @@ Global Symbols
 <LI><a href="#[df]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_heap_descriptor
 </UL>
 <BR>[Called By]<UL><LI><a href="#[b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;check_usart_while_playing
-<LI><a href="#[c2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SendInstruction
+<LI><a href="#[c3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SendInstruction
 </UL>
 
 <P><STRONG><a name="[de]"></a>free</STRONG> (Thumb, 78 bytes, Stack size 16 bytes, h1_free.o(.text))
@@ -1750,14 +1741,14 @@ Global Symbols
 <BR>[Calls]<UL><LI><a href="#[df]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_heap_descriptor
 </UL>
 <BR>[Called By]<UL><LI><a href="#[b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;check_usart_while_playing
-<LI><a href="#[c2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SendInstruction
+<LI><a href="#[c3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SendInstruction
 <LI><a href="#[e3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__Heap_ProvideMemory
 </UL>
 
 <P><STRONG><a name="[d9]"></a>strlen</STRONG> (Thumb, 62 bytes, Stack size 8 bytes, strlen.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = strlen
 </UL>
-<BR>[Called By]<UL><LI><a href="#[bd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;usart_packet_parser
+<BR>[Called By]<UL><LI><a href="#[be]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;usart_packet_parser
 <LI><a href="#[da]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;usart_crc8
 </UL>
 
