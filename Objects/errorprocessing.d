@@ -2,7 +2,7 @@
 .\objects\errorprocessing.o: USER\mcu_config.h
 .\objects\errorprocessing.o: .\Libraries\CMSIS\CM3\DeviceSupport\ST\STM32F10x\stm32f10x.h
 .\objects\errorprocessing.o: .\Libraries\CMSIS\CM3\CoreSupport\core_cm3.h
-.\objects\errorprocessing.o: H:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\errorprocessing.o: D:\Keil_v5.2\ARM\ARMCC\Bin\..\include\stdint.h
 .\objects\errorprocessing.o: .\Libraries\CMSIS\CM3\DeviceSupport\ST\STM32F10x\system_stm32f10x.h
 .\objects\errorprocessing.o: .\USER\stm32f10x_conf.h
 .\objects\errorprocessing.o: .\Libraries\STM32F10x_StdPeriph_Driver\inc\stm32f10x_adc.h

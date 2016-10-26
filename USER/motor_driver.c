@@ -26,8 +26,8 @@
 #define READ_BONUS_SENS_MED()				(GPIO_ReadInputDataBit(BONUS_SENS_PORT, BONUS_SENS_MED))
 #define READ_BONUS_SENS_HIGH()			(GPIO_ReadInputDataBit(BONUS_SENS_PORT, BONUS_SENS_HIGH))
 /* Avaliable speeds. I assume greater number means less speed */
-#define AUTOMAT_SPEED								1000
-#define USER_BASE_SPEED							1100
+#define AUTOMAT_SPEED								110 //1000
+#define USER_BASE_SPEED							1000 //1400
 #define USER_BONUS_LOW_SPEED				950
 #define USER_BONUS_MED_SPEED				800
 #define USER_BONUS_HIGH_SPEED				650
@@ -129,7 +129,7 @@ void MotorInit (void)
 		}
 		delay_ms(1);
 	}
-
+	Check_if_both_arrived(true);
 /*
 	QUARTER_STEP();
 	DIR1_FORWARD();
@@ -169,6 +169,9 @@ unsigned char HorseRace (void)
 			STEP1_EN_1();
 			STEP2_EN_1();
 			set_task_counter(get_task_counter() + 1); // Added by me
+			//set_task_counter(0);
+			set_game_state(true);
+			//return 0;
 			return 0;									
 		}
 		if (READ_USER_END_POINT() == 0) {														
@@ -177,7 +180,10 @@ unsigned char HorseRace (void)
 			STEP1_EN_1();
 			STEP2_EN_1();
 			set_task_counter(get_task_counter() + 1); // Added by me
-			return 1;
+			//set_task_counter(0);
+			//set_game_state(true);
+			//return 0;
+			return 0;
 		}
 		if (bonus_speed_time > 0) {
 			bonus_speed_time--;
@@ -297,10 +303,16 @@ bool Check_if_both_arrived(bool reset){
 	else return false;
 }
 
-bool Check_if_both_at_start(void){
+bool Check_if_one_at_start(void){
 	if(READ_MASTER_START_POINT() == 0 || READ_USER_START_POINT() == 0) return true;
 	else return false;
 }
+
+bool Check_if_both_at_start(void){
+	if(READ_MASTER_START_POINT() == 0 && READ_USER_START_POINT() == 0) return true;
+	else return false;
+}
+
 
 void Emergency_Stop(void){
 		STEP1_RES_1();

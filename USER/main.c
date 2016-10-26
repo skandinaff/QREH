@@ -76,7 +76,7 @@ int main(void)
 				GPIO_ResetBits(LED_PORT, LED2);
 				switch (incoming_packet.instruction) {
 					case INSTR_MASTER_TEST:
-						if(!Check_if_both_at_start()) MotorInit(); 
+						if(!Check_if_one_at_start()) MotorInit(); 
 						SendInstruction(INSTR_SLAVE_READY);
 						break;
 					case INSTR_MASTER_WORK_START:
@@ -101,7 +101,8 @@ int main(void)
 					case INSTR_MASTER_SET_IDLE:
 						set_task_counter(0);
 						set_break_flag(true);
-						if(!Check_if_both_at_start()) MotorInit();
+						set_game_state(false);
+						if(!Check_if_one_at_start()) MotorInit();
 						break;
 					case SYS_RESET:
 						NVIC_SystemReset();
@@ -138,12 +139,24 @@ void PerformQuest(void){
 
 	while (task_counter == get_task_counter()) {
 		switch (task_counter) {
-			case 0:	// Horses
+			case 0:	// 
+				if(!Check_if_both_at_start()) MotorInit();
 			  HorseRace();
 				break;
 			case 1:
-				GPIO_ResetBits(STATE_LED_PORT, STATE_LED);
-				if(HorseRace() == 1) 
+				
+				if(get_game_state()) {
+					GPIO_ResetBits(STATE_LED_PORT, STATE_LED);
+					LCD_Puts("Game over!", 1, 1, DARK_BLUE, WHITE,1,1);
+					break;
+				}
+				if(!get_game_state()) {
+					LCD_Puts("Game starts again", 1, 1, DARK_BLUE, WHITE,1,1);
+					set_game_state(false);
+					task_counter = 0;
+					set_task_counter(0);
+					break;
+				}
 				break;
 		}
 

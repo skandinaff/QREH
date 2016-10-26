@@ -5,6 +5,7 @@
 char str[15];
 char buffer[15];
 uint8_t msg_size;
+char game_state = false;
 
 unsigned char sample[] = {0xC1, 0x10, 0x01, 0xFF, 0xC0};
 unsigned char sample2[] = {0xC1, 0x10, 0x01, 0xAA, 0xAA, 0xFF, 0xC0};
@@ -311,9 +312,9 @@ void check_usart_while_playing(void){
 						
 						break;
 					case INSTR_MASTER_STATUS_REQ:				
-						if (get_task_counter() == TASK_COUNT) {
+						if (get_game_state()) {
 							SendInstruction(INSTR_SLAVE_COMPLETED);
-						} else {
+						} else if (!get_game_state()){
 							SendInstruction(INSTR_SLAVE_NOT_COMLETED);
 
 						}
@@ -322,8 +323,9 @@ void check_usart_while_playing(void){
 						GPIO_ResetBits(STATE_LED_PORT, STATE_LED);
 						Check_if_both_arrived(true);
 						set_task_counter(0);
+						set_game_state(false);
 						Emergency_Stop();
-						if(!Check_if_both_at_start()) MotorInit();
+						if(!Check_if_one_at_start()) MotorInit();
 						set_break_flag(true);
 						break;
 					case SYS_RESET:
@@ -356,4 +358,12 @@ void set_break_flag(bool bf) {
 
 bool get_break_flag(void) {
     return break_flag;
+}
+
+void set_game_state(bool gs){
+	game_state = gs;
+}
+
+bool get_game_state(void){
+	return game_state;
 }
