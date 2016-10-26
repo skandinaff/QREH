@@ -56,6 +56,10 @@ extern AppStateTypeDef AppState;
 #define STATE_LED_PORT_RCC	RCC_APB2Periph_GPIOE
 #define STATE_LED 					GPIO_Pin_8	
 
+#define MAGNET_PORT 				GPIOE
+#define MAGNET_PORT_RCC			RCC_APB2Periph_GPIOE
+#define MAGNET							GPIO_Pin_15
+
 // RS - 485
 #define USART_PORT				GPIOA
 #define USART_PORT_RCC		RCC_APB2Periph_GPIOA
@@ -120,6 +124,7 @@ void reset_task_counter(void);
 int get_task_counter(void);
 void set_task_counter(int counter);
 void ADC_Configuration(void);
+void open_magnet(void);
 uint16_t readADC1(uint8_t channel);
 
 #endif

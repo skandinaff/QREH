@@ -27,7 +27,14 @@ Project File Date:  10/24/2016
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 2 (build 183)', folder: 'D:\Keil_v5.2\ARM\ARMCC\Bin'
 Build target 'Q1kony'
+compiling stm32f10x_it.c...
+compiling mcu_config.c...
+USER\mcu_config.c(249): warning:  #1-D: last line of file ends without a newline
+  }
+USER\mcu_config.c: 1 warning, 0 errors
 compiling main.c...
+compiling ErrorProcessing.c...
+compiling motor_driver.c...
 compiling usart.c...
 USER\usart.c(201): warning:  #167-D: argument of type "unsigned char *" is incompatible with parameter of type "const char *"
       incoming_packet.packet_length = strlen(packet);
@@ -41,16 +48,16 @@ USER\usart.c(272): warning:  #167-D: argument of type "uint8_t *" is incompatibl
   	uint8_t len = strlen(packet);
 USER\usart.c: 4 warnings, 0 errors
 linking...
-Program Size: Code=17012 RO-data=1068 RW-data=160 ZI-data=17896  
+Program Size: Code=17092 RO-data=1068 RW-data=160 ZI-data=17896  
 FromELF: creating hex file...
-".\Objects\Q1kony.axf" - 0 Error(s), 4 Warning(s).
+".\Objects\Q1kony.axf" - 0 Error(s), 5 Warning(s).
 
 <h2>Collection of Component include folders:</h2>
   D:\workspace\QREH\RTE
   D:\Keil_v5.2\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include
 
 <h2>Collection of Component Files used:</h2>
-Build Time Elapsed:  00:00:04
+Build Time Elapsed:  00:00:06
 </pre>
 </body>
 </html>

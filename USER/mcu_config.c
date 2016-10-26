@@ -48,7 +48,12 @@ void ChipInit ( void )
 	GPIO_InitStructure.GPIO_Pin = STATE_LED;											// STATE LED
 	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_2MHz;
-	GPIO_Init(STATE_LED_PORT, &GPIO_InitStructure);	
+	GPIO_Init(STATE_LED_PORT, &GPIO_InitStructure);
+
+	GPIO_InitStructure.GPIO_Pin = MAGNET;											// MAGNET
+	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
+	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_2MHz;
+	GPIO_Init(MAGNET_PORT, &GPIO_InitStructure);
 	
 	GPIO_InitStructure.GPIO_Pin = USART_TX_PIN;										// RS - 485
 	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP;
@@ -237,3 +242,8 @@ void set_task_counter(int counter) {
     _task_counter = counter;
 }
 
+void open_magnet(void){
+	GPIO_ResetBits(MAGNET_PORT, MAGNET);
+	delay_ms(500);
+	GPIO_SetBits(MAGNET_PORT, MAGNET);
+}

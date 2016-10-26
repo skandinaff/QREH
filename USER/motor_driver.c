@@ -26,8 +26,8 @@
 #define READ_BONUS_SENS_MED()				(GPIO_ReadInputDataBit(BONUS_SENS_PORT, BONUS_SENS_MED))
 #define READ_BONUS_SENS_HIGH()			(GPIO_ReadInputDataBit(BONUS_SENS_PORT, BONUS_SENS_HIGH))
 /* Avaliable speeds. I assume greater number means less speed */
-#define AUTOMAT_SPEED								110 //1000
-#define USER_BASE_SPEED							1000 //1400
+#define AUTOMAT_SPEED								1000
+#define USER_BASE_SPEED							1400
 #define USER_BONUS_LOW_SPEED				950
 #define USER_BONUS_MED_SPEED				800
 #define USER_BONUS_HIGH_SPEED				650
@@ -35,57 +35,7 @@
 volatile bool master_start = false;
 volatile bool user_start = false;
 
-/* Original init function
-void MotorInit (void)
-{
-	STEP1_RES_0();
-	STEP2_RES_0();
-	STEP1_EN_1();
-	STEP2_EN_1();
-	FULL_STEP();
-	
-	if (READ_USER_START_POINT() != 0){
-		
-		DIR2_REVERSE();
-		STEP2_RES_1();
-		STEP2_EN_0();
-		TIM2->ARR = 200;
-		TIM_Cmd(TIM2, ENABLE);
-		do {
-			//vTaskDelay(1);
-			check_usart_while_playing();
-			delay_ms(1);
-		} while (READ_USER_START_POINT() != 0);
-		STEP2_RES_0();
-		STEP2_EN_1();
-		TIM_Cmd(TIM2, DISABLE);
-		
-	}
-	if (READ_MASTER_START_POINT() != 0){
-		DIR1_REVERSE();
-		STEP1_RES_1();
-		STEP1_EN_0();
-		TIM3->ARR = 200;
-		TIM_Cmd(TIM3, ENABLE);
-		do {
-			//vTaskDelay(1);
-			check_usart_while_playing();
-			delay_ms(1);
-		} while (READ_MASTER_START_POINT() != 0);
-		STEP1_RES_0();
-		STEP1_EN_1();
-		TIM_Cmd(TIM3, DISABLE);
-	
-	}
 
-	QUARTER_STEP();
-	DIR1_FORWARD();
-	DIR2_FORWARD();
-	
-	TIM2->ARR = 1200;						// Setting computer's speed 
-	TIM3->ARR = 1400;						// Setting user's base speed
-}
-*/
 
 void MotorInit (void)
 {

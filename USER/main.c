@@ -53,6 +53,9 @@ int main(void)
 	LCD_FillScreen(WHITE);
 	LCD_Puts("Status: Idle", 1, 30, DARK_BLUE, WHITE,1,1);
 	
+	GPIO_SetBits(MAGNET_PORT, MAGNET);
+	
+	
   while(1){
 	/*
 		int adcval = readADC1(2);
@@ -148,6 +151,7 @@ void PerformQuest(void){
 				if(get_game_state()) {
 					GPIO_ResetBits(STATE_LED_PORT, STATE_LED);
 					LCD_Puts("Game over!", 1, 1, DARK_BLUE, WHITE,1,1);
+					open_magnet();
 					break;
 				}
 				if(!get_game_state()) {
