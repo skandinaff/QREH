@@ -320,6 +320,7 @@ void check_usart_while_playing(void){
 						}
 						break;
 					case INSTR_MASTER_SET_IDLE:
+						//NVIC_SystemReset(); //TODO: It's here, because otherwise, otherwise in second go limiters wont work
 						GPIO_ResetBits(STATE_LED_PORT, STATE_LED);
 						Check_if_both_arrived(true);
 						set_task_counter(0);
@@ -327,6 +328,7 @@ void check_usart_while_playing(void){
 						Emergency_Stop();
 						if(!Check_if_one_at_start()) MotorInit();
 						set_break_flag(true);
+						
 						break;
 					case SYS_RESET:
 						NVIC_SystemReset();

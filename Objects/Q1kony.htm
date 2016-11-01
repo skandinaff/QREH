@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\Objects\Q1kony.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Objects\Q1kony.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060183: Last Updated: Wed Oct 26 20:46:21 2016
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060183: Last Updated: Tue Nov 01 22:22:30 2016
 <BR><P>
 <H3>Maximum Stack Usage =        344 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -1413,7 +1413,7 @@ Global Symbols
 <BR><BR>[Calls]<UL><LI><a href="#[b2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_FillTriangleA
 </UL>
 
-<P><STRONG><a name="[b4]"></a>PerformQuest</STRONG> (Thumb, 152 bytes, Stack size 32 bytes, main.o(.text))
+<P><STRONG><a name="[b4]"></a>PerformQuest</STRONG> (Thumb, 166 bytes, Stack size 32 bytes, main.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 320<LI>Call Chain = PerformQuest &rArr; HorseRace &rArr; LCD_Puts &rArr; LCD_Putchar &rArr; Send_Symbol &rArr; Put_Pixel &rArr; SetArea &rArr; Send_to_lcd &rArr; Send_spi &rArr; ClkPulse
 </UL>
 <BR>[Calls]<UL><LI><a href="#[bd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;set_task_counter
@@ -1575,7 +1575,7 @@ Global Symbols
 <LI><a href="#[b4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PerformQuest
 </UL>
 
-<P><STRONG><a name="[b9]"></a>HorseRace</STRONG> (Thumb, 458 bytes, Stack size 48 bytes, motor_driver.o(.text))
+<P><STRONG><a name="[b9]"></a>HorseRace</STRONG> (Thumb, 460 bytes, Stack size 48 bytes, motor_driver.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 288<LI>Call Chain = HorseRace &rArr; LCD_Puts &rArr; LCD_Putchar &rArr; Send_Symbol &rArr; Put_Pixel &rArr; SetArea &rArr; Send_to_lcd &rArr; Send_spi &rArr; ClkPulse
 </UL>
 <BR>[Calls]<UL><LI><a href="#[bd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;set_task_counter
@@ -1593,7 +1593,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[b4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PerformQuest
 </UL>
 
-<P><STRONG><a name="[c8]"></a>MotorTest</STRONG> (Thumb, 510 bytes, Stack size 40 bytes, motor_driver.o(.text))
+<P><STRONG><a name="[c8]"></a>MotorTest</STRONG> (Thumb, 508 bytes, Stack size 40 bytes, motor_driver.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 148<LI>Call Chain = MotorTest &rArr; check_usart_while_playing &rArr; set_task_counter &rArr; BlinkOnboardLED &rArr; delay_ms &rArr; RCC_GetClocksFreq
 </UL>
 <BR>[Calls]<UL><LI><a href="#[b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;check_usart_while_playing

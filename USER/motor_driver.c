@@ -26,7 +26,7 @@
 #define READ_BONUS_SENS_MED()				(GPIO_ReadInputDataBit(BONUS_SENS_PORT, BONUS_SENS_MED))
 #define READ_BONUS_SENS_HIGH()			(GPIO_ReadInputDataBit(BONUS_SENS_PORT, BONUS_SENS_HIGH))
 /* Avaliable speeds. I assume greater number means less speed */
-#define AUTOMAT_SPEED								1000
+#define AUTOMAT_SPEED								1150 // was 1200 initally
 #define USER_BASE_SPEED							1400
 #define USER_BONUS_LOW_SPEED				950
 #define USER_BONUS_MED_SPEED				800
@@ -145,17 +145,17 @@ unsigned char HorseRace (void)
 			}
 		}
 		
-		if (READ_BONUS_SENS_LOW() == 0) {
+		if (READ_BONUS_SENS_LOW() != 0) {
 			LCD_Puts("LOW BONUS!", 1, 1, DARK_BLUE, WHITE,1,1);
 			bonus_speed_time = 500;
 			TIM3->ARR = USER_BONUS_LOW_SPEED;
 		}
-		if (READ_BONUS_SENS_MED() == 0) {
+		if (READ_BONUS_SENS_MED() != 0) {
 			LCD_Puts("MEDIUM BONUS!", 1, 10, DARK_BLUE, WHITE,1,1);
 			bonus_speed_time = 500;
 			TIM3->ARR = USER_BONUS_MED_SPEED;
 		}
-		if (READ_BONUS_SENS_HIGH() == 0) {
+		if (READ_BONUS_SENS_HIGH() != 0) {
 			LCD_Puts("HIGH BONUS!", 1, 20, DARK_BLUE, WHITE,1,1);
 			bonus_speed_time = 500;
 			TIM3->ARR = USER_BONUS_HIGH_SPEED;

@@ -152,7 +152,10 @@ void PerformQuest(void){
 					GPIO_ResetBits(STATE_LED_PORT, STATE_LED);
 					LCD_Puts("Game over!", 1, 1, DARK_BLUE, WHITE,1,1);
 					open_magnet();
-					break;
+					while(get_game_state()) {
+						check_usart_while_playing();
+					}
+					return;
 				}
 				if(!get_game_state()) {
 					LCD_Puts("Game starts again", 1, 1, DARK_BLUE, WHITE,1,1);
