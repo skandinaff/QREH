@@ -2,7 +2,7 @@
 .\objects\motor_driver.o: USER\motor_driver.h
 .\objects\motor_driver.o: .\Libraries\CMSIS\CM3\DeviceSupport\ST\STM32F10x\stm32f10x.h
 .\objects\motor_driver.o: .\Libraries\CMSIS\CM3\CoreSupport\core_cm3.h
-.\objects\motor_driver.o: H:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\motor_driver.o: D:\Keil_v5.2\ARM\ARMCC\Bin\..\include\stdint.h
 .\objects\motor_driver.o: .\Libraries\CMSIS\CM3\DeviceSupport\ST\STM32F10x\system_stm32f10x.h
 .\objects\motor_driver.o: .\USER\stm32f10x_conf.h
 .\objects\motor_driver.o: .\Libraries\STM32F10x_StdPeriph_Driver\inc\stm32f10x_adc.h
@@ -18,8 +18,8 @@
 .\objects\motor_driver.o: .\USER\MyDrv\delay.h
 .\objects\motor_driver.o: .\USER\MyDrv\LPH8731-3C.h
 .\objects\motor_driver.o: .\USER\usart.h
-.\objects\motor_driver.o: H:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
-.\objects\motor_driver.o: H:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
-.\objects\motor_driver.o: H:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
-.\objects\motor_driver.o: H:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\objects\motor_driver.o: D:\Keil_v5.2\ARM\ARMCC\Bin\..\include\stdio.h
+.\objects\motor_driver.o: D:\Keil_v5.2\ARM\ARMCC\Bin\..\include\string.h
+.\objects\motor_driver.o: D:\Keil_v5.2\ARM\ARMCC\Bin\..\include\stdbool.h
+.\objects\motor_driver.o: D:\Keil_v5.2\ARM\ARMCC\Bin\..\include\stdlib.h
 .\objects\motor_driver.o: .\USER\motor_driver.h

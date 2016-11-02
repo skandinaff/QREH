@@ -5,11 +5,11 @@
 <h2>Tool Versions:</h2>
 IDE-Version: µVision V5.20.0.0
 Copyright (C) 2016 ARM Ltd and ARM Germany GmbH. All rights reserved.
-License Information: Aleksandrs Sevastjanovs, Silmor, LIC=AK19U-SJKQE-C1XPU-SKRS9-T85H7-ATFRP
+License Information: A S, AS, LIC=LJWDY-IWR9F-GNTA5-G7RBD-61JVX-YHPUE
  
 Tool Versions:
 Toolchain:       MDK-ARM Professional  Version: 5.20
-Toolchain Path:  H:\Keil_v5\ARM\ARMCC\Bin
+Toolchain Path:  D:\Keil_v5.2\ARM\ARMCC\Bin
 C Compiler:      Armcc.exe V5.06 update 2 (build 183)
 Assembler:       Armasm.exe V5.06 update 2 (build 183)
 Linker/Locator:  ArmLink.exe V5.06 update 2 (build 183)
@@ -21,35 +21,24 @@ Target DLL:      STLink\ST-LINKIII-KEIL_SWO.dll V2.0.18.0
 Dialog DLL:      TCM.DLL V1.14.9.0
  
 <h2>Project:</h2>
-F:\workspace\arm\QREH\Q1kony.uvprojx
-Project File Date:  10/26/2016
+D:\workspace\QREH\Q1kony.uvprojx
+Project File Date:  10/24/2016
 
 <h2>Output:</h2>
-*** Using Compiler 'V5.06 update 2 (build 183)', folder: 'H:\Keil_v5\ARM\ARMCC\Bin'
+*** Using Compiler 'V5.06 update 2 (build 183)', folder: 'D:\Keil_v5.2\ARM\ARMCC\Bin'
 Build target 'Q1kony'
-compiling usart.c...
-USER\usart.c(203): warning:  #167-D: argument of type "unsigned char *" is incompatible with parameter of type "const char *"
-      incoming_packet.packet_length = strlen(packet);
-USER\usart.c(233): warning:  #167-D: argument of type "char *" is incompatible with parameter of type "uint8_t *"
-      outgoing_packet.crc8 = usart_crc8(
-RC_INIT_VAL, data_for_crc8); 
-USER\usart.c(259): warning:  #167-D: argument of type "char *" is incompatible with parameter of type "uint8_t *"
-  	incoming_crc8 = usart_crc8(
-RC_INIT_VAL, data_for_crc8);
-USER\usart.c(274): warning:  #167-D: argument of type "uint8_t *" is incompatible with parameter of type "const char *"
-  	uint8_t len = strlen(packet);
-USER\usart.c: 4 warnings, 0 errors
+compiling main.c...
 linking...
-Program Size: Code=17576 RO-data=1068 RW-data=160 ZI-data=17896  
+Program Size: Code=17364 RO-data=1068 RW-data=160 ZI-data=17896  
 FromELF: creating hex file...
-".\Objects\Q1kony.axf" - 0 Error(s), 4 Warning(s).
+".\Objects\Q1kony.axf" - 0 Error(s), 0 Warning(s).
 
 <h2>Collection of Component include folders:</h2>
-  F:\workspace\arm\QREH\RTE
-  H:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include
+  D:\workspace\QREH\RTE
+  D:\Keil_v5.2\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include
 
 <h2>Collection of Component Files used:</h2>
-Build Time Elapsed:  00:00:00
+Build Time Elapsed:  00:00:01
 </pre>
 </body>
 </html>

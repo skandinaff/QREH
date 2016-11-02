@@ -305,7 +305,7 @@ void check_usart_while_playing(void){
 			usart_get_data_packet(packet);
 			incoming_packet = usart_packet_parser(packet);
 			if (usart_validate_crc8(incoming_packet) && usart_packet_is_addressed_to_me(incoming_packet)){
-			BlinkOnboardLED(2);
+			//BlinkOnboardLED(2);
 				switch (incoming_packet.instruction) {
 					case INSTR_MASTER_TEST:
 						
@@ -323,11 +323,14 @@ void check_usart_while_playing(void){
 						break;
 					case INSTR_MASTER_SET_IDLE:
 						//NVIC_SystemReset(); // Last resort
-
+						
+						if(!Check_if_one_at_start()) {
+							MotorInit(); 
+						} 
 						
 						if(get_idle_received()==false){
-							LCD_FillScreen(WHITE);
-							LCD_Puts("Idled by usart", 1, 30, DARK_BLUE, WHITE,1,1);
+							//LCD_FillScreen(WHITE);
+							//LCD_Puts("Idled by usart", 1, 30, DARK_BLUE, WHITE,1,1);
 							GPIO_ResetBits(STATE_LED_PORT, STATE_LED);
 							Check_if_both_arrived(true);
 							set_task_counter(0);
@@ -353,10 +356,10 @@ void check_usart_while_playing(void){
 uint8_t SendInstruction(unsigned char instruction){
 	unsigned char* packet = malloc((OUTGOING_PACKET_LENGTH + 1) * sizeof(char));
 	outgoing_packet_t outgoing_packet = usart_assemble_response(instruction);	
-	GPIO_SetBits(USART_PORT, RS485DIR_PIN);
 	usart_convert_outgoing_packet(packet, outgoing_packet);
+	GPIO_SetBits(USART_PORT, RS485DIR_PIN);
 	put_str(packet);
-	delay_ms(100);
+	delay_ms(10);
 	free(packet);
 	GPIO_ResetBits(USART_PORT, RS485DIR_PIN);
 	return 1;
