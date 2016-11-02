@@ -328,7 +328,7 @@ void check_usart_while_playing(void){
 						Emergency_Stop();
 						if(!Check_if_one_at_start()) MotorInit();
 						set_break_flag(true);
-						
+					//TODO: add here all timer disable, to avoid overflow or weird behavoiur 
 						break;
 					case SYS_RESET:
 						NVIC_SystemReset();
