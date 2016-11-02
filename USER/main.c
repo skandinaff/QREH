@@ -79,8 +79,10 @@ int main(void)
 				GPIO_ResetBits(LED_PORT, LED2);
 				switch (incoming_packet.instruction) {
 					case INSTR_MASTER_TEST:
-						if(!Check_if_one_at_start()) MotorInit(); 
+						LCD_Puts("Test received!", 1, 1, DARK_BLUE, WHITE,1,1);
 						SendInstruction(INSTR_SLAVE_READY);
+						if(!Check_if_one_at_start()) { MotorInit(); } 
+						LCD_Puts("For Sure!", 1, 1, DARK_BLUE, WHITE,1,1);
 						break;
 					case INSTR_MASTER_WORK_START:
 						while (get_task_counter() <= TASK_COUNT) {
@@ -105,7 +107,7 @@ int main(void)
 						set_task_counter(0);
 						set_break_flag(true);
 						set_game_state(false);
-						if(!Check_if_one_at_start()) MotorInit();
+						//if(!Check_if_one_at_start()) MotorInit();
 						break;
 					case SYS_RESET:
 						NVIC_SystemReset();
@@ -129,7 +131,7 @@ void PerformQuest(void){
 	
 	int task_counter = get_task_counter();
 
-
+	LCD_Puts("Game will start shortly!", 1, 30, DARK_BLUE, WHITE,1,1);
 	check_usart_while_playing();
 
 	

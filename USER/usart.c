@@ -321,13 +321,15 @@ void check_usart_while_playing(void){
 						break;
 					case INSTR_MASTER_SET_IDLE:
 						//NVIC_SystemReset(); //TODO: It's here, because otherwise, otherwise in second go limiters wont work
+						LCD_FillScreen(WHITE);
+						LCD_Puts("Idled by usart", 1, 30, DARK_BLUE, WHITE,1,1);
 						GPIO_ResetBits(STATE_LED_PORT, STATE_LED);
 						Check_if_both_arrived(true);
 						set_task_counter(0);
 						set_game_state(false);
-						Emergency_Stop();
-						if(!Check_if_one_at_start()) MotorInit();
 						set_break_flag(true);
+						Emergency_Stop();
+						//if(!Check_if_one_at_start()) MotorInit();
 					//TODO: add here all timer disable, to avoid overflow or weird behavoiur 
 						break;
 					case SYS_RESET:

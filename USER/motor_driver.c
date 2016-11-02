@@ -39,6 +39,7 @@ volatile bool user_start = false;
 
 void MotorInit (void)
 {
+	LCD_Puts("Please Init motors!", 1, 40, DARK_BLUE, WHITE,1,1);
 	STEP1_RES_0();
 	STEP2_RES_0();
 	STEP1_EN_1();
@@ -69,16 +70,20 @@ void MotorInit (void)
 			STEP1_EN_1();
 			TIM_Cmd(TIM3, DISABLE);
 			user_start = true;
-		
+			LCD_Puts("Master at start!", 1, 50, DARK_BLUE, WHITE,1,1);
 		}
 		if (READ_USER_START_POINT() == 0) {														
 			STEP2_RES_0();
 			STEP2_EN_1();
 			TIM_Cmd(TIM2, DISABLE);
 			master_start = true;
+			LCD_Puts("User at start!", 1, 60, DARK_BLUE, WHITE,1,1);
 		}
 		delay_ms(1);
 	}
+	LCD_Puts("                   ", 1, 40, DARK_BLUE, WHITE,1,1);
+	LCD_Puts("                   ", 1, 50, DARK_BLUE, WHITE,1,1);
+	LCD_Puts("                   ", 1, 60, DARK_BLUE, WHITE,1,1);
 	Check_if_both_arrived(true);
 /*
 	QUARTER_STEP();
@@ -92,8 +97,9 @@ void MotorInit (void)
 
 unsigned char HorseRace (void) 
 {
+
 	unsigned int bonus_speed_time = 0;
-	
+		LCD_Puts("Game on!      ", 1, 30, DARK_BLUE, WHITE,1,1);
 	QUARTER_STEP();
 	DIR1_FORWARD();
 	DIR2_FORWARD();
