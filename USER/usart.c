@@ -28,6 +28,8 @@ volatile uint16_t tx_counter=0;
 char data_for_crc8[5];
 char incoming_crc8;
 bool break_flag = false;
+bool idle_received = false; // This is to avoid system hang during lot's of idles coming in
+
 
 void init_usart(void){
 	
@@ -320,15 +322,20 @@ void check_usart_while_playing(void){
 						}
 						break;
 					case INSTR_MASTER_SET_IDLE:
-						//NVIC_SystemReset(); //TODO: It's here, because otherwise, otherwise in second go limiters wont work
-						LCD_FillScreen(WHITE);
-						LCD_Puts("Idled by usart", 1, 30, DARK_BLUE, WHITE,1,1);
-						GPIO_ResetBits(STATE_LED_PORT, STATE_LED);
-						Check_if_both_arrived(true);
-						set_task_counter(0);
-						set_game_state(false);
-						set_break_flag(true);
-						Emergency_Stop();
+						//NVIC_SystemReset(); // Last resort
+
+						
+						if(get_idle_received()==false){
+							LCD_FillScreen(WHITE);
+							LCD_Puts("Idled by usart", 1, 30, DARK_BLUE, WHITE,1,1);
+							GPIO_ResetBits(STATE_LED_PORT, STATE_LED);
+							Check_if_both_arrived(true);
+							set_task_counter(0);
+							set_game_state(false);
+							set_break_flag(true);
+							Emergency_Stop();
+						}
+						set_idle_received(true);
 						//if(!Check_if_one_at_start()) MotorInit();
 					//TODO: add here all timer disable, to avoid overflow or weird behavoiur 
 						break;
@@ -371,3 +378,12 @@ void set_game_state(bool gs){
 bool get_game_state(void){
 	return game_state;
 }
+
+void set_idle_received(bool ir){
+	idle_received = ir;
+}
+
+bool get_idle_received(void){
+	return idle_received;
+}
+

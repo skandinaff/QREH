@@ -51,7 +51,7 @@ int main(void)
 	
 	LCD_init();
 	LCD_FillScreen(WHITE);
-	LCD_Puts("Status: Idle", 1, 30, DARK_BLUE, WHITE,1,1);
+	LCD_Puts("First startup", 1, 30, DARK_BLUE, WHITE,1,1);
 	
 	GPIO_SetBits(MAGNET_PORT, MAGNET);
 	
@@ -79,12 +79,14 @@ int main(void)
 				GPIO_ResetBits(LED_PORT, LED2);
 				switch (incoming_packet.instruction) {
 					case INSTR_MASTER_TEST:
+						set_idle_received(false);
 						LCD_Puts("Test received!", 1, 1, DARK_BLUE, WHITE,1,1);
 						SendInstruction(INSTR_SLAVE_READY);
 						if(!Check_if_one_at_start()) { MotorInit(); } 
 						LCD_Puts("For Sure!", 1, 1, DARK_BLUE, WHITE,1,1);
 						break;
 					case INSTR_MASTER_WORK_START:
+						set_idle_received(false);
 						while (get_task_counter() <= TASK_COUNT) {
 							GPIO_SetBits(STATE_LED_PORT, STATE_LED);
 							PerformQuest();
@@ -104,9 +106,23 @@ int main(void)
 						}*/
 						break;
 					case INSTR_MASTER_SET_IDLE:
+
+						set_idle_received(true);
+						if(get_idle_received()==false){
+							LCD_FillScreen(WHITE);
+							LCD_Puts("Idled by usart", 1, 30, DARK_BLUE, WHITE,1,1);
+							GPIO_ResetBits(STATE_LED_PORT, STATE_LED);
+							Check_if_both_arrived(true);
+							set_task_counter(0);
+							set_game_state(false);
+							set_break_flag(true);
+							Emergency_Stop();
+						}
+						/*
 						set_task_counter(0);
 						set_break_flag(true);
 						set_game_state(false);
+						*/
 						//if(!Check_if_one_at_start()) MotorInit();
 						break;
 					case SYS_RESET:
@@ -131,7 +147,7 @@ void PerformQuest(void){
 	
 	int task_counter = get_task_counter();
 
-	LCD_Puts("Game will start shortly!", 1, 30, DARK_BLUE, WHITE,1,1);
+	LCD_Puts("Idle between games", 1, 30, DARK_BLUE, WHITE,1,1);
 	check_usart_while_playing();
 
 	

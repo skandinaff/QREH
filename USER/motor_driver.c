@@ -99,7 +99,7 @@ unsigned char HorseRace (void)
 {
 
 	unsigned int bonus_speed_time = 0;
-		LCD_Puts("Game on!      ", 1, 30, DARK_BLUE, WHITE,1,1);
+		LCD_Puts("Game on!            ", 1, 30, DARK_BLUE, WHITE,1,1);
 	QUARTER_STEP();
 	DIR1_FORWARD();
 	DIR2_FORWARD();
@@ -117,6 +117,7 @@ unsigned char HorseRace (void)
   while(1)
   {
 		if (get_break_flag()) return 0;
+		
 		check_usart_while_playing();
 		
 		if (READ_MASTER_END_POINT() == 0) {													
