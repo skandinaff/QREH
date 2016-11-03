@@ -2,7 +2,7 @@
 .\objects\quest.o: User\quest.h
 .\objects\quest.o: .\Libraries\CMSIS\CM3\DeviceSupport\ST\STM32F10x\stm32f10x.h
 .\objects\quest.o: .\Libraries\CMSIS\CM3\CoreSupport\core_cm3.h
-.\objects\quest.o: H:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\quest.o: D:\Keil_v5.2\ARM\ARMCC\Bin\..\include\stdint.h
 .\objects\quest.o: .\Libraries\CMSIS\CM3\DeviceSupport\ST\STM32F10x\system_stm32f10x.h
 .\objects\quest.o: .\USER\stm32f10x_conf.h
 .\objects\quest.o: .\Libraries\STM32F10x_StdPeriph_Driver\inc\stm32f10x_adc.h
@@ -14,7 +14,7 @@
 .\objects\quest.o: .\Libraries\STM32F10x_StdPeriph_Driver\inc\stm32f10x_tim.h
 .\objects\quest.o: .\Libraries\STM32F10x_StdPeriph_Driver\inc\stm32f10x_usart.h
 .\objects\quest.o: .\Libraries\STM32F10x_StdPeriph_Driver\inc\misc.h
-.\objects\quest.o: H:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
-.\objects\quest.o: H:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
-.\objects\quest.o: H:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
-.\objects\quest.o: H:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\objects\quest.o: D:\Keil_v5.2\ARM\ARMCC\Bin\..\include\stdio.h
+.\objects\quest.o: D:\Keil_v5.2\ARM\ARMCC\Bin\..\include\string.h
+.\objects\quest.o: D:\Keil_v5.2\ARM\ARMCC\Bin\..\include\stdbool.h
+.\objects\quest.o: D:\Keil_v5.2\ARM\ARMCC\Bin\..\include\stdlib.h
