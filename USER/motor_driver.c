@@ -107,7 +107,6 @@ unsigned char HorseRace (void)
 	STEP2_RES_1();
 	STEP1_EN_0();
 	STEP2_EN_0();
-	//vTaskDelay(50);
 	delay_ms(50);
 	TIM2->ARR = AUTOMAT_SPEED;
 	TIM3->ARR = USER_BASE_SPEED;
@@ -125,10 +124,7 @@ unsigned char HorseRace (void)
 			STEP2_RES_0();
 			STEP1_EN_1();
 			STEP2_EN_1();
-			//set_task_counter(get_task_counter() + 1); // Added by me
-			//set_task_counter(0);
-			//set_game_state(true);
-			MotorInit();
+			set_game_result(COMPLETED); // Swapped places. Appears that motors are connected other way around
 			return 0;									
 		}
 		if (READ_USER_END_POINT() == 0) {														
@@ -136,10 +132,7 @@ unsigned char HorseRace (void)
 			STEP2_RES_0();
 			STEP1_EN_1();
 			STEP2_EN_1();
-			//set_task_counter(get_task_counter() + 1); // Added by me
-			//set_task_counter(0);
-			//set_game_state(true);
-			set_game_result(COMPLETED);
+			MotorInit();
 			return 0;
 		}
 		if (bonus_speed_time > 0) {
@@ -167,7 +160,6 @@ unsigned char HorseRace (void)
 			bonus_speed_time = 500;
 			TIM3->ARR = USER_BONUS_HIGH_SPEED;
 		}
-		//vTaskDelay(10);
 		delay_ms(10);
   }
 }

@@ -68,7 +68,7 @@ int main(void)
 				if(get_game_result()==COMPLETED) LCD_Puts("COMPL", 50, 40, DARK_BLUE, WHITE,1,1);
 				if(get_game_result()==NOT_COMPLETED) LCD_Puts("NOT_C", 50, 40, DARK_BLUE, WHITE,1,1);
 				GPIO_ResetBits(STATE_LED_PORT, STATE_LED);
-
+				open_magnet();
 				//Emergency_Stop();
 				if(!Check_if_one_at_start()) {
 					MotorInit(); 
@@ -77,8 +77,15 @@ int main(void)
 				break;
 			case GAME:
 				LCD_Puts("State: Game", 1, 30, DARK_BLUE, WHITE,1,1);
-				if(get_game_result()==COMPLETED) LCD_Puts("COMPL", 50, 40, DARK_BLUE, WHITE,1,1);
-				if(get_game_result()==NOT_COMPLETED) LCD_Puts("NOT_C", 50, 40, DARK_BLUE, WHITE,1,1);
+				if(get_game_result()==COMPLETED) {
+					LCD_Puts("COMPL", 50, 40, DARK_BLUE, WHITE,1,1);
+					GPIO_ResetBits(STATE_LED_PORT, STATE_LED);
+					open_magnet();
+				}
+				if(get_game_result()==NOT_COMPLETED) {
+					LCD_Puts("NOT_C", 50, 40, DARK_BLUE, WHITE,1,1);
+					GPIO_SetBits(STATE_LED_PORT, STATE_LED);
+				}
 				while(get_game_result()==NOT_COMPLETED && get_game_state()==GAME) {
 					HorseRace();
 				}

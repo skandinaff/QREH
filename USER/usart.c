@@ -329,11 +329,8 @@ void check_usart_while_playing(void){
 						if(get_game_state()==GAME) { 
 							set_game_state(IDLE);
 							Emergency_Stop();
-							//return;
 						}
-						//set_game_state(IDLE);
 						break;
-						//break;
 					// Custom commands
 					case SYS_RESET:
 						NVIC_SystemReset();
