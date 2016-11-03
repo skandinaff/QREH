@@ -308,24 +308,24 @@ void check_usart_while_playing(void){
 				//BlinkOnboardLED(2); // TODO: rewrite blik function using timer
 				switch (incoming_packet.instruction) {
 					case INSTR_MASTER_TEST:
-						LCD_Puts("TEST received", 1, 1, DARK_BLUE, WHITE,1,1);
+						//LCD_Puts("TEST received", 1, 1, DARK_BLUE, WHITE,1,1);
 						if(get_game_state()==IDLE){
 							SendInstruction(INSTR_SLAVE_READY);
 						}
 						break;
 					case INSTR_MASTER_WORK_START:
-						LCD_Puts("WORK received", 1, 1, DARK_BLUE, WHITE,1,1);
+						//LCD_Puts("WORK received", 1, 1, DARK_BLUE, WHITE,1,1);
 						if(get_game_state()==IDLE){
 							set_game_state(GAME);
 						}
 						break;
 					case INSTR_MASTER_STATUS_REQ:	
-						LCD_Puts("STATUS received", 1, 1, DARK_BLUE, WHITE,1,1);
+						//LCD_Puts("STATUS received", 1, 1, DARK_BLUE, WHITE,1,1);
 						if(get_game_result()==COMPLETED) SendInstruction(INSTR_SLAVE_COMPLETED);
 						if(get_game_result()==NOT_COMPLETED) SendInstruction(INSTR_SLAVE_NOT_COMLETED);
 						break;
 					case INSTR_MASTER_SET_IDLE:
-						LCD_Puts("IDLE received", 1, 1, DARK_BLUE, WHITE,1,1);
+						//LCD_Puts("IDLE received", 1, 1, DARK_BLUE, WHITE,1,1);
 						if(get_game_state()==GAME) { 
 							set_game_state(IDLE);
 							Emergency_Stop();
@@ -352,7 +352,7 @@ uint8_t SendInstruction(unsigned char instruction){
 	GPIO_SetBits(USART_PORT, RS485DIR_PIN);
 	usart_convert_outgoing_packet(packet, outgoing_packet);
 	put_str(packet);
-	delay_ms(100);
+	delay_ms(50); // was 100
 	free(packet);
 	GPIO_ResetBits(USART_PORT, RS485DIR_PIN);
 	return 1;

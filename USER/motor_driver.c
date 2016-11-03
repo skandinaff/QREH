@@ -26,11 +26,11 @@
 #define READ_BONUS_SENS_MED()				(GPIO_ReadInputDataBit(BONUS_SENS_PORT, BONUS_SENS_MED))
 #define READ_BONUS_SENS_HIGH()			(GPIO_ReadInputDataBit(BONUS_SENS_PORT, BONUS_SENS_HIGH))
 /* Avaliable speeds. I assume greater number means less speed */
-#define AUTOMAT_SPEED								1150 // was 1200 initally
-#define USER_BASE_SPEED							1400
-#define USER_BONUS_LOW_SPEED				950
-#define USER_BONUS_MED_SPEED				800
-#define USER_BONUS_HIGH_SPEED				650
+#define AUTOMAT_SPEED								1150 // was 1200 initally // The was 1150
+#define USER_BASE_SPEED							2500 // was 1400
+#define USER_BONUS_LOW_SPEED				350 // was 950
+#define USER_BONUS_MED_SPEED				250 // was 800
+#define USER_BONUS_HIGH_SPEED				200 // was 650
 
 volatile bool master_start = false;
 volatile bool user_start = false;
@@ -39,7 +39,7 @@ volatile bool user_start = false;
 
 void MotorInit (void)
 {
-	LCD_Puts("Please Init motors!", 1, 50, DARK_BLUE, WHITE,1,1);
+	//LCD_Puts("Please Init motors!", 1, 50, DARK_BLUE, WHITE,1,1);
 	STEP1_RES_0();
 	STEP2_RES_0();
 	STEP1_EN_1();
@@ -70,36 +70,29 @@ void MotorInit (void)
 			STEP1_EN_1();
 			TIM_Cmd(TIM3, DISABLE);
 			user_start = true;
-			LCD_Puts("Master at start!", 1, 60, DARK_BLUE, WHITE,1,1);
+			//LCD_Puts("Master at start!", 1, 60, DARK_BLUE, WHITE,1,1);
 		}
 		if (READ_USER_START_POINT() == 0) {														
 			STEP2_RES_0();
 			STEP2_EN_1();
 			TIM_Cmd(TIM2, DISABLE);
 			master_start = true;
-			LCD_Puts("User at start!", 1, 70, DARK_BLUE, WHITE,1,1);
+			//LCD_Puts("User at start!", 1, 70, DARK_BLUE, WHITE,1,1);
 		}
 		delay_ms(1);
 	}
-	LCD_Puts("                   ", 1, 50, DARK_BLUE, WHITE,1,1);
-	LCD_Puts("                   ", 1, 60, DARK_BLUE, WHITE,1,1);
-	LCD_Puts("                   ", 1, 70, DARK_BLUE, WHITE,1,1);
+	//LCD_Puts("                   ", 1, 50, DARK_BLUE, WHITE,1,1);
+	//LCD_Puts("                   ", 1, 60, DARK_BLUE, WHITE,1,1);
+	//LCD_Puts("                   ", 1, 70, DARK_BLUE, WHITE,1,1);
 	Check_if_both_arrived(true);
-/*
-	QUARTER_STEP();
-	DIR1_FORWARD();
-	DIR2_FORWARD();
-	//TODO: find out if it works or gets overrwritten in HorseRace
-	TIM2->ARR = 1200;						// Setting computer's speed 
-	TIM3->ARR = 1400;						// Setting user's base speed
-*/
+
 }
 
 unsigned char HorseRace (void) 
 {
 
 	unsigned int bonus_speed_time = 0;
-		LCD_Puts("Game on!            ", 1, 20, DARK_BLUE, WHITE,1,1);
+		//LCD_Puts("Game on!            ", 1, 20, DARK_BLUE, WHITE,1,1);
 	QUARTER_STEP();
 	DIR1_FORWARD();
 	DIR2_FORWARD();
@@ -138,25 +131,25 @@ unsigned char HorseRace (void)
 		if (bonus_speed_time > 0) {
 			bonus_speed_time--;
 			if (bonus_speed_time == 0) {
-				LCD_Puts("             ", 1, 1, DARK_BLUE, WHITE,1,1);
-				LCD_Puts("             ", 1, 10, DARK_BLUE, WHITE,1,1);
-				LCD_Puts("             ", 1, 20, DARK_BLUE, WHITE,1,1);
+				//LCD_Puts("             ", 1, 1, DARK_BLUE, WHITE,1,1);
+				//LCD_Puts("             ", 1, 10, DARK_BLUE, WHITE,1,1);
+				//LCD_Puts("             ", 1, 20, DARK_BLUE, WHITE,1,1);
 				TIM3->ARR = USER_BASE_SPEED;
 			}
 		}
 		
 		if (READ_BONUS_SENS_LOW() != 0) {
-			LCD_Puts("LOW BONUS!", 1, 1, DARK_BLUE, WHITE,1,1);
+			//LCD_Puts("LOW BONUS!", 1, 1, DARK_BLUE, WHITE,1,1);
 			bonus_speed_time = 500;
 			TIM3->ARR = USER_BONUS_LOW_SPEED;
 		}
 		if (READ_BONUS_SENS_MED() != 0) {
-			LCD_Puts("MEDIUM BONUS!", 1, 10, DARK_BLUE, WHITE,1,1);
+			//LCD_Puts("MEDIUM BONUS!", 1, 10, DARK_BLUE, WHITE,1,1);
 			bonus_speed_time = 500;
 			TIM3->ARR = USER_BONUS_MED_SPEED;
 		}
 		if (READ_BONUS_SENS_HIGH() != 0) {
-			LCD_Puts("HIGH BONUS!", 1, 20, DARK_BLUE, WHITE,1,1);
+			//LCD_Puts("HIGH BONUS!", 1, 20, DARK_BLUE, WHITE,1,1);
 			bonus_speed_time = 500;
 			TIM3->ARR = USER_BONUS_HIGH_SPEED;
 		}

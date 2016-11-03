@@ -21,6 +21,8 @@
 *
 * Speed selection formula: 108+10*incoming_packet.motor_speed
 *
+* Add a byte to response to status request, to indicate events such as ball
+*
 * ---------------------------------------------------------- */
 
 #ifndef USART_H

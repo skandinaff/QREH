@@ -3,11 +3,11 @@
 <title>Static Call Graph - [.\Objects\Q1kony.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Objects\Q1kony.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060183: Last Updated: Thu Nov 03 15:32:54 2016
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060183: Last Updated: Thu Nov 03 16:10:49 2016
 <BR><P>
-<H3>Maximum Stack Usage =        384 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
+<H3>Maximum Stack Usage =        188 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
-__rt_entry_main &rArr; main &rArr; HorseRace &rArr; MotorInit &rArr; check_usart_while_playing &rArr; LCD_Puts &rArr; LCD_Putchar &rArr; Send_Symbol &rArr; Put_Pixel &rArr; SetArea &rArr; Send_to_lcd &rArr; Send_spi &rArr; ClkPulse
+__rt_entry_main &rArr; main &rArr; HorseRace &rArr; MotorInit &rArr; check_usart_while_playing &rArr; MotorTest &rArr;  check_usart_while_playing (Cycle)
 <P>
 <H3>
 Functions with no stack information
@@ -207,8 +207,8 @@ Global Symbols
 <P><STRONG><a name="[114]"></a>__rt_entry_postsh_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, __rtentry2.o(.ARM.Collect$$rtentry$$00000009))
 
 <P><STRONG><a name="[4b]"></a>__rt_entry_main</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, __rtentry2.o(.ARM.Collect$$rtentry$$0000000D))
-<BR><BR>[Stack]<UL><LI>Max Depth = 384 + Unknown Stack Size
-<LI>Call Chain = __rt_entry_main &rArr; main &rArr; HorseRace &rArr; MotorInit &rArr; check_usart_while_playing &rArr; LCD_Puts &rArr; LCD_Putchar &rArr; Send_Symbol &rArr; Put_Pixel &rArr; SetArea &rArr; Send_to_lcd &rArr; Send_spi &rArr; ClkPulse
+<BR><BR>[Stack]<UL><LI>Max Depth = 188 + Unknown Stack Size
+<LI>Call Chain = __rt_entry_main &rArr; main &rArr; HorseRace &rArr; MotorInit &rArr; check_usart_while_playing &rArr; MotorTest &rArr;  check_usart_while_playing (Cycle)
 </UL>
 <BR>[Calls]<UL><LI><a href="#[4c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 <LI><a href="#[4d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;exit
@@ -1290,10 +1290,8 @@ Global Symbols
 <LI><a href="#[a1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Put_Pixel
 </UL>
 
-<P><STRONG><a name="[a1]"></a>Put_Pixel</STRONG> (Thumb, 24 bytes, Stack size 8 bytes, lph8731-3c.o(.text))
-<BR><BR>[Stack]<UL><LI>Max Depth = 96<LI>Call Chain = Put_Pixel &rArr; SetArea &rArr; Send_to_lcd &rArr; Send_spi &rArr; ClkPulse
-</UL>
-<BR>[Calls]<UL><LI><a href="#[a0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SetArea
+<P><STRONG><a name="[a1]"></a>Put_Pixel</STRONG> (Thumb, 24 bytes, Stack size 8 bytes, lph8731-3c.o(.text), UNUSED)
+<BR><BR>[Calls]<UL><LI><a href="#[a0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SetArea
 <LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Send_to_lcd
 </UL>
 <BR>[Called By]<UL><LI><a href="#[af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_DrawCircle
@@ -1302,31 +1300,20 @@ Global Symbols
 <LI><a href="#[a2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Send_Symbol
 </UL>
 
-<P><STRONG><a name="[a2]"></a>Send_Symbol</STRONG> (Thumb, 290 bytes, Stack size 64 bytes, lph8731-3c.o(.text))
-<BR><BR>[Stack]<UL><LI>Max Depth = 160<LI>Call Chain = Send_Symbol &rArr; Put_Pixel &rArr; SetArea &rArr; Send_to_lcd &rArr; Send_spi &rArr; ClkPulse
-</UL>
-<BR>[Calls]<UL><LI><a href="#[a1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Put_Pixel
+<P><STRONG><a name="[a2]"></a>Send_Symbol</STRONG> (Thumb, 290 bytes, Stack size 64 bytes, lph8731-3c.o(.text), UNUSED)
+<BR><BR>[Calls]<UL><LI><a href="#[a1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Put_Pixel
 </UL>
 <BR>[Called By]<UL><LI><a href="#[a3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_Putchar
 </UL>
 
-<P><STRONG><a name="[a3]"></a>LCD_Putchar</STRONG> (Thumb, 74 bytes, Stack size 32 bytes, lph8731-3c.o(.text))
-<BR><BR>[Stack]<UL><LI>Max Depth = 192<LI>Call Chain = LCD_Putchar &rArr; Send_Symbol &rArr; Put_Pixel &rArr; SetArea &rArr; Send_to_lcd &rArr; Send_spi &rArr; ClkPulse
-</UL>
-<BR>[Calls]<UL><LI><a href="#[a2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Send_Symbol
+<P><STRONG><a name="[a3]"></a>LCD_Putchar</STRONG> (Thumb, 74 bytes, Stack size 32 bytes, lph8731-3c.o(.text), UNUSED)
+<BR><BR>[Calls]<UL><LI><a href="#[a2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Send_Symbol
 </UL>
 <BR>[Called By]<UL><LI><a href="#[a4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_Puts
 </UL>
 
-<P><STRONG><a name="[a4]"></a>LCD_Puts</STRONG> (Thumb, 78 bytes, Stack size 48 bytes, lph8731-3c.o(.text))
-<BR><BR>[Stack]<UL><LI>Max Depth = 240<LI>Call Chain = LCD_Puts &rArr; LCD_Putchar &rArr; Send_Symbol &rArr; Put_Pixel &rArr; SetArea &rArr; Send_to_lcd &rArr; Send_spi &rArr; ClkPulse
-</UL>
-<BR>[Calls]<UL><LI><a href="#[a3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_Putchar
-</UL>
-<BR>[Called By]<UL><LI><a href="#[b5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;check_usart_while_playing
-<LI><a href="#[bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MotorInit
-<LI><a href="#[bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HorseRace
-<LI><a href="#[4c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+<P><STRONG><a name="[a4]"></a>LCD_Puts</STRONG> (Thumb, 78 bytes, Stack size 48 bytes, lph8731-3c.o(.text), UNUSED)
+<BR><BR>[Calls]<UL><LI><a href="#[a3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_Putchar
 </UL>
 
 <P><STRONG><a name="[a5]"></a>Send_Symbol_Shadow</STRONG> (Thumb, 274 bytes, Stack size 64 bytes, lph8731-3c.o(.text), UNUSED)
@@ -1411,8 +1398,8 @@ Global Symbols
 <BR><BR>[Calls]<UL><LI><a href="#[b2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_FillTriangleA
 </UL>
 
-<P><STRONG><a name="[4c]"></a>main</STRONG> (Thumb, 310 bytes, Stack size 16 bytes, main.o(.text))
-<BR><BR>[Stack]<UL><LI>Max Depth = 384<LI>Call Chain = main &rArr; HorseRace &rArr; MotorInit &rArr; check_usart_while_playing &rArr; LCD_Puts &rArr; LCD_Putchar &rArr; Send_Symbol &rArr; Put_Pixel &rArr; SetArea &rArr; Send_to_lcd &rArr; Send_spi &rArr; ClkPulse
+<P><STRONG><a name="[4c]"></a>main</STRONG> (Thumb, 162 bytes, Stack size 0 bytes, main.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 188<LI>Call Chain = main &rArr; HorseRace &rArr; MotorInit &rArr; check_usart_while_playing &rArr; MotorTest &rArr;  check_usart_while_playing (Cycle)
 </UL>
 <BR>[Calls]<UL><LI><a href="#[b8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;set_game_result
 <LI><a href="#[b9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;open_magnet
@@ -1424,7 +1411,6 @@ Global Symbols
 <LI><a href="#[b4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ChipInit
 <LI><a href="#[ba]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Check_if_one_at_start
 <LI><a href="#[a8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_FillScreen
-<LI><a href="#[a4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_Puts
 <LI><a href="#[9a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_init
 <LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_ResetBits
 <LI><a href="#[96]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_SetBits
@@ -1514,11 +1500,10 @@ Global Symbols
 <BR><BR>[Called By]<UL><LI><a href="#[bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MotorInit
 </UL>
 
-<P><STRONG><a name="[bb]"></a>MotorInit</STRONG> (Thumb, 372 bytes, Stack size 48 bytes, motor_driver.o(.text))
-<BR><BR>[Stack]<UL><LI>Max Depth = 320<LI>Call Chain = MotorInit &rArr; check_usart_while_playing &rArr; LCD_Puts &rArr; LCD_Putchar &rArr; Send_Symbol &rArr; Put_Pixel &rArr; SetArea &rArr; Send_to_lcd &rArr; Send_spi &rArr; ClkPulse
+<P><STRONG><a name="[bb]"></a>MotorInit</STRONG> (Thumb, 256 bytes, Stack size 32 bytes, motor_driver.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 148<LI>Call Chain = MotorInit &rArr; check_usart_while_playing &rArr; MotorTest &rArr;  check_usart_while_playing (Cycle)
 </UL>
 <BR>[Calls]<UL><LI><a href="#[b5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;check_usart_while_playing
-<LI><a href="#[a4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_Puts
 <LI><a href="#[93]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_ms
 <LI><a href="#[c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_Cmd
 <LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_ResetBits
@@ -1530,14 +1515,13 @@ Global Symbols
 <LI><a href="#[4c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[bc]"></a>HorseRace</STRONG> (Thumb, 462 bytes, Stack size 48 bytes, motor_driver.o(.text))
-<BR><BR>[Stack]<UL><LI>Max Depth = 368<LI>Call Chain = HorseRace &rArr; MotorInit &rArr; check_usart_while_playing &rArr; LCD_Puts &rArr; LCD_Putchar &rArr; Send_Symbol &rArr; Put_Pixel &rArr; SetArea &rArr; Send_to_lcd &rArr; Send_spi &rArr; ClkPulse
+<P><STRONG><a name="[bc]"></a>HorseRace</STRONG> (Thumb, 332 bytes, Stack size 40 bytes, motor_driver.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 188<LI>Call Chain = HorseRace &rArr; MotorInit &rArr; check_usart_while_playing &rArr; MotorTest &rArr;  check_usart_while_playing (Cycle)
 </UL>
 <BR>[Calls]<UL><LI><a href="#[b8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;set_game_result
 <LI><a href="#[b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;get_game_state
 <LI><a href="#[b5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;check_usart_while_playing
 <LI><a href="#[bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MotorInit
-<LI><a href="#[a4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_Puts
 <LI><a href="#[93]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_ms
 <LI><a href="#[c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_Cmd
 <LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_ResetBits
@@ -1547,7 +1531,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[4c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[ca]"></a>MotorTest</STRONG> (Thumb, 608 bytes, Stack size 40 bytes, motor_driver.o(.text))
+<P><STRONG><a name="[ca]"></a>MotorTest</STRONG> (Thumb, 450 bytes, Stack size 40 bytes, motor_driver.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 84 + In Cycle
 <LI>Call Chain = MotorTest &rArr;  check_usart_while_playing (Cycle)
 </UL>
@@ -1698,12 +1682,11 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[b5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;check_usart_while_playing
 </UL>
 
-<P><STRONG><a name="[b5]"></a>check_usart_while_playing</STRONG> (Thumb, 320 bytes, Stack size 32 bytes, usart.o(.text))
-<BR><BR>[Stack]<UL><LI>Max Depth = 272<LI>Call Chain = check_usart_while_playing &rArr; LCD_Puts &rArr; LCD_Putchar &rArr; Send_Symbol &rArr; Put_Pixel &rArr; SetArea &rArr; Send_to_lcd &rArr; Send_spi &rArr; ClkPulse
+<P><STRONG><a name="[b5]"></a>check_usart_while_playing</STRONG> (Thumb, 238 bytes, Stack size 32 bytes, usart.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 116<LI>Call Chain = check_usart_while_playing &rArr; MotorTest &rArr;  check_usart_while_playing (Cycle)
 </UL>
 <BR>[Calls]<UL><LI><a href="#[b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;get_game_state
 <LI><a href="#[b7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;get_game_result
-<LI><a href="#[a4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_Puts
 <LI><a href="#[e0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;free
 <LI><a href="#[de]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;malloc
 <LI><a href="#[e2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;set_game_state
