@@ -4,9 +4,9 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f10x.h"
+#include "mcu_config.h"
 #include "FreeRTOS.h"
 #include "task.h"
-#include "mcu_config.h"
 #include "queue.h"
 
 #include "delay.h"
@@ -21,15 +21,15 @@
 #include <stdbool.h>
 #include <stdlib.h>
 #include <stdint.h>
-#include "quest.h"
+
 #include "usart.h"
 #include "quest_routines.h"
 #include "motor_driver.h"
+#include "quest.h"
 
 /* Function prototypes -----------------------------------------------*/
 
 void PerformQuest(void);
-
 
 /*******************************************************************************
 * Function Name  : main
