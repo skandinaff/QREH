@@ -562,6 +562,16 @@
               <FileType>5</FileType>
               <FilePath>.\USER\terminal.h</FilePath>
             </File>
+            <File>
+              <FileName>quest.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\User\quest.c</FilePath>
+            </File>
+            <File>
+              <FileName>quest.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\USER\quest.h</FilePath>
+            </File>
           </Files>
         </Group>
       </Groups>

@@ -23,6 +23,7 @@
 ".\objects\errorprocessing.o"
 ".\objects\motor_driver.o"
 ".\objects\usart.o"
+".\objects\quest.o"
 --strict --scatter ".\Objects\Q1kony.sct"
 --summary_stderr --info summarysizes --map --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers

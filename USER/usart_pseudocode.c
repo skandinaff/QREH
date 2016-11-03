@@ -5,6 +5,7 @@
 char str[15];
 char buffer[15];
 uint8_t msg_size;
+char game_state = false;
 
 unsigned char sample[] = {0xC1, 0x10, 0x01, 0xFF, 0xC0};
 unsigned char sample2[] = {0xC1, 0x10, 0x01, 0xAA, 0xAA, 0xFF, 0xC0};
@@ -158,7 +159,7 @@ void usart_get_data_packet(unsigned char* packet) {
         return;
     }
 
-
+    //uint8_t packet_byte; // for some reason compiler does not allow this here///
     do {
         while (rx_counter == 0); 														// Wait if there's no data
 
@@ -173,6 +174,7 @@ void usart_get_data_packet(unsigned char* packet) {
 void put_char(uint8_t c) {
     if (c) {
         while (tx_counter == TX_BUFFER_SIZE);
+			//GPIO_SetBits(USART_PORT, RS485DIR_PIN);
         USART_ITConfig(USART1, USART_IT_TXE, DISABLE);
         if (tx_counter || (USART_GetFlagStatus(USART1, USART_FLAG_TXE) == RESET)) {
             tx_buffer[tx_wr_index++] = c;
@@ -182,6 +184,7 @@ void put_char(uint8_t c) {
         }
         else
             USART_SendData(USART1, c);
+				//GPIO_ResetBits(USART_PORT, RS485DIR_PIN);
     }
 }
 
@@ -303,28 +306,52 @@ void check_usart_while_playing(void){
 			
 			usart_get_data_packet(packet);
 			incoming_packet = usart_packet_parser(packet);
-			
 			if (usart_validate_crc8(incoming_packet) && usart_packet_is_addressed_to_me(incoming_packet)){
-				//BlinkOnboardLED(2); // TODO: rewrite blik function using timer
+			//BlinkOnboardLED(2);
 				switch (incoming_packet.instruction) {
 					case INSTR_MASTER_TEST:
-						SendInstruction(INSTR_SLAVE_READY);
-						LCD_Puts("TEST received", 1, 1, DARK_BLUE, WHITE,1,1);
-						if(get_game_state()==IDLE){
-							SendInstruction(INSTR_SLAVE_READY);
-						}
+						
 						break;
 					case INSTR_MASTER_WORK_START:
-						if(get_game_state()==IDLE){
-							set_game_state(GAME);
+						set_idle_received(false);
+						while (get_task_counter() <= TASK_COUNT) {
+							GPIO_SetBits(STATE_LED_PORT, STATE_LED);
+							PerformQuest();
+							if(get_break_flag()){
+								set_task_counter(0);
+								set_break_flag(false);
+								break;
+							}
 						}
 						break;
 					case INSTR_MASTER_STATUS_REQ:				
-						if(get_game_result()==COMPLETED) SendInstruction(INSTR_SLAVE_COMPLETED);
-						if(get_game_result()==NOT_COMPLETED) SendInstruction(INSTR_SLAVE_NOT_COMLETED);
+						if (get_game_state()) {
+							SendInstruction(INSTR_SLAVE_COMPLETED);
+						} else if (!get_game_state()){
+							SendInstruction(INSTR_SLAVE_NOT_COMLETED);
+
+						}
 						break;
 					case INSTR_MASTER_SET_IDLE:
-						set_game_state(IDLE);
+						//NVIC_SystemReset(); // Last resort
+						
+						if(!Check_if_one_at_start()) {
+							MotorInit(); 
+						} 
+						
+						if(get_idle_received()==false){
+							//LCD_FillScreen(WHITE);
+							//LCD_Puts("Idled by usart", 1, 30, DARK_BLUE, WHITE,1,1);
+							GPIO_ResetBits(STATE_LED_PORT, STATE_LED);
+							Check_if_both_arrived(true);
+							set_task_counter(0);
+							set_game_state(false);
+							set_break_flag(true);
+							Emergency_Stop();
+						}
+						set_idle_received(true);
+						//if(!Check_if_one_at_start()) MotorInit();
+					//TODO: add here all timer disable, to avoid overflow or weird behavoiur 
 						break;
 					case SYS_RESET:
 						NVIC_SystemReset();
@@ -343,12 +370,12 @@ void check_usart_while_playing(void){
 uint8_t SendInstruction(unsigned char instruction){
 	unsigned char* packet = malloc((OUTGOING_PACKET_LENGTH + 1) * sizeof(char));
 	outgoing_packet_t outgoing_packet = usart_assemble_response(instruction);	
-	GPIO_SetBits(USART_PORT, RS485DIR_PIN);
 	usart_convert_outgoing_packet(packet, outgoing_packet);
+	GPIO_SetBits(USART_PORT, RS485DIR_PIN);
 	put_str(packet);
-	delay_ms(100);
-	free(packet);
+	delay_ms(10);
 	GPIO_ResetBits(USART_PORT, RS485DIR_PIN);
+	free(packet);
 	return 1;
 }
 
@@ -361,5 +388,19 @@ bool get_break_flag(void) {
     return break_flag;
 }
 
+void set_game_state(bool gs){
+	game_state = gs;
+}
 
+bool get_game_state(void){
+	return game_state;
+}
+
+void set_idle_received(bool ir){
+	idle_received = ir;
+}
+
+bool get_idle_received(void){
+	return idle_received;
+}
 

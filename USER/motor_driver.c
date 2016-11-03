@@ -125,9 +125,9 @@ unsigned char HorseRace (void)
 			STEP2_RES_0();
 			STEP1_EN_1();
 			STEP2_EN_1();
-			set_task_counter(get_task_counter() + 1); // Added by me
+			//set_task_counter(get_task_counter() + 1); // Added by me
 			//set_task_counter(0);
-			set_game_state(true);
+			//set_game_state(true);
 			//return 0;
 			return 0;									
 		}
@@ -136,7 +136,7 @@ unsigned char HorseRace (void)
 			STEP2_RES_0();
 			STEP1_EN_1();
 			STEP2_EN_1();
-			set_task_counter(get_task_counter() + 1); // Added by me
+			//set_task_counter(get_task_counter() + 1); // Added by me
 			//set_task_counter(0);
 			//set_game_state(true);
 			//return 0;

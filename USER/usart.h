@@ -35,6 +35,7 @@
 #include <stdlib.h>
 #include <mcu_config.h>
 #include "motor_driver.h"
+#include "quest.h"
 
 
 #define USART_BAUD_RATE 					19200
@@ -122,10 +123,6 @@ uint8_t SendInstruction(unsigned char instruction);
 void check_usart_while_playing(void);
 void set_break_flag(bool bf);
 bool get_break_flag(void);
-void set_game_state(bool gs);
-bool get_game_state(void);
 
-void set_idle_received(bool ir);
-bool get_idle_received(void);
 
 #endif
