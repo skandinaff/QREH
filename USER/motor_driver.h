@@ -19,6 +19,8 @@
 #define STEP2_EN_0()				(GPIO_ResetBits(STEP_PORT3, STEP2_EN))
 #define STEP2_EN_1()				(GPIO_SetBits(STEP_PORT3, STEP2_EN))
 
+typedef enum {HIGH, MED, LOW, NONE} bonus;
+
 void MotorInit (void);
 unsigned char HorseRace (void);
 void MotorTest(char dir, int speed);

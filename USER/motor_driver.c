@@ -26,16 +26,20 @@
 #define READ_BONUS_SENS_MED()				(GPIO_ReadInputDataBit(BONUS_SENS_PORT, BONUS_SENS_MED))
 #define READ_BONUS_SENS_HIGH()			(GPIO_ReadInputDataBit(BONUS_SENS_PORT, BONUS_SENS_HIGH))
 /* Avaliable speeds. I assume greater number means less speed */
-#define AUTOMAT_SPEED								1150 // was 1200 initally // The was 1150
-#define USER_BASE_SPEED							2500 // was 1400
-#define USER_BONUS_LOW_SPEED				350 // was 950
+#define AUTOMAT_SPEED								450 // was 1200 initally // The was 1150 - 6.45 minutes //
+#define USER_BASE_SPEED							2800 // was 1400
+
+#define USER_BONUS_LOW_SPEED				400 // was 950
 #define USER_BONUS_MED_SPEED				250 // was 800
-#define USER_BONUS_HIGH_SPEED				200 // was 650
+#define USER_BONUS_HIGH_SPEED				150 // was 650
 
 volatile bool master_start = false;
 volatile bool user_start = false;
 
+bonus game_bonus = NONE;
 
+volatile float incr;
+volatile int incr_count = 1;
 
 void MotorInit (void)
 {
@@ -128,32 +132,62 @@ unsigned char HorseRace (void)
 			MotorInit();
 			return 0;
 		}
+		
 		if (bonus_speed_time > 0) {
 			bonus_speed_time--;
+			
+			if(bonus_speed_time < 150){ // initially = 250
+				
+				if(game_bonus == LOW){
+				 incr = (USER_BASE_SPEED - USER_BONUS_LOW_SPEED)/bonus_speed_time;
+				 TIM3->ARR = USER_BONUS_LOW_SPEED + incr*incr_count;
+				}
+				
+				if(game_bonus == MED){
+				 incr = (USER_BASE_SPEED - USER_BONUS_MED_SPEED)/bonus_speed_time;
+				 TIM3->ARR = USER_BONUS_MED_SPEED + incr*incr_count;
+				}
+				
+				if(game_bonus == HIGH){
+				 incr = (USER_BASE_SPEED - USER_BONUS_HIGH_SPEED)/bonus_speed_time;
+				 TIM3->ARR = USER_BONUS_HIGH_SPEED + incr*incr_count;
+				}
+				incr_count+=2; // Initally = 1
+			}
+			
+
+			
 			if (bonus_speed_time == 0) {
 				//LCD_Puts("             ", 1, 1, DARK_BLUE, WHITE,1,1);
 				//LCD_Puts("             ", 1, 10, DARK_BLUE, WHITE,1,1);
 				//LCD_Puts("             ", 1, 20, DARK_BLUE, WHITE,1,1);
+				incr=0;
+				incr_count=1;
+				game_bonus=NONE;
 				TIM3->ARR = USER_BASE_SPEED;
 			}
 		}
-		
-		if (READ_BONUS_SENS_LOW() != 0) {
-			//LCD_Puts("LOW BONUS!", 1, 1, DARK_BLUE, WHITE,1,1);
-			bonus_speed_time = 500;
-			TIM3->ARR = USER_BONUS_LOW_SPEED;
+		if(game_bonus == NONE){
+			if (READ_BONUS_SENS_LOW() != 0) {
+				//LCD_Puts("LOW BONUS!", 1, 1, DARK_BLUE, WHITE,1,1);
+				bonus_speed_time = 500;
+				game_bonus = LOW;
+				TIM3->ARR = USER_BONUS_LOW_SPEED;
+			}
+			if (READ_BONUS_SENS_MED() != 0) {
+				//LCD_Puts("MEDIUM BONUS!", 1, 10, DARK_BLUE, WHITE,1,1);
+				bonus_speed_time = 500;
+				game_bonus = MED;
+				TIM3->ARR = USER_BONUS_MED_SPEED;
+			}
+			if (READ_BONUS_SENS_HIGH() != 0) {
+				//LCD_Puts("HIGH BONUS!", 1, 20, DARK_BLUE, WHITE,1,1);
+				bonus_speed_time = 500;
+				game_bonus = HIGH;
+				TIM3->ARR = USER_BONUS_HIGH_SPEED;
+			}
 		}
-		if (READ_BONUS_SENS_MED() != 0) {
-			//LCD_Puts("MEDIUM BONUS!", 1, 10, DARK_BLUE, WHITE,1,1);
-			bonus_speed_time = 500;
-			TIM3->ARR = USER_BONUS_MED_SPEED;
-		}
-		if (READ_BONUS_SENS_HIGH() != 0) {
-			//LCD_Puts("HIGH BONUS!", 1, 20, DARK_BLUE, WHITE,1,1);
-			bonus_speed_time = 500;
-			TIM3->ARR = USER_BONUS_HIGH_SPEED;
-		}
-		delay_ms(10);
+		 delay_ms(10);
   }
 }
 
