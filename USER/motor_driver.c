@@ -26,12 +26,13 @@
 #define READ_BONUS_SENS_MED()				(GPIO_ReadInputDataBit(BONUS_SENS_PORT, BONUS_SENS_MED))
 #define READ_BONUS_SENS_HIGH()			(GPIO_ReadInputDataBit(BONUS_SENS_PORT, BONUS_SENS_HIGH))
 /* Avaliable speeds. I assume greater number means less speed */
-#define AUTOMAT_SPEED								450 // was 1200 initally // The was 1150 - 6.45 minutes //
+#define AUTOMAT_SPEED								650 // was 1200 initally // The was 1150 - 6.45 minutes //
 #define USER_BASE_SPEED							2800 // was 1400
 
 #define USER_BONUS_LOW_SPEED				400 // was 950
-#define USER_BONUS_MED_SPEED				250 // was 800
-#define USER_BONUS_HIGH_SPEED				150 // was 650
+#define USER_BONUS_MED_SPEED				200 // was 800
+#define USER_BONUS_HIGH_SPEED				160 // was 650
+#define BONUS_SPEED_TIME						600
 
 volatile bool master_start = false;
 volatile bool user_start = false;
@@ -167,26 +168,26 @@ unsigned char HorseRace (void)
 				TIM3->ARR = USER_BASE_SPEED;
 			}
 		}
-		if(game_bonus == NONE){
+		//if(game_bonus == NONE){
 			if (READ_BONUS_SENS_LOW() != 0) {
 				//LCD_Puts("LOW BONUS!", 1, 1, DARK_BLUE, WHITE,1,1);
-				bonus_speed_time = 500;
+				bonus_speed_time = BONUS_SPEED_TIME;
 				game_bonus = LOW;
 				TIM3->ARR = USER_BONUS_LOW_SPEED;
 			}
 			if (READ_BONUS_SENS_MED() != 0) {
 				//LCD_Puts("MEDIUM BONUS!", 1, 10, DARK_BLUE, WHITE,1,1);
-				bonus_speed_time = 500;
+				bonus_speed_time = BONUS_SPEED_TIME;
 				game_bonus = MED;
 				TIM3->ARR = USER_BONUS_MED_SPEED;
 			}
 			if (READ_BONUS_SENS_HIGH() != 0) {
 				//LCD_Puts("HIGH BONUS!", 1, 20, DARK_BLUE, WHITE,1,1);
-				bonus_speed_time = 500;
+				bonus_speed_time = BONUS_SPEED_TIME;
 				game_bonus = HIGH;
 				TIM3->ARR = USER_BONUS_HIGH_SPEED;
 			}
-		}
+		//}
 		 delay_ms(10);
   }
 }
