@@ -29,6 +29,7 @@ char incoming_crc8;
 bool break_flag = false;
 bool idle_received = false; // This is to avoid system hang during lot's of idles coming in
 
+char packet_str[15];
 
 void init_usart(void){
 	
@@ -301,8 +302,16 @@ void check_usart_while_playing(void){
 	
 		if (usart_has_data()) {
 			
+			//LCD_Puts("Data received", 1, 1, DARK_BLUE, WHITE,1,1);
+			BlinkOnboardLED(2);
+			
 			usart_get_data_packet(packet);
 			incoming_packet = usart_packet_parser(packet);
+			
+			
+			//sprintf(packet_str, "%4d: ", incoming_packet);
+			
+			//LCD_Puts(packet_str, 1, 1, DARK_BLUE, WHITE,1,1);
 			
 			if (usart_validate_crc8(incoming_packet) && usart_packet_is_addressed_to_me(incoming_packet)){
 				//BlinkOnboardLED(2); // TODO: rewrite blik function using timer

@@ -14,6 +14,7 @@
 /* Selecting motor rotation direction */
 #define DIR1_FORWARD()			(GPIO_SetBits(STEP_PORT1, STEP1_DIR))
 #define DIR1_REVERSE()			(GPIO_ResetBits(STEP_PORT1, STEP1_DIR))
+
 #define DIR2_FORWARD()			(GPIO_SetBits(STEP_PORT1, STEP2_DIR))
 #define DIR2_REVERSE()			(GPIO_ResetBits(STEP_PORT1, STEP2_DIR))
 /* Reading end switches */
@@ -50,9 +51,12 @@ void MotorInit (void)
 	STEP1_EN_1();
 	STEP2_EN_1();
 	FULL_STEP();
-	
-	DIR1_REVERSE();
-	DIR2_REVERSE();
+	//For the RIGHT room
+	//DIR1_REVERSE();
+	//DIR2_REVERSE();
+	//For the LEFT room
+	DIR1_FORWARD();
+	DIR2_FORWARD();
 	
 	STEP1_RES_1();	
 	STEP2_RES_1();
@@ -69,15 +73,20 @@ void MotorInit (void)
   while( !Check_if_both_arrived(false) )
   {
 		check_usart_while_playing();
-		
-		if (READ_MASTER_START_POINT() == 0) {													
+		//For the RIGHT room		
+		//if (READ_MASTER_START_POINT() == 0) {
+		//For the LEFT room
+		if (READ_MASTER_END_POINT() == 0) {
 			STEP1_RES_0();
 			STEP1_EN_1();
 			TIM_Cmd(TIM3, DISABLE);
 			user_start = true;
 			//LCD_Puts("Master at start!", 1, 60, DARK_BLUE, WHITE,1,1);
 		}
-		if (READ_USER_START_POINT() == 0) {														
+		//For the RIGHT room
+		//if (READ_USER_START_POINT() == 0) {		
+  	//For the LEFT room		
+		if (READ_USER_END_POINT() == 0) {
 			STEP2_RES_0();
 			STEP2_EN_1();
 			TIM_Cmd(TIM2, DISABLE);
@@ -99,8 +108,13 @@ unsigned char HorseRace (void)
 	unsigned int bonus_speed_time = 0;
 		//LCD_Puts("Game on!            ", 1, 20, DARK_BLUE, WHITE,1,1);
 	QUARTER_STEP();
-	DIR1_FORWARD();
-	DIR2_FORWARD();
+	//For the RIGHT room
+	//DIR1_FORWARD();
+	//DIR2_FORWARD();
+	//For the LEFT room
+	DIR1_REVERSE();
+	DIR2_REVERSE();
+	
 	STEP1_RES_1();
 	STEP2_RES_1();
 	STEP1_EN_0();
@@ -116,8 +130,10 @@ unsigned char HorseRace (void)
 		if (get_game_state()==IDLE) return 0;
 		
 		check_usart_while_playing();
-		
-		if (READ_MASTER_END_POINT() == 0) {													
+		//For the RIGHT room
+		//if (READ_MASTER_END_POINT() == 0) {	
+		//For the LEFT room		
+		if (READ_MASTER_START_POINT() == 0) {							
 			STEP1_RES_0();
 			STEP2_RES_0();
 			STEP1_EN_1();
@@ -125,7 +141,10 @@ unsigned char HorseRace (void)
 			set_game_result(COMPLETED); // Swapped places. Appears that motors are connected other way around
 			return 0;									
 		}
-		if (READ_USER_END_POINT() == 0) {														
+		//For the RIGHT room
+		//if (READ_USER_END_POINT() == 0) {	
+		//For the LEFT room		
+		if (READ_USER_START_POINT() == 0) {
 			STEP1_RES_0();
 			STEP2_RES_0();
 			STEP1_EN_1();
@@ -168,7 +187,7 @@ unsigned char HorseRace (void)
 				TIM3->ARR = USER_BASE_SPEED;
 			}
 		}
-		//if(game_bonus == NONE){
+		//if(game_bonus == NONE){ // This is ommited, as it reduces the freqcueny of bonuses
 			if (READ_BONUS_SENS_LOW() != 0) {
 				//LCD_Puts("LOW BONUS!", 1, 1, DARK_BLUE, WHITE,1,1);
 				bonus_speed_time = BONUS_SPEED_TIME;
@@ -193,6 +212,8 @@ unsigned char HorseRace (void)
 }
 
 void MotorTest(char sel_dir, int speed){
+	
+	// USABLE ONLY IN THE RIGHT ROOM!!!
 
 	STEP1_RES_0();
 	STEP2_RES_0();
@@ -281,12 +302,18 @@ bool Check_if_both_arrived(bool reset){
 }
 
 bool Check_if_one_at_start(void){
+	//For the RIGHT room
 	if(READ_MASTER_START_POINT() == 0 || READ_USER_START_POINT() == 0) return true;
+	//For the LEFT room
+	if(READ_MASTER_END_POINT() == 0 || READ_USER_END_POINT() == 0) return true;	
 	else return false;
 }
 
 bool Check_if_both_at_start(void){
+	//For the RIGHT room
 	if(READ_MASTER_START_POINT() == 0 && READ_USER_START_POINT() == 0) return true;
+	//For the LEFT room
+	if(READ_MASTER_END_POINT() == 0 && READ_USER_END_POINT() == 0) return true;
 	else return false;
 }
 
