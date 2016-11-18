@@ -285,13 +285,23 @@ uint8_t usart_crc8(uint8_t init, uint8_t *packet){
 	
 }
 
-void usart_convert_outgoing_packet (unsigned char* packet, outgoing_packet_t outgoing_packet){ //, bool crc8) {
+void usart_convert_outgoing_packet (unsigned char* packet, outgoing_packet_t outgoing_packet) {
     packet[0] = outgoing_packet.slave_start_byte;
     packet[1] = outgoing_packet.slave_address;
     packet[2] = outgoing_packet.instruction;
-    packet[3] = outgoing_packet.crc8;
-    packet[4] = outgoing_packet.stop_byte;
-    packet[5] = '\0';
+		if(get_sound() == true) {
+			packet[3] = 0x01;
+			packet[4] = outgoing_packet.crc8;
+			packet[5] = outgoing_packet.stop_byte;
+			packet[6] = '\0';
+			set_sound(false);
+		}
+		if(get_sound() == false){
+			packet[3] = outgoing_packet.crc8;
+			packet[4] = outgoing_packet.stop_byte;
+			packet[5] = '\0';
+		}
+
 	
 }
 

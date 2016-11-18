@@ -189,18 +189,21 @@ unsigned char HorseRace (void)
 		}
 		//if(game_bonus == NONE){ // This is ommited, as it reduces the freqcueny of bonuses
 			if (READ_BONUS_SENS_LOW() != 0) {
+				//set_sound(true); // ADD ONLY WHEN SYSTEM WILL BE READY
 				//LCD_Puts("LOW BONUS!", 1, 1, DARK_BLUE, WHITE,1,1);
 				bonus_speed_time = BONUS_SPEED_TIME;
 				game_bonus = LOW;
 				TIM3->ARR = USER_BONUS_LOW_SPEED;
 			}
 			if (READ_BONUS_SENS_MED() != 0) {
+				//set_sound(true); // ADD ONLY WHEN SYSTEM WILL BE READY
 				//LCD_Puts("MEDIUM BONUS!", 1, 10, DARK_BLUE, WHITE,1,1);
 				bonus_speed_time = BONUS_SPEED_TIME;
 				game_bonus = MED;
 				TIM3->ARR = USER_BONUS_MED_SPEED;
 			}
 			if (READ_BONUS_SENS_HIGH() != 0) {
+				//set_sound(true); // ADD ONLY WHEN SYSTEM WILL BE READY
 				//LCD_Puts("HIGH BONUS!", 1, 20, DARK_BLUE, WHITE,1,1);
 				bonus_speed_time = BONUS_SPEED_TIME;
 				game_bonus = HIGH;
