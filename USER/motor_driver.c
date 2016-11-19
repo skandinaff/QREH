@@ -306,7 +306,7 @@ bool Check_if_both_arrived(bool reset){
 
 bool Check_if_one_at_start(void){
 	//For the RIGHT room
-	if(READ_MASTER_START_POINT() == 0 || READ_USER_START_POINT() == 0) return true;
+	//if(READ_MASTER_START_POINT() == 0 || READ_USER_START_POINT() == 0) return true;
 	//For the LEFT room
 	if(READ_MASTER_END_POINT() == 0 || READ_USER_END_POINT() == 0) return true;	
 	else return false;
@@ -314,7 +314,7 @@ bool Check_if_one_at_start(void){
 
 bool Check_if_both_at_start(void){
 	//For the RIGHT room
-	if(READ_MASTER_START_POINT() == 0 && READ_USER_START_POINT() == 0) return true;
+	//if(READ_MASTER_START_POINT() == 0 && READ_USER_START_POINT() == 0) return true;
 	//For the LEFT room
 	if(READ_MASTER_END_POINT() == 0 && READ_USER_END_POINT() == 0) return true;
 	else return false;
