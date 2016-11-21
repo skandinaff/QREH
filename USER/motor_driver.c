@@ -27,7 +27,7 @@
 #define READ_BONUS_SENS_MED()				(GPIO_ReadInputDataBit(BONUS_SENS_PORT, BONUS_SENS_MED))
 #define READ_BONUS_SENS_HIGH()			(GPIO_ReadInputDataBit(BONUS_SENS_PORT, BONUS_SENS_HIGH))
 /* Avaliable speeds. I assume greater number means less speed */
-#define AUTOMAT_SPEED								450 //625 // was 1200 initally // The was 1150 - 6.45 minutes //
+#define AUTOMAT_SPEED								480 //625 // was 1200 initally // The was 1150 - 6.45 minutes //
 #define USER_BASE_SPEED							2800 // was 1400
 
 #define USER_BONUS_LOW_SPEED				380 // was 950
@@ -126,7 +126,7 @@ unsigned char HorseRace (void)
 	STEP2_EN_0();
 	delay_ms(50);
 	//TIM2->ARR = AUTOMAT_SPEED;
-	automat_speed = AUTOMAT_SPEED + (50*round_count);
+	automat_speed = AUTOMAT_SPEED + (75*round_count);
 	if(automat_speed >= (USER_BASE_SPEED/2)) automat_speed = USER_BASE_SPEED/2;
 	TIM2->ARR = automat_speed;
 	TIM3->ARR = USER_BASE_SPEED;
@@ -147,6 +147,7 @@ unsigned char HorseRace (void)
 			STEP1_EN_1();
 			STEP2_EN_1();
 			set_game_result(COMPLETED); // Swapped places. Appears that motors are connected other way around
+			round_count=0;
 			return 0;									
 		}
 		//For the RIGHT room

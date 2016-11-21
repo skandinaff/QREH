@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\Objects\Q1kony.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Objects\Q1kony.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060183: Last Updated: Mon Nov 21 17:27:03 2016
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060183: Last Updated: Mon Nov 21 19:35:07 2016
 <BR><P>
 <H3>Maximum Stack Usage =        288 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -1680,19 +1680,20 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[e3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;strlen
 </UL>
-<BR>[Called By]<UL><LI><a href="#[e6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;usart_validate_crc8
+<BR>[Called By]<UL><LI><a href="#[e7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;usart_validate_crc8
 <LI><a href="#[e5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;usart_assemble_response
 </UL>
 
-<P><STRONG><a name="[e5]"></a>usart_assemble_response</STRONG> (Thumb, 78 bytes, Stack size 16 bytes, usart.o(.text))
-<BR><BR>[Stack]<UL><LI>Max Depth = 40<LI>Call Chain = usart_assemble_response &rArr; usart_crc8 &rArr; strlen
+<P><STRONG><a name="[e5]"></a>usart_assemble_response</STRONG> (Thumb, 90 bytes, Stack size 24 bytes, usart.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 48<LI>Call Chain = usart_assemble_response &rArr; usart_crc8 &rArr; strlen
 </UL>
-<BR>[Calls]<UL><LI><a href="#[e4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;usart_crc8
+<BR>[Calls]<UL><LI><a href="#[e6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;get_sound
+<LI><a href="#[e4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;usart_crc8
 </UL>
 <BR>[Called By]<UL><LI><a href="#[ea]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SendInstruction
 </UL>
 
-<P><STRONG><a name="[e6]"></a>usart_validate_crc8</STRONG> (Thumb, 58 bytes, Stack size 8 bytes, usart.o(.text))
+<P><STRONG><a name="[e7]"></a>usart_validate_crc8</STRONG> (Thumb, 58 bytes, Stack size 8 bytes, usart.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = usart_validate_crc8 &rArr; usart_crc8 &rArr; strlen
 </UL>
 <BR>[Calls]<UL><LI><a href="#[e4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;usart_crc8
@@ -1700,16 +1701,16 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[b9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;check_usart_while_playing
 </UL>
 
-<P><STRONG><a name="[e7]"></a>usart_convert_outgoing_packet</STRONG> (Thumb, 70 bytes, Stack size 24 bytes, usart.o(.text))
+<P><STRONG><a name="[e8]"></a>usart_convert_outgoing_packet</STRONG> (Thumb, 70 bytes, Stack size 24 bytes, usart.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = usart_convert_outgoing_packet
 </UL>
 <BR>[Calls]<UL><LI><a href="#[e9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;set_sound
-<LI><a href="#[e8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;get_sound
+<LI><a href="#[e6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;get_sound
 </UL>
 <BR>[Called By]<UL><LI><a href="#[ea]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SendInstruction
 </UL>
 
-<P><STRONG><a name="[ea]"></a>SendInstruction</STRONG> (Thumb, 94 bytes, Stack size 24 bytes, usart.o(.text))
+<P><STRONG><a name="[ea]"></a>SendInstruction</STRONG> (Thumb, 96 bytes, Stack size 24 bytes, usart.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 72<LI>Call Chain = SendInstruction &rArr; malloc &rArr; __Heap_Full &rArr; __Heap_ProvideMemory &rArr; free
 </UL>
 <BR>[Calls]<UL><LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_ms
@@ -1717,7 +1718,7 @@ Global Symbols
 <LI><a href="#[9a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_SetBits
 <LI><a href="#[ec]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;free
 <LI><a href="#[eb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;malloc
-<LI><a href="#[e7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;usart_convert_outgoing_packet
+<LI><a href="#[e8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;usart_convert_outgoing_packet
 <LI><a href="#[e5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;usart_assemble_response
 <LI><a href="#[e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;put_str
 </UL>
@@ -1734,7 +1735,7 @@ Global Symbols
 <LI><a href="#[eb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;malloc
 <LI><a href="#[ee]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;set_game_state
 <LI><a href="#[ea]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SendInstruction
-<LI><a href="#[e6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;usart_validate_crc8
+<LI><a href="#[e7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;usart_validate_crc8
 <LI><a href="#[e2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;usart_packet_parser
 <LI><a href="#[ed]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;usart_packet_is_addressed_to_me
 <LI><a href="#[dd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;usart_get_data_packet
@@ -1773,11 +1774,12 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[e9]"></a>set_sound</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, quest.o(.text))
-<BR><BR>[Called By]<UL><LI><a href="#[e7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;usart_convert_outgoing_packet
+<BR><BR>[Called By]<UL><LI><a href="#[e8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;usart_convert_outgoing_packet
 </UL>
 
-<P><STRONG><a name="[e8]"></a>get_sound</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, quest.o(.text))
-<BR><BR>[Called By]<UL><LI><a href="#[e7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;usart_convert_outgoing_packet
+<P><STRONG><a name="[e6]"></a>get_sound</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, quest.o(.text))
+<BR><BR>[Called By]<UL><LI><a href="#[e8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;usart_convert_outgoing_packet
+<LI><a href="#[e5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;usart_assemble_response
 </UL>
 
 <P><STRONG><a name="[eb]"></a>malloc</STRONG> (Thumb, 94 bytes, Stack size 16 bytes, h1_alloc.o(.text))
