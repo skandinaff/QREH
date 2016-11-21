@@ -2,7 +2,7 @@
 
 state game_state;
 result game_result;
-bool sound = false;
+unsigned char sound = 0xFF;
 
 state get_game_state(){
 	return game_state;
@@ -20,10 +20,10 @@ void set_game_result(result r){
 	game_result = r;
 }
 
-void set_sound(bool s){
+void set_sound(unsigned char s){
 	sound = s;
 }
 
-bool get_sound(void){
+unsigned char get_sound(void){
 	return sound;
 }

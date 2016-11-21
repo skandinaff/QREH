@@ -27,13 +27,14 @@
 #define READ_BONUS_SENS_MED()				(GPIO_ReadInputDataBit(BONUS_SENS_PORT, BONUS_SENS_MED))
 #define READ_BONUS_SENS_HIGH()			(GPIO_ReadInputDataBit(BONUS_SENS_PORT, BONUS_SENS_HIGH))
 /* Avaliable speeds. I assume greater number means less speed */
-#define AUTOMAT_SPEED								650 // was 1200 initally // The was 1150 - 6.45 minutes //
+#define AUTOMAT_SPEED								450 //625 // was 1200 initally // The was 1150 - 6.45 minutes //
 #define USER_BASE_SPEED							2800 // was 1400
 
-#define USER_BONUS_LOW_SPEED				400 // was 950
-#define USER_BONUS_MED_SPEED				200 // was 800
-#define USER_BONUS_HIGH_SPEED				160 // was 650
-#define BONUS_SPEED_TIME						600
+#define USER_BONUS_LOW_SPEED				380 // was 950
+#define USER_BONUS_MED_SPEED				220 // was 800
+#define USER_BONUS_HIGH_SPEED				180 // was 650
+
+#define BONUS_SPEED_TIME						500
 
 volatile bool master_start = false;
 volatile bool user_start = false;
@@ -42,6 +43,10 @@ bonus game_bonus = NONE;
 
 volatile float incr;
 volatile int incr_count = 1;
+int round_count = 0;
+char round_count_str[16];
+char motor_speed_str[16];
+int automat_speed;
 
 void MotorInit (void)
 {
@@ -52,11 +57,11 @@ void MotorInit (void)
 	STEP2_EN_1();
 	FULL_STEP();
 	//For the RIGHT room
-	//DIR1_REVERSE();
-	//DIR2_REVERSE();
+	DIR1_REVERSE();
+	DIR2_REVERSE();
 	//For the LEFT room
-	DIR1_FORWARD();
-	DIR2_FORWARD();
+	//DIR1_FORWARD();
+	//DIR2_FORWARD();
 	
 	STEP1_RES_1();	
 	STEP2_RES_1();
@@ -74,9 +79,9 @@ void MotorInit (void)
   {
 		check_usart_while_playing();
 		//For the RIGHT room		
-		//if (READ_MASTER_START_POINT() == 0) {
+		if (READ_MASTER_START_POINT() == 0) {
 		//For the LEFT room
-		if (READ_MASTER_END_POINT() == 0) {
+		//if (READ_MASTER_END_POINT() == 0) {
 			STEP1_RES_0();
 			STEP1_EN_1();
 			TIM_Cmd(TIM3, DISABLE);
@@ -84,9 +89,9 @@ void MotorInit (void)
 			//LCD_Puts("Master at start!", 1, 60, DARK_BLUE, WHITE,1,1);
 		}
 		//For the RIGHT room
-		//if (READ_USER_START_POINT() == 0) {		
+		if (READ_USER_START_POINT() == 0) {		
   	//For the LEFT room		
-		if (READ_USER_END_POINT() == 0) {
+		//if (READ_USER_END_POINT() == 0) {
 			STEP2_RES_0();
 			STEP2_EN_1();
 			TIM_Cmd(TIM2, DISABLE);
@@ -109,18 +114,21 @@ unsigned char HorseRace (void)
 		//LCD_Puts("Game on!            ", 1, 20, DARK_BLUE, WHITE,1,1);
 	QUARTER_STEP();
 	//For the RIGHT room
-	//DIR1_FORWARD();
-	//DIR2_FORWARD();
+	DIR1_FORWARD();
+	DIR2_FORWARD();
 	//For the LEFT room
-	DIR1_REVERSE();
-	DIR2_REVERSE();
+	//DIR1_REVERSE();
+	//DIR2_REVERSE();
 	
 	STEP1_RES_1();
 	STEP2_RES_1();
 	STEP1_EN_0();
 	STEP2_EN_0();
 	delay_ms(50);
-	TIM2->ARR = AUTOMAT_SPEED;
+	//TIM2->ARR = AUTOMAT_SPEED;
+	automat_speed = AUTOMAT_SPEED + (50*round_count);
+	if(automat_speed >= (USER_BASE_SPEED/2)) automat_speed = USER_BASE_SPEED/2;
+	TIM2->ARR = automat_speed;
 	TIM3->ARR = USER_BASE_SPEED;
 	TIM_Cmd(TIM2, ENABLE);
 	TIM_Cmd(TIM3, ENABLE);
@@ -131,9 +139,9 @@ unsigned char HorseRace (void)
 		
 		check_usart_while_playing();
 		//For the RIGHT room
-		//if (READ_MASTER_END_POINT() == 0) {	
+		if (READ_MASTER_END_POINT() == 0) {	
 		//For the LEFT room		
-		if (READ_MASTER_START_POINT() == 0) {							
+		//if (READ_MASTER_START_POINT() == 0) {							
 			STEP1_RES_0();
 			STEP2_RES_0();
 			STEP1_EN_1();
@@ -142,14 +150,22 @@ unsigned char HorseRace (void)
 			return 0;									
 		}
 		//For the RIGHT room
-		//if (READ_USER_END_POINT() == 0) {	
+		if (READ_USER_END_POINT() == 0) {	
 		//For the LEFT room		
-		if (READ_USER_START_POINT() == 0) {
+		//if (READ_USER_START_POINT() == 0) {
 			STEP1_RES_0();
 			STEP2_RES_0();
 			STEP1_EN_1();
 			STEP2_EN_1();
+			round_count++;
+			LCD_Puts("Round Nr: ", 1, 1, DARK_BLUE, WHITE,1,1);
+			sprintf(round_count_str, "%d", round_count);
+			LCD_Puts(round_count_str, 1, 10, DARK_BLUE, WHITE,1,1);
 			MotorInit();
+			LCD_Puts("Motor Speed", 1, 20, DARK_BLUE, WHITE,1,1);
+			//TIM2->ARR = AUTOMAT_SPEED + (50*round_count);
+			sprintf(motor_speed_str, "%d", AUTOMAT_SPEED + (50*round_count));
+			LCD_Puts(motor_speed_str, 1, 30, DARK_BLUE, WHITE,1,1);
 			return 0;
 		}
 		
@@ -189,21 +205,21 @@ unsigned char HorseRace (void)
 		}
 		//if(game_bonus == NONE){ // This is ommited, as it reduces the freqcueny of bonuses
 			if (READ_BONUS_SENS_LOW() != 0) {
-				//set_sound(true); // ADD ONLY WHEN SYSTEM WILL BE READY
+				//set_sound(0x01); // ADD ONLY WHEN SYSTEM WILL BE READY
 				//LCD_Puts("LOW BONUS!", 1, 1, DARK_BLUE, WHITE,1,1);
 				bonus_speed_time = BONUS_SPEED_TIME;
 				game_bonus = LOW;
 				TIM3->ARR = USER_BONUS_LOW_SPEED;
 			}
 			if (READ_BONUS_SENS_MED() != 0) {
-				//set_sound(true); // ADD ONLY WHEN SYSTEM WILL BE READY
+				//set_sound(0x02); // ADD ONLY WHEN SYSTEM WILL BE READY
 				//LCD_Puts("MEDIUM BONUS!", 1, 10, DARK_BLUE, WHITE,1,1);
 				bonus_speed_time = BONUS_SPEED_TIME;
 				game_bonus = MED;
 				TIM3->ARR = USER_BONUS_MED_SPEED;
 			}
 			if (READ_BONUS_SENS_HIGH() != 0) {
-				//set_sound(true); // ADD ONLY WHEN SYSTEM WILL BE READY
+				//set_sound(0x02); // ADD ONLY WHEN SYSTEM WILL BE READY
 				//LCD_Puts("HIGH BONUS!", 1, 20, DARK_BLUE, WHITE,1,1);
 				bonus_speed_time = BONUS_SPEED_TIME;
 				game_bonus = HIGH;
@@ -306,17 +322,17 @@ bool Check_if_both_arrived(bool reset){
 
 bool Check_if_one_at_start(void){
 	//For the RIGHT room
-	//if(READ_MASTER_START_POINT() == 0 || READ_USER_START_POINT() == 0) return true;
+	if(READ_MASTER_START_POINT() == 0 || READ_USER_START_POINT() == 0) return true;
 	//For the LEFT room
-	if(READ_MASTER_END_POINT() == 0 || READ_USER_END_POINT() == 0) return true;	
+	//if(READ_MASTER_END_POINT() == 0 || READ_USER_END_POINT() == 0) return true;	
 	else return false;
 }
 
 bool Check_if_both_at_start(void){
 	//For the RIGHT room
-	//if(READ_MASTER_START_POINT() == 0 && READ_USER_START_POINT() == 0) return true;
+	if(READ_MASTER_START_POINT() == 0 && READ_USER_START_POINT() == 0) return true;
 	//For the LEFT room
-	if(READ_MASTER_END_POINT() == 0 && READ_USER_END_POINT() == 0) return true;
+	//if(READ_MASTER_END_POINT() == 0 && READ_USER_END_POINT() == 0) return true;
 	else return false;
 }
 

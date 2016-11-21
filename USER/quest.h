@@ -16,7 +16,7 @@ void set_game_state(state s);
 result get_game_result(void);
 void set_game_result(result r);
 
-void set_sound(bool s);
-bool get_sound(void);
+void set_sound(unsigned char s);
+unsigned char get_sound(void);
 	
 #endif

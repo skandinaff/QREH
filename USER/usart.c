@@ -289,17 +289,18 @@ void usart_convert_outgoing_packet (unsigned char* packet, outgoing_packet_t out
     packet[0] = outgoing_packet.slave_start_byte;
     packet[1] = outgoing_packet.slave_address;
     packet[2] = outgoing_packet.instruction;
-		if(get_sound() == true) {
-			packet[3] = 0x01;
+		if(get_sound() != 0xFF) {
+			packet[3] = get_sound();
 			packet[4] = outgoing_packet.crc8;
 			packet[5] = outgoing_packet.stop_byte;
 			packet[6] = '\0';
-			set_sound(false);
+			set_sound(0xFF);
 		}
-		if(get_sound() == false){
-			packet[3] = outgoing_packet.crc8;
-			packet[4] = outgoing_packet.stop_byte;
-			packet[5] = '\0';
+		if(get_sound() == 0xFF){
+			packet[3] = 0xFF;
+			packet[4] = outgoing_packet.crc8;
+			packet[5] = outgoing_packet.stop_byte;
+			packet[6] = '\0';
 		}
 
 	
@@ -371,7 +372,7 @@ uint8_t SendInstruction(unsigned char instruction){
 	GPIO_SetBits(USART_PORT, RS485DIR_PIN);
 	usart_convert_outgoing_packet(packet, outgoing_packet);
 	put_str(packet);
-	delay_ms(50); // was 100
+	delay_ms(50); // was 100 // this is awful, should put RS485 opening/closing into interrupt
 	free(packet);
 	GPIO_ResetBits(USART_PORT, RS485DIR_PIN);
 	return 1;

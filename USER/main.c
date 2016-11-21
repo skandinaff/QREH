@@ -50,8 +50,8 @@ int main(void)
 	STEP2_RES_0();
 
 // Enable only for debugging purpouses	
-//	LCD_init();
-//	LCD_FillScreen(WHITE);
+	LCD_init();
+	LCD_FillScreen(WHITE);
 
 	
 	GPIO_SetBits(MAGNET_PORT, MAGNET);
