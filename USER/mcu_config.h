@@ -21,6 +21,8 @@
 #define MASTER_START_BYTE	0xC1
 #define SLAVE_START_BYTE	0xC2
 #define STOP_BYTE					0xC0
+#define LCD								1								// Flag that turns on the LCD
+
 
 typedef enum {
 	QUEST_INIT = 0,													// Квест в процессе инициализации

@@ -50,7 +50,7 @@ int automat_speed;
 
 void MotorInit (void)
 {
-	LCD_Puts("Please Init motors!", 1, 50, DARK_BLUE, WHITE,1,1);
+	if(LCD) LCD_Puts("Please Init motors!", 1, 50, DARK_BLUE, WHITE,1,1);
 	STEP1_RES_0();
 	STEP2_RES_0();
 	STEP1_EN_1();
@@ -80,7 +80,7 @@ void MotorInit (void)
 			STEP1_EN_1();
 			TIM_Cmd(TIM3, DISABLE);
 			user_start = true;
-			LCD_Puts("Master at start!", 1, 60, DARK_BLUE, WHITE,1,1);
+			if(LCD) LCD_Puts("Master at start!", 1, 60, DARK_BLUE, WHITE,1,1);
 		}
 		if (READ_USER_START_POINT() == 0) {		
 
@@ -88,13 +88,13 @@ void MotorInit (void)
 			STEP2_EN_1();
 			TIM_Cmd(TIM2, DISABLE);
 			master_start = true;
-			LCD_Puts("User at start!", 1, 70, DARK_BLUE, WHITE,1,1);
+			if(LCD) LCD_Puts("User at start!", 1, 70, DARK_BLUE, WHITE,1,1);
 		}
 		delay_ms(1);
 	}
-	LCD_Puts("                   ", 1, 50, DARK_BLUE, WHITE,1,1);
-	LCD_Puts("                   ", 1, 60, DARK_BLUE, WHITE,1,1);
-	LCD_Puts("                   ", 1, 70, DARK_BLUE, WHITE,1,1);
+	if(LCD) LCD_Puts("                   ", 1, 50, DARK_BLUE, WHITE,1,1);
+	if(LCD) LCD_Puts("                   ", 1, 60, DARK_BLUE, WHITE,1,1);
+	if(LCD) LCD_Puts("                   ", 1, 70, DARK_BLUE, WHITE,1,1);
 	Check_if_both_arrived(true);
 
 }
@@ -103,7 +103,7 @@ unsigned char HorseRace (void)
 {
 
 	unsigned int bonus_speed_time = 0;
-	LCD_Puts("Game on!            ", 1, 20, DARK_BLUE, WHITE,1,1);
+	if(LCD) LCD_Puts("Game on!            ", 1, 20, DARK_BLUE, WHITE,1,1);
 	QUARTER_STEP();
 	DIR1_FORWARD();
 	DIR2_FORWARD();
@@ -141,13 +141,13 @@ unsigned char HorseRace (void)
 			STEP1_EN_1();
 			STEP2_EN_1();
 			round_count++;
-			LCD_Puts("Round Nr: ", 1, 1, DARK_BLUE, WHITE,1,1);
+			if(LCD) LCD_Puts("Round Nr: ", 1, 1, DARK_BLUE, WHITE,1,1);
 			sprintf(round_count_str, "%d", round_count);
-			LCD_Puts(round_count_str, 1, 10, DARK_BLUE, WHITE,1,1);
+			if(LCD) LCD_Puts(round_count_str, 1, 10, DARK_BLUE, WHITE,1,1);
 			MotorInit();
-			LCD_Puts("Motor Speed", 1, 20, DARK_BLUE, WHITE,1,1);
+			if(LCD) LCD_Puts("Motor Speed", 1, 20, DARK_BLUE, WHITE,1,1);
 			sprintf(motor_speed_str, "%d", AUTOMAT_SPEED + (50*round_count));
-			LCD_Puts(motor_speed_str, 1, 30, DARK_BLUE, WHITE,1,1);
+			if(LCD) LCD_Puts(motor_speed_str, 1, 30, DARK_BLUE, WHITE,1,1);
 			return 0;
 		}
 		
@@ -176,9 +176,9 @@ unsigned char HorseRace (void)
 
 			
 			if (bonus_speed_time == 0) {
-				LCD_Puts("             ", 1, 1, DARK_BLUE, WHITE,1,1);
-				LCD_Puts("             ", 1, 10, DARK_BLUE, WHITE,1,1);
-				LCD_Puts("             ", 1, 20, DARK_BLUE, WHITE,1,1);
+				if(LCD) LCD_Puts("             ", 1, 1, DARK_BLUE, WHITE,1,1);
+				if(LCD) LCD_Puts("             ", 1, 10, DARK_BLUE, WHITE,1,1);
+				if(LCD) LCD_Puts("             ", 1, 20, DARK_BLUE, WHITE,1,1);
 				incr=0;
 				incr_count=1;
 				game_bonus=NONE;
@@ -187,21 +187,21 @@ unsigned char HorseRace (void)
 		}
 			if (READ_BONUS_SENS_LOW() != 0) {
 				set_sound(0x01); 
-				LCD_Puts("LOW BONUS!", 1, 1, DARK_BLUE, WHITE,1,1);
+				if(LCD) LCD_Puts("LOW BONUS!", 1, 1, DARK_BLUE, WHITE,1,1);
 				bonus_speed_time = BONUS_SPEED_TIME;
 				game_bonus = LOW;
 				TIM3->ARR = USER_BONUS_LOW_SPEED;
 			}
 			if (READ_BONUS_SENS_MED() != 0) {
 				set_sound(0x02); 
-				LCD_Puts("MEDIUM BONUS!", 1, 10, DARK_BLUE, WHITE,1,1);
+				if(LCD) LCD_Puts("MEDIUM BONUS!", 1, 10, DARK_BLUE, WHITE,1,1);
 				bonus_speed_time = BONUS_SPEED_TIME;
 				game_bonus = MED;
 				TIM3->ARR = USER_BONUS_MED_SPEED;
 			}
 			if (READ_BONUS_SENS_HIGH() != 0) {
 				set_sound(0x03); 
-				LCD_Puts("HIGH BONUS!", 1, 20, DARK_BLUE, WHITE,1,1);
+				if(LCD) LCD_Puts("HIGH BONUS!", 1, 20, DARK_BLUE, WHITE,1,1);
 				bonus_speed_time = BONUS_SPEED_TIME;
 				game_bonus = HIGH;
 				TIM3->ARR = USER_BONUS_HIGH_SPEED;

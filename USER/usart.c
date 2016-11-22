@@ -135,7 +135,7 @@ void USART1_IRQHandler(void) {
 		
 		if(USART_GetITStatus(USART1, USART_IT_TC) == SET) {
 			RS485DIR_RX();
-			LCD_Puts("TX completed!", 1, 70, DARK_BLUE, WHITE,1,1);
+			if(LCD) LCD_Puts("TX completed!", 1, 70, DARK_BLUE, WHITE,1,1);
 			USART_ITConfig(USART1, USART_IT_TC, DISABLE);
 		}
 
@@ -326,7 +326,7 @@ void check_usart_while_playing(void){
 	
 		if (usart_has_data()) {
 			
-			LCD_Puts("Data received", 1, 1, DARK_BLUE, WHITE,1,1);
+			if(LCD) LCD_Puts("Data received", 1, 1, DARK_BLUE, WHITE,1,1);
 			BlinkOnboardLED(2);
 			
 			usart_get_data_packet(packet);
@@ -336,24 +336,24 @@ void check_usart_while_playing(void){
 			if (usart_validate_crc8(incoming_packet) && usart_packet_is_addressed_to_me(incoming_packet)){
 				switch (incoming_packet.instruction) {
 					case INSTR_MASTER_TEST:
-						LCD_Puts("TEST received", 1, 1, DARK_BLUE, WHITE,1,1);
+						if(LCD) LCD_Puts("TEST received", 1, 1, DARK_BLUE, WHITE,1,1);
 						if(get_game_state()==IDLE){
 							SendInstruction(INSTR_SLAVE_READY);
 						}
 						break;
 					case INSTR_MASTER_WORK_START:
-						LCD_Puts("WORK received", 1, 1, DARK_BLUE, WHITE,1,1);
+						if(LCD) LCD_Puts("WORK received", 1, 1, DARK_BLUE, WHITE,1,1);
 						if(get_game_state()==IDLE){
 							set_game_state(GAME);
 						}
 						break;
 					case INSTR_MASTER_STATUS_REQ:	
-						LCD_Puts("STATUS received", 1, 1, DARK_BLUE, WHITE,1,1);
+						if(LCD) LCD_Puts("STATUS received", 1, 1, DARK_BLUE, WHITE,1,1);
 						if(get_game_result()==COMPLETED) SendInstruction(INSTR_SLAVE_COMPLETED);
 						if(get_game_result()==NOT_COMPLETED) SendInstruction(INSTR_SLAVE_NOT_COMLETED);
 						break;
 					case INSTR_MASTER_SET_IDLE:
-						LCD_Puts("IDLE received", 1, 1, DARK_BLUE, WHITE,1,1);
+						if(LCD) LCD_Puts("IDLE received", 1, 1, DARK_BLUE, WHITE,1,1);
 						if(get_game_state()==GAME) { 
 							set_game_state(IDLE);
 							Emergency_Stop();
