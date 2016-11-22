@@ -50,18 +50,15 @@ int automat_speed;
 
 void MotorInit (void)
 {
-	//LCD_Puts("Please Init motors!", 1, 50, DARK_BLUE, WHITE,1,1);
+	LCD_Puts("Please Init motors!", 1, 50, DARK_BLUE, WHITE,1,1);
 	STEP1_RES_0();
 	STEP2_RES_0();
 	STEP1_EN_1();
 	STEP2_EN_1();
 	FULL_STEP();
-	//For the RIGHT room
 	DIR1_REVERSE();
 	DIR2_REVERSE();
-	//For the LEFT room
-	//DIR1_FORWARD();
-	//DIR2_FORWARD();
+
 	
 	STEP1_RES_1();	
 	STEP2_RES_1();
@@ -78,31 +75,26 @@ void MotorInit (void)
   while( !Check_if_both_arrived(false) )
   {
 		check_usart_while_playing();
-		//For the RIGHT room		
 		if (READ_MASTER_START_POINT() == 0) {
-		//For the LEFT room
-		//if (READ_MASTER_END_POINT() == 0) {
 			STEP1_RES_0();
 			STEP1_EN_1();
 			TIM_Cmd(TIM3, DISABLE);
 			user_start = true;
-			//LCD_Puts("Master at start!", 1, 60, DARK_BLUE, WHITE,1,1);
+			LCD_Puts("Master at start!", 1, 60, DARK_BLUE, WHITE,1,1);
 		}
-		//For the RIGHT room
 		if (READ_USER_START_POINT() == 0) {		
-  	//For the LEFT room		
-		//if (READ_USER_END_POINT() == 0) {
+
 			STEP2_RES_0();
 			STEP2_EN_1();
 			TIM_Cmd(TIM2, DISABLE);
 			master_start = true;
-			//LCD_Puts("User at start!", 1, 70, DARK_BLUE, WHITE,1,1);
+			LCD_Puts("User at start!", 1, 70, DARK_BLUE, WHITE,1,1);
 		}
 		delay_ms(1);
 	}
-	//LCD_Puts("                   ", 1, 50, DARK_BLUE, WHITE,1,1);
-	//LCD_Puts("                   ", 1, 60, DARK_BLUE, WHITE,1,1);
-	//LCD_Puts("                   ", 1, 70, DARK_BLUE, WHITE,1,1);
+	LCD_Puts("                   ", 1, 50, DARK_BLUE, WHITE,1,1);
+	LCD_Puts("                   ", 1, 60, DARK_BLUE, WHITE,1,1);
+	LCD_Puts("                   ", 1, 70, DARK_BLUE, WHITE,1,1);
 	Check_if_both_arrived(true);
 
 }
@@ -111,21 +103,17 @@ unsigned char HorseRace (void)
 {
 
 	unsigned int bonus_speed_time = 0;
-		//LCD_Puts("Game on!            ", 1, 20, DARK_BLUE, WHITE,1,1);
+	LCD_Puts("Game on!            ", 1, 20, DARK_BLUE, WHITE,1,1);
 	QUARTER_STEP();
-	//For the RIGHT room
 	DIR1_FORWARD();
 	DIR2_FORWARD();
-	//For the LEFT room
-	//DIR1_REVERSE();
-	//DIR2_REVERSE();
+
 	
 	STEP1_RES_1();
 	STEP2_RES_1();
 	STEP1_EN_0();
 	STEP2_EN_0();
-	delay_ms(50);
-	//TIM2->ARR = AUTOMAT_SPEED;
+	//delay_ms(50); // Do we need this?
 	automat_speed = AUTOMAT_SPEED + (75*round_count);
 	if(automat_speed >= (USER_BASE_SPEED/2)) automat_speed = USER_BASE_SPEED/2;
 	TIM2->ARR = automat_speed;
@@ -138,10 +126,7 @@ unsigned char HorseRace (void)
 		if (get_game_state()==IDLE) return 0;
 		
 		check_usart_while_playing();
-		//For the RIGHT room
 		if (READ_MASTER_END_POINT() == 0) {	
-		//For the LEFT room		
-		//if (READ_MASTER_START_POINT() == 0) {							
 			STEP1_RES_0();
 			STEP2_RES_0();
 			STEP1_EN_1();
@@ -150,10 +135,7 @@ unsigned char HorseRace (void)
 			round_count=0;
 			return 0;									
 		}
-		//For the RIGHT room
 		if (READ_USER_END_POINT() == 0) {	
-		//For the LEFT room		
-		//if (READ_USER_START_POINT() == 0) {
 			STEP1_RES_0();
 			STEP2_RES_0();
 			STEP1_EN_1();
@@ -164,7 +146,6 @@ unsigned char HorseRace (void)
 			LCD_Puts(round_count_str, 1, 10, DARK_BLUE, WHITE,1,1);
 			MotorInit();
 			LCD_Puts("Motor Speed", 1, 20, DARK_BLUE, WHITE,1,1);
-			//TIM2->ARR = AUTOMAT_SPEED + (50*round_count);
 			sprintf(motor_speed_str, "%d", AUTOMAT_SPEED + (50*round_count));
 			LCD_Puts(motor_speed_str, 1, 30, DARK_BLUE, WHITE,1,1);
 			return 0;
@@ -195,45 +176,41 @@ unsigned char HorseRace (void)
 
 			
 			if (bonus_speed_time == 0) {
-				//LCD_Puts("             ", 1, 1, DARK_BLUE, WHITE,1,1);
-				//LCD_Puts("             ", 1, 10, DARK_BLUE, WHITE,1,1);
-				//LCD_Puts("             ", 1, 20, DARK_BLUE, WHITE,1,1);
+				LCD_Puts("             ", 1, 1, DARK_BLUE, WHITE,1,1);
+				LCD_Puts("             ", 1, 10, DARK_BLUE, WHITE,1,1);
+				LCD_Puts("             ", 1, 20, DARK_BLUE, WHITE,1,1);
 				incr=0;
 				incr_count=1;
 				game_bonus=NONE;
 				TIM3->ARR = USER_BASE_SPEED;
 			}
 		}
-		//if(game_bonus == NONE){ // This is ommited, as it reduces the freqcueny of bonuses
 			if (READ_BONUS_SENS_LOW() != 0) {
-				//set_sound(0x01); // ADD ONLY WHEN SYSTEM WILL BE READY
-				//LCD_Puts("LOW BONUS!", 1, 1, DARK_BLUE, WHITE,1,1);
+				set_sound(0x01); 
+				LCD_Puts("LOW BONUS!", 1, 1, DARK_BLUE, WHITE,1,1);
 				bonus_speed_time = BONUS_SPEED_TIME;
 				game_bonus = LOW;
 				TIM3->ARR = USER_BONUS_LOW_SPEED;
 			}
 			if (READ_BONUS_SENS_MED() != 0) {
-				//set_sound(0x02); // ADD ONLY WHEN SYSTEM WILL BE READY
-				//LCD_Puts("MEDIUM BONUS!", 1, 10, DARK_BLUE, WHITE,1,1);
+				set_sound(0x02); 
+				LCD_Puts("MEDIUM BONUS!", 1, 10, DARK_BLUE, WHITE,1,1);
 				bonus_speed_time = BONUS_SPEED_TIME;
 				game_bonus = MED;
 				TIM3->ARR = USER_BONUS_MED_SPEED;
 			}
 			if (READ_BONUS_SENS_HIGH() != 0) {
-				//set_sound(0x02); // ADD ONLY WHEN SYSTEM WILL BE READY
-				//LCD_Puts("HIGH BONUS!", 1, 20, DARK_BLUE, WHITE,1,1);
+				set_sound(0x03); 
+				LCD_Puts("HIGH BONUS!", 1, 20, DARK_BLUE, WHITE,1,1);
 				bonus_speed_time = BONUS_SPEED_TIME;
 				game_bonus = HIGH;
 				TIM3->ARR = USER_BONUS_HIGH_SPEED;
 			}
-		//}
 		 delay_ms(10);
   }
 }
 
 void MotorTest(char sel_dir, int speed){
-	
-	// USABLE ONLY IN THE RIGHT ROOM!!!
 
 	STEP1_RES_0();
 	STEP2_RES_0();
@@ -322,18 +299,12 @@ bool Check_if_both_arrived(bool reset){
 }
 
 bool Check_if_one_at_start(void){
-	//For the RIGHT room
 	if(READ_MASTER_START_POINT() == 0 || READ_USER_START_POINT() == 0) return true;
-	//For the LEFT room
-	//if(READ_MASTER_END_POINT() == 0 || READ_USER_END_POINT() == 0) return true;	
 	else return false;
 }
 
 bool Check_if_both_at_start(void){
-	//For the RIGHT room
 	if(READ_MASTER_START_POINT() == 0 && READ_USER_START_POINT() == 0) return true;
-	//For the LEFT room
-	//if(READ_MASTER_END_POINT() == 0 && READ_USER_END_POINT() == 0) return true;
 	else return false;
 }
 

@@ -56,6 +56,7 @@ int main(void)
 	
 	GPIO_SetBits(MAGNET_PORT, MAGNET);
 	
+	RS485DIR_RX();
 	
   while(1){
 	
@@ -64,10 +65,10 @@ int main(void)
 		switch(get_game_state()){
 			case IDLE:
 				set_game_result(NOT_COMPLETED);
-				//LCD_Puts("State: Idle", 1, 30, DARK_BLUE, WHITE,1,1);
-				//LCD_Puts("Result: ", 1, 40, DARK_BLUE, WHITE,1,1);
-				//if(get_game_result()==COMPLETED) LCD_Puts("COMPL", 50, 40, DARK_BLUE, WHITE,1,1);
-				//if(get_game_result()==NOT_COMPLETED) LCD_Puts("NOT_C", 50, 40, DARK_BLUE, WHITE,1,1);
+				LCD_Puts("State: Idle", 1, 30, DARK_BLUE, WHITE,1,1);
+				LCD_Puts("Result: ", 1, 40, DARK_BLUE, WHITE,1,1);
+				if(get_game_result()==COMPLETED) LCD_Puts("COMPL", 50, 40, DARK_BLUE, WHITE,1,1);
+				if(get_game_result()==NOT_COMPLETED) LCD_Puts("NOT_C", 50, 40, DARK_BLUE, WHITE,1,1);
 				GPIO_ResetBits(STATE_LED_PORT, STATE_LED);
 			
 				//open_magnet();
@@ -79,15 +80,15 @@ int main(void)
 
 				break;
 			case GAME:
-				//LCD_Puts("State: Game", 1, 30, DARK_BLUE, WHITE,1,1);
+				LCD_Puts("State: Game", 1, 30, DARK_BLUE, WHITE,1,1);
 				if(get_game_result()==COMPLETED) {
-					//LCD_Puts("COMPL", 50, 40, DARK_BLUE, WHITE,1,1);
+					LCD_Puts("COMPL", 50, 40, DARK_BLUE, WHITE,1,1);
 					GPIO_ResetBits(STATE_LED_PORT, STATE_LED);
 					open_magnet();
 					// TODO:put a break here
 				}
 				if(get_game_result()==NOT_COMPLETED) {
-					//LCD_Puts("NOT_C", 50, 40, DARK_BLUE, WHITE,1,1);
+					LCD_Puts("NOT_C", 50, 40, DARK_BLUE, WHITE,1,1);
 					GPIO_SetBits(STATE_LED_PORT, STATE_LED);
 				}
 				while(get_game_result()==NOT_COMPLETED && get_game_state()==GAME) {

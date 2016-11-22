@@ -105,7 +105,6 @@ void init_usart(void){
 
 
 void USART1_IRQHandler(void) {
-	
     if (USART_GetITStatus(USART1, USART_IT_RXNE) == SET) {
         if ((USART1->SR & (USART_FLAG_NE | USART_FLAG_FE | USART_FLAG_PE | USART_FLAG_ORE)) == 0) {
             rx_buffer[rx_wr_index++] = (uint8_t)(USART_ReceiveData(USART1) & 0xFF);
@@ -133,6 +132,12 @@ void USART1_IRQHandler(void) {
             USART_ITConfig(USART1, USART_IT_TXE, DISABLE);
         }
     }
+		
+		if(USART_GetITStatus(USART1, USART_IT_TC) == SET) {
+			RS485DIR_RX();
+			LCD_Puts("TX completed!", 1, 70, DARK_BLUE, WHITE,1,1);
+			USART_ITConfig(USART1, USART_IT_TC, DISABLE);
+		}
 
 	
 
@@ -172,6 +177,7 @@ void usart_get_data_packet(unsigned char* packet) {
 }
 
 void put_char(uint8_t c) {
+
     if (c) {
         while (tx_counter == TX_BUFFER_SIZE);
         USART_ITConfig(USART1, USART_IT_TXE, DISABLE);
@@ -180,16 +186,21 @@ void put_char(uint8_t c) {
             if (tx_wr_index == TX_BUFFER_SIZE) tx_wr_index = 0;
             ++tx_counter;
             USART_ITConfig(USART1, USART_IT_TXE, ENABLE);
+						USART_ITConfig(USART1, USART_IT_TC, ENABLE);
+
         }
         else
             USART_SendData(USART1, c);
     }
+		
 }
 
 
 void put_str(unsigned char *s) {
-    while (*s != 0)
+		RS485DIR_TX();	
+    while (*s != 0){
         put_char(*s++);
+		}
 }
 
 bool usart_packet_is_addressed_to_me(incoming_packet_t incoming_packet) {
@@ -231,6 +242,9 @@ outgoing_packet_t usart_assemble_response(unsigned char instruction) {
     outgoing_packet.slave_start_byte = SLAVE_START_BYTE;
     outgoing_packet.slave_address = QUEST_ID;
     outgoing_packet.instruction = instruction;
+		if(instruction == INSTR_SLAVE_NOT_COMLETED || instruction == INSTR_SLAVE_COMPLETED){
+			outgoing_packet.sound = get_sound(); 
+		} else outgoing_packet.sound = 0;
     outgoing_packet.crc8 = usart_crc8(CRC_INIT_VAL, data_for_crc8); 
 		
     outgoing_packet.stop_byte = STOP_BYTE;
@@ -290,20 +304,18 @@ void usart_convert_outgoing_packet (unsigned char* packet, outgoing_packet_t out
     packet[0] = outgoing_packet.slave_start_byte;
     packet[1] = outgoing_packet.slave_address;
     packet[2] = outgoing_packet.instruction;
-		if(get_sound() != 0xFF) {
-			packet[3] = get_sound();
-			packet[4] = outgoing_packet.crc8;
-			packet[5] = outgoing_packet.stop_byte;
-			packet[6] = '\0';
-			set_sound(0xFF);
+		if(outgoing_packet.sound != 0){
+				packet[3] = get_sound();
+				packet[4] = outgoing_packet.crc8;
+				packet[5] = outgoing_packet.stop_byte;
+				packet[6] = '\0';
+				set_sound(0xFF);
 		}
-		if(get_sound() == 0xFF){
-			packet[3] = 0xFF;
-			packet[4] = outgoing_packet.crc8;
-			packet[5] = outgoing_packet.stop_byte;
-			packet[6] = '\0';
+		if(outgoing_packet.sound == 0){
+			packet[3] = outgoing_packet.crc8;
+			packet[4] = outgoing_packet.stop_byte;
+			packet[5] = '\0';
 		}
-
 	
 }
 
@@ -314,39 +326,34 @@ void check_usart_while_playing(void){
 	
 		if (usart_has_data()) {
 			
-			//LCD_Puts("Data received", 1, 1, DARK_BLUE, WHITE,1,1);
+			LCD_Puts("Data received", 1, 1, DARK_BLUE, WHITE,1,1);
 			BlinkOnboardLED(2);
 			
 			usart_get_data_packet(packet);
 			incoming_packet = usart_packet_parser(packet);
 			
 			
-			//sprintf(packet_str, "%4d: ", incoming_packet);
-			
-			//LCD_Puts(packet_str, 1, 1, DARK_BLUE, WHITE,1,1);
-			
 			if (usart_validate_crc8(incoming_packet) && usart_packet_is_addressed_to_me(incoming_packet)){
-				//BlinkOnboardLED(2); // TODO: rewrite blik function using timer
 				switch (incoming_packet.instruction) {
 					case INSTR_MASTER_TEST:
-						//LCD_Puts("TEST received", 1, 1, DARK_BLUE, WHITE,1,1);
+						LCD_Puts("TEST received", 1, 1, DARK_BLUE, WHITE,1,1);
 						if(get_game_state()==IDLE){
 							SendInstruction(INSTR_SLAVE_READY);
 						}
 						break;
 					case INSTR_MASTER_WORK_START:
-						//LCD_Puts("WORK received", 1, 1, DARK_BLUE, WHITE,1,1);
+						LCD_Puts("WORK received", 1, 1, DARK_BLUE, WHITE,1,1);
 						if(get_game_state()==IDLE){
 							set_game_state(GAME);
 						}
 						break;
 					case INSTR_MASTER_STATUS_REQ:	
-						//LCD_Puts("STATUS received", 1, 1, DARK_BLUE, WHITE,1,1);
+						LCD_Puts("STATUS received", 1, 1, DARK_BLUE, WHITE,1,1);
 						if(get_game_result()==COMPLETED) SendInstruction(INSTR_SLAVE_COMPLETED);
 						if(get_game_result()==NOT_COMPLETED) SendInstruction(INSTR_SLAVE_NOT_COMLETED);
 						break;
 					case INSTR_MASTER_SET_IDLE:
-						//LCD_Puts("IDLE received", 1, 1, DARK_BLUE, WHITE,1,1);
+						LCD_Puts("IDLE received", 1, 1, DARK_BLUE, WHITE,1,1);
 						if(get_game_state()==GAME) { 
 							set_game_state(IDLE);
 							Emergency_Stop();
@@ -370,12 +377,9 @@ void check_usart_while_playing(void){
 uint8_t SendInstruction(unsigned char instruction){
 	unsigned char* packet = malloc((OUTGOING_PACKET_LENGTH + 1) * sizeof(char));
 	outgoing_packet_t outgoing_packet = usart_assemble_response(instruction);	
-	GPIO_SetBits(USART_PORT, RS485DIR_PIN);
 	usart_convert_outgoing_packet(packet, outgoing_packet);
 	put_str(packet);
-	delay_ms(50); // was 100 // this is awful, should put RS485 opening/closing into interrupt
 	free(packet);
-	GPIO_ResetBits(USART_PORT, RS485DIR_PIN);
 	return 1;
 }
 

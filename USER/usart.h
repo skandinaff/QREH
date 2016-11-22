@@ -101,6 +101,7 @@ typedef struct {
 	char slave_start_byte;
 	char slave_address;
 	char instruction;
+	char sound;
 	char crc8;
 	char stop_byte;
 } outgoing_packet_t;
