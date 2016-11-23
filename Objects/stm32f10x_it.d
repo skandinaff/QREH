@@ -2,7 +2,7 @@
 .\objects\stm32f10x_it.o: USER\stm32f10x_it.h
 .\objects\stm32f10x_it.o: .\Libraries\CMSIS\CM3\DeviceSupport\ST\STM32F10x\stm32f10x.h
 .\objects\stm32f10x_it.o: .\Libraries\CMSIS\CM3\CoreSupport\core_cm3.h
-.\objects\stm32f10x_it.o: H:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\stm32f10x_it.o: D:\Keil_v5.2\ARM\ARMCC\Bin\..\include\stdint.h
 .\objects\stm32f10x_it.o: .\Libraries\CMSIS\CM3\DeviceSupport\ST\STM32F10x\system_stm32f10x.h
 .\objects\stm32f10x_it.o: .\USER\stm32f10x_conf.h
 .\objects\stm32f10x_it.o: .\Libraries\STM32F10x_StdPeriph_Driver\inc\stm32f10x_adc.h
@@ -18,7 +18,7 @@
 .\objects\stm32f10x_it.o: USER\mcu_config.h
 .\objects\stm32f10x_it.o: .\USER\MyDrv\delay.h
 .\objects\stm32f10x_it.o: .\USER\FreeRTOSV6.1.0\include\FreeRTOS.h
-.\objects\stm32f10x_it.o: H:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+.\objects\stm32f10x_it.o: D:\Keil_v5.2\ARM\ARMCC\Bin\..\include\stddef.h
 .\objects\stm32f10x_it.o: .\USER\FreeRTOSV6.1.0\include\projdefs.h
 .\objects\stm32f10x_it.o: .\USER\FreeRTOSConfig.h
 .\objects\stm32f10x_it.o: .\USER\FreeRTOSV6.1.0\include\portable.h

@@ -236,8 +236,11 @@ outgoing_packet_t usart_assemble_response(unsigned char instruction) {
 	
 		data_for_crc8[0] = QUEST_ID;
 		data_for_crc8[1] = instruction;
-		data_for_crc8[2] = get_sound();
-		data_for_crc8[3] = '\0'; 
+		if(instruction == INSTR_SLAVE_NOT_COMLETED || instruction == INSTR_SLAVE_COMPLETED){ 
+			data_for_crc8[2] = get_sound();
+			data_for_crc8[3] = '\0'; 
+		}
+		else data_for_crc8[2] = '\0';
 	
     outgoing_packet.slave_start_byte = SLAVE_START_BYTE;
     outgoing_packet.slave_address = QUEST_ID;

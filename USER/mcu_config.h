@@ -125,6 +125,7 @@ int get_task_counter(void);
 void set_task_counter(int counter);
 void ADC_Configuration(void);
 void open_magnet(void);
+void close_magnet(void);
 uint16_t readADC1(uint8_t channel);
 
 #endif

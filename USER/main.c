@@ -56,7 +56,7 @@ int main(void)
 	LCD_FillScreen(WHITE);
 
 	
-	GPIO_SetBits(MAGNET_PORT, MAGNET);
+	close_magnet(); // Close magnet
 	
 	RS485DIR_RX();
 	

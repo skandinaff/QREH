@@ -3,10 +3,12 @@
 *********************************************/
 
 #include "mcu_config.h"
+#include <stdbool.h>
 
 /* ----------------------------------- Typedef -----------------------------------------------------------*/
 
 uint8_t _task_counter = 0; // Here we'll have only 2 states. 0 - Waiting to start quest. 1 - quest, and when it's finished - back to 0
+bool magnet_state;
 
 /*******************************************************************************
 * Function Name  : ChipInit
@@ -246,4 +248,9 @@ void open_magnet(void){
 	GPIO_ResetBits(MAGNET_PORT, MAGNET);
 	delay_ms(500);
 	GPIO_SetBits(MAGNET_PORT, MAGNET);
+	magnet_state = false;
+}
+void close_magnet(void){
+	GPIO_SetBits(MAGNET_PORT, MAGNET);
+	magnet_state = true;
 }
