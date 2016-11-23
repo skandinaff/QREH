@@ -39,6 +39,7 @@
 #define LCD_DATA_HI()				(GPIO_SetBits(LCD_PORT, LCD_DATA))								//(HAL_GPIO_WritePin(LCD_PORT, LCD_DATA, GPIO_PIN_SET))
 
 
+
 //===============================================================
 //     			    Определение цветов
 //===============================================================
@@ -174,6 +175,9 @@ void LCD_FillTriangle (char x1, char y1, char x2, char y2, char x3, char y3, int
  Рабочая функция для LCD_FillTriangle
 ==============================================================================================================================*/
 void LCD_FillTriangleA (char x1, char y1, char x2, char y2, char x3, char y3, int color);
+
+void LCD_ON(void);
+void LCD_OFF(void);
 
 #endif //_GEOMETRICAL
 

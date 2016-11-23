@@ -7,10 +7,11 @@
 #include "stm32f10x.h"
 #include "LPH8731-3C.h"
 #include "Ascii_tab.h"
+#include <stdbool.h>
 
 /* Private variables ---------------------------------------------------------*/
 unsigned int rot=0; // угол поворота экрана (0, 90, 180, 270)
-
+bool LCD_state = true;
 /* Private function prototypes -----------------------------------------------*/
 static void LCD_port_init(void);
 
@@ -61,6 +62,7 @@ static void LCD_port_init(void)
 //===============================================================
 void LCD_init ()
 {
+ if(!LCD_state) return;
  LCD_port_init();
  //Сброс
 	LCD_CS_LO();
@@ -331,7 +333,9 @@ void LCD_Putchar(char symbol, char x, char y, int t_color, int b_color, char zoo
 //===============================================================
 void LCD_Puts(const char *str, int x, int y,  int t_color, int b_color, char zoom_width, char zoom_height)
 {
-    unsigned char i=0;
+	    unsigned char i=0;
+	if(!LCD_state) return;
+
 
     if(zoom_width == 0)   zoom_width = 1;
     if(zoom_height == 0)  zoom_height = 1;
@@ -446,7 +450,9 @@ void LCD_Puts_Shadow(const char *str, int x, int y,  int t_color, char zoom_widt
 //===============================================================
 void LCD_FillScreen (unsigned int color)
 {
- unsigned int x;
+ unsigned int x;	
+ if(!LCD_state) return;
+
  SetArea( 0, 101, 0, 80 );   //Область всего экрана
  for (x = 0; x < 101*81; x++)
  {
@@ -896,4 +902,10 @@ void Send_to_lcd (unsigned char RS, unsigned char data)
 	LCD_DATA_LO();
 }
 
+void LCD_ON(){
+	LCD_state = true;
+}
+void LCD_OFF(){
+	LCD_state = false;
+}
 

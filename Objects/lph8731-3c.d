@@ -15,3 +15,4 @@
 .\objects\lph8731-3c.o: .\Libraries\STM32F10x_StdPeriph_Driver\inc\misc.h
 .\objects\lph8731-3c.o: USER\MyDrv\LPH8731-3C.h
 .\objects\lph8731-3c.o: USER\MyDrv\Ascii_tab.h
+.\objects\lph8731-3c.o: H:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
