@@ -56,7 +56,7 @@ int main(void)
 	LCD_FillScreen(WHITE);
 
 	
-	close_magnet(); // Close magnet
+	close_magnet();
 	
 	RS485DIR_RX();
 	
@@ -72,14 +72,9 @@ int main(void)
 				if(get_game_result()==COMPLETED) LCD_Puts("COMPL", 50, 40, DARK_BLUE, WHITE,1,1);
 				if(get_game_result()==NOT_COMPLETED) LCD_Puts("NOT_C", 50, 40, DARK_BLUE, WHITE,1,1);
 				GPIO_ResetBits(STATE_LED_PORT, STATE_LED);
-			
-				//open_magnet();
-			
-				//Emergency_Stop();
 				if(!Check_if_one_at_start()) {
 					MotorInit(); 
 				} 
-
 				break;
 			case GAME:
 				LCD_Puts("State: Game", 1, 30, DARK_BLUE, WHITE,1,1);
@@ -87,7 +82,7 @@ int main(void)
 					LCD_Puts("COMPL", 50, 40, DARK_BLUE, WHITE,1,1);
 					GPIO_ResetBits(STATE_LED_PORT, STATE_LED);
 					open_magnet();
-					// TODO:put a break here
+					// TODO:put a break here ???
 				}
 				if(get_game_result()==NOT_COMPLETED) {
 					LCD_Puts("NOT_C", 50, 40, DARK_BLUE, WHITE,1,1);
